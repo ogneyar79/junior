@@ -75,7 +75,7 @@ public class IteratorPrimeNumberTest {
         assertThat(itSecond.hasNextSecond(), is(true));
         assertThat(itSecond.next(), is(3571));
         assertThat(itSecond.hasNextSecond(), is(false));
-        itSecond.next();
+      //  itSecond.next();
     }
 
     @Test

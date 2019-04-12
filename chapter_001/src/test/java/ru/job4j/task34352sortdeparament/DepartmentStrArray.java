@@ -1,4 +1,4 @@
-package ru.job4j.task34352sortdeparament;//package ru.job4j.task34352sortdeparament;
+//package ru.job4j.task34352sortdeparament;//package ru.job4j.task34352sortdeparament;
 //
 //
 //public class DepartmentsStrArray {

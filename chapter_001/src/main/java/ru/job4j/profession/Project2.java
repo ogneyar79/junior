@@ -1,10 +1,11 @@
-package ru.job4j.profession;/*package ru.job4j.profession;
+//
+// package ru.job4j.profession/*package ru.job4j.profession;
 
-/**
- * Класс Project (project for engineer).
- *
- * @author Sirotkin.
- */
+///**
+// * Класс Project (project for engineer).
+// *
+// * @author Sirotkin.
+// */
 /*public class Project2 {
 
 
@@ -13,7 +14,7 @@ package ru.job4j.profession;/*package ru.job4j.profession;
      */
    /* public String getProjectName(){
         return this.projectName;
-    }
+  //  }
 
 
 

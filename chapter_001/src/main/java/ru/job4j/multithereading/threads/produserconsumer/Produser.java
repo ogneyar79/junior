@@ -1,4 +1,4 @@
-package ru.job4j.multithereading.threads.produserconsumer;//package ru.job4j.multithereading.threads.produserconsumer;
+//package ru.job4j.multithereading.threads.produserconsumer//package ru.job4j.multithereading.threads.produserconsumer;
 //
 //import java.util.Random;
 //

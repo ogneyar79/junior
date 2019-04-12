@@ -1,4 +1,4 @@
-package ru.job4j.tasksortdeparament;//package ru.job4j.tasksortdeparament;
+//package ru.job4j.tasksortdeparament//package ru.job4j.tasksortdeparament;
 
 //public class DepartmentTask {
 
