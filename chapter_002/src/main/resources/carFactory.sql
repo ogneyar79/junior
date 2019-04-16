@@ -46,14 +46,14 @@ insert into car (name, car_body_id ,car_engine_id,
 
  --update car set color='Black02Blue' where id=1;
 
-                    запросы, выборка имен автомобилей со всеми  именами запчатей
+                    запросы, выборка имён автомобилей со всеми  именами запчатей
 
 select car.name, car_body.name, car_engine.name, car_transmission.name from car inner join car_body on car.car_body_id=car_body.id
 join car_engine on car.car_engine_id=car_engine.id
 join car_transmission on car.car_transmission_id=car_transmission.id;
 
 
-                    вывод запчастей  котырые не используються
+                    вывод запчастей  котoрые не используються
                                   первый вариант одной таблицы, вывод корпусов, которые не используються всё идет
                                          по тойже схеме могу вывести другие запчасти в отдельных таблицах
 select car.name, car_body.name from car
