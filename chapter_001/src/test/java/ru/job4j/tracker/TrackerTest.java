@@ -49,6 +49,7 @@ public class TrackerTest {
         Item item3 = new Item("T4", "TD4", 123L);
         item3.setId(item2.getId());
         tracker2.update(item3);
+        System.out.println(tracker2.getItems().get(0).getId());
         assertThat(tracker2.getAll().get(0), is(item3));
     }
 
@@ -80,5 +81,28 @@ public class TrackerTest {
         assertThat(tracker7.getAll().get(0), is(tracker7.findByName(item7.getName()).get(0)));
     }
 
-     }
+    @Test
+    public void generateId() {
+    }
+
+    @Test
+    public void delete() {
+    }
+
+    @Test
+    public void getAll() {
+    }
+
+    @Test
+    public void replace() {
+    }
+
+    @Test
+    public void findByName() {
+    }
+
+    @Test
+    public void findAll() {
+    }
+}
 

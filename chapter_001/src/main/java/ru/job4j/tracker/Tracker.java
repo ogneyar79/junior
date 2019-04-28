@@ -10,7 +10,7 @@ import java.util.Random;
  * @author Sirotkin.
  * @return s
  */
-public class Tracker {
+public class Tracker implements ITracker {
 
     /**
      * @ param value position, show quantity items and where items[position] we get new item.
@@ -20,7 +20,7 @@ public class Tracker {
     /**
      * @ param value Item [].
      */
-    private List<Item> items = new ArrayList<Item>();
+    private List<Item> items = new ArrayList<>();
 
     /**
      * @ param RN Random.
@@ -59,13 +59,54 @@ public class Tracker {
         return item;
     }
 
+
+    /**
+     * method for deleted our items[i] = null and move to end list, and changed position.
+     *
+     * @param item Item
+     */
+    public void delete(Item item) {
+        String id;
+        id = item.getId();
+        for (int index = 0; index != position; index++) {
+            if (this.items.get(index).getId().equals(id)) {
+                this.items.set(index, null);
+                break;
+            }
+        }
+        for (int i = 0; i != position; i++) {
+            if (this.items.get(i) == null) {
+                this.items.set(i, this.items.get(position - 1));
+                this.items.set(position - 1, null);
+                break;
+            }
+        }
+        position--;
+    }
+
+
+    /**
+     * method for deleted by Finding String id.
+     */
+    @Override
+    public void delete(String id) {
+        for (Item item : items) {
+            if (item != null && item.getId().equals(id)) {
+                items.remove(item);
+                break;
+            }
+        }
+        position--;
+    }
+
+
     /**
      * method for find item via id.
      *
      * @param id String
      * @return the item
      */
-    protected Item findById(String id) {
+    public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
             if (item != null && item.getId().equals(id)) {
@@ -109,30 +150,17 @@ public class Tracker {
     }
 
     /**
-     * method for deleted our items[i] = null and move to end list, and changed position.
-     *
-     * @param item Item
+     * metod for replace Item for another Item by id.
      */
-    public void delete(Item item) {
-        String id;
-        id = item.getId();
-        for (int index = 0; index != position; index++) {
-            if (this.items.get(index).getId().equals(id)) {
-                this.items.set(index, null);
+    @Override
+    public void replace(String id, Item item) {
+
+        for (Item itemChanged : items) {
+            if (itemChanged.getId().equals(id)) {
+                items.set(items.indexOf(itemChanged), item);
                 break;
             }
-
         }
-
-        for (int i = 0; i != position; i++) {
-            if (this.items.get(i) == null) {
-                this.items.set(i, this.items.get(position - 1));
-                this.items.set(position - 1, null);
-                break;
-            }
-
-        }
-        position--;
     }
 
     /**
@@ -141,7 +169,7 @@ public class Tracker {
      * @param key String
      * @return result Arraays.copyOf
      */
-    List<Item> findByName(String key) {
+    public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().equals(key)) {
@@ -149,5 +177,11 @@ public class Tracker {
             }
         }
         return result;
+    }
+
+    @Override
+    public Item[] findAll() {
+        Item[] itemArray = items.toArray(new Item[items.size()]);
+        return itemArray;
     }
 }
