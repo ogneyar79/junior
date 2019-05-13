@@ -13,7 +13,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private static final Logger LOGER = LogManager.getLogger(TrackerSQL.class.getName());
 
-     Connection connection;
+    Connection connection;
 
 
     public TrackerSQL(Connection connection) {
@@ -86,9 +86,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             st.setString(2, itemS.getDescription());
             st.setInt(3, id);
             int row = st.executeUpdate();
-            if (row == 0) {
-                result = false;
-            } else {
+            if (row != 0) {
                 result = true;
             }
         } catch (SQLException e) {
@@ -112,9 +110,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement st = this.connection.prepareStatement(killerDateSqlQuery)) {
             st.setInt(1, id);
             int row = st.executeUpdate();
-            if (row == 0) {
-                result = false;
-            } else {
+            if (row != 0) {
                 result = true;
             }
         } catch (SQLException e) {
