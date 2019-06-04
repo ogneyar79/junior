@@ -37,7 +37,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
             this.connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/Itemss",
+                    "jdbc:postgresql:/localhost:5432/itemss",
                     "postgres",
                     "apsala");
             System.out.println("Connection");
