@@ -8,10 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -35,6 +33,10 @@ public class StoreSQL implements AutoCloseable {
      */
     private Connection connect = null;
 
+    public Config getConfig() {
+        return config;
+    }
+
     /**
      * Creates a connection to the database.
      *
@@ -55,16 +57,64 @@ public class StoreSQL implements AutoCloseable {
         }
     }
 
-
     public StoreSQL(Config config) {
         this.config = config;
     }
 
-    public void generate(int size) {
+    /**
+     * Create a new Table in the database if it does not exists.
+     * Each time creates a new table to remove old items.
+     */
+    public void createStructure() {
+        try (Statement statement = connect.createStatement()) {
+            statement.executeUpdate("DROP TABLE IF EXISTS entry");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS  entry (field INTEGER NOT NULL )");
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Generates N items in a table from 1 to n.
+     *
+     * @param size number of items.
+     * @throws SQLException if exception.
+     */
+    public void generate(int size) throws SQLException {
+        System.out.println(String.format("Start inserting %s items into database", size));
+        try (PreparedStatement statement = connect.prepareStatement("INSERT INTO entry(field) VALUES(?) ")) {
+            for (int index = 1; index <= size; index++) {
+                statement.setInt(1, index);
+                statement.addBatch();
+            }
+            statement.executeBatch();
+            connect.commit();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+            connect.rollback();
+        }
+        System.out.println(String.format("%s elements inserted", size));
 
     }
 
+    /**
+     * List of all elements at the database.
+     *
+     * @return list.
+     */
     public List<Entry> load() {
+        List<Entry> result = new ArrayList<>();
+        try (PreparedStatement statement = connect.prepareStatement("SELECT * FROM entry")) {
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Entry entry = new Entry();
+                entry.setField(rs.getInt("field"));
+                result.add(entry);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
         return Collections.EMPTY_LIST;
     }
 
@@ -74,6 +124,4 @@ public class StoreSQL implements AutoCloseable {
             connect.close();
         }
     }
-
-
 }
