@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 
 public class StoreSQLTest {
 
+    Config config = new Config();
+    StoreSQL sql = new StoreSQL(config);
 
     @Test
     public void setConnection() throws Exception {
-        Config config = new Config();
-        StoreSQL sql = new StoreSQL(config);
 
         sql.setConnection(sql.getConfig());
         sql.createStructure();

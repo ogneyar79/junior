@@ -44,10 +44,11 @@ public class StoreSQL implements AutoCloseable {
      */
     public void setConnection(Config config) {
         config.init();
+        this.connectDate();
         String url = String.valueOf(config.get("url"));
-        try (Connection conn = DriverManager.getConnection(url)) {
-            if (conn != null) {
-                DatabaseMetaData meta = conn.getMetaData();
+        try (Connection connect = DriverManager.getConnection(url)) {
+            if (connect != null) {
+                DatabaseMetaData meta = connect.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
             }
@@ -59,6 +60,18 @@ public class StoreSQL implements AutoCloseable {
 
     public StoreSQL(Config config) {
         this.config = config;
+
+    }
+
+    /**
+     * Connect to  database
+     */
+    private void connectDate() {
+        try {
+            this.connect = DriverManager.getConnection(config.get("url"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
