@@ -17,6 +17,7 @@ public class StoreSQLTest {
     public void setConnection() throws Exception {
         Config config = new Config();
         StoreSQL sql = new StoreSQL(config);
+
         sql.setConnection(sql.getConfig());
         sql.createStructure();
         try {

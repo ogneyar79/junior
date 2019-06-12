@@ -45,7 +45,7 @@ public class StoreSQL implements AutoCloseable {
     public void setConnection(Config config) {
         config.init();
         String url = String.valueOf(config.get("url"));
-        try (Connection conn = DriverManager.getConnection(config.get(url))) {
+        try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());

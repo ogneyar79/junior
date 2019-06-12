@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<root>
+    <country countryCode="RUS" carency="RUB">
+        <name>Russia</name>
+        <capital>Moskow</capital>
+        <Description>Russia is ....</Description>
+    </country>
+
+    <country countryCode="USA" carency="USD">
+        <name>United States America</name>
+        <capital>Washington</capital>
+        <Description>America is ....</Description>
+    </country>
+
+
+</root>
