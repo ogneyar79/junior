@@ -19,5 +19,10 @@ public class Entries {
     @XmlElement(name = "entry")
     public List<Entry> entry;
 
+    public Entries() {
+    }
 
+    public Entries(List<Entry> entry) {
+        this.entry = entry;
+    }
 }

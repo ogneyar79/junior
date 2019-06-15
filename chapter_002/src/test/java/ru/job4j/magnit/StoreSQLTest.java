@@ -16,8 +16,7 @@ public class StoreSQLTest {
     StoreSQL sql = new StoreSQL(config);
 
     @Test
-    public void setConnection() throws Exception {
-
+    public void setConnectionAndCreateAndGenerateBaseWithDateThenLoadToList() throws Exception {
         sql.setConnection(sql.getConfig());
         sql.createStructure();
         try {
@@ -37,16 +36,6 @@ public class StoreSQLTest {
         assertThat(result, is(expected));
     }
 
-    @Test
-    public void generate() throws Exception {
-    }
 
-    @Test
-    public void load() throws Exception {
-    }
-
-    @Test
-    public void close() throws Exception {
-    }
 
 }

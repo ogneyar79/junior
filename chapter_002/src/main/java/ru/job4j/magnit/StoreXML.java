@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * The class converts the List of SQLite database items to XML.
  *
- *  @author Sirotkin Maksimus(maksimus.s@mail.ru)
- *  @version 0.1$
- *  @since 0.1
- *  28.05.2019
+ * @author Sirotkin Maksimus(maksimus.s@mail.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 28.05.2019
  */
 public class StoreXML {
 
@@ -29,12 +29,13 @@ public class StoreXML {
 
     /**
      * The method turn the list of database elements into XML.
+     *
      * @param list of items to convert.
      */
     public void save(List<Entry> list) {
         System.out.println("Database transform to XML started.");
-        Entries entries = new Entries();
-        entries.entry = list;
+        Entries entries = new Entries(list);
+
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Entries.class, Entry.class);
             Marshaller mar = jaxbContext.createMarshaller();
@@ -45,5 +46,4 @@ public class StoreXML {
         }
         System.out.println("transformation of DateBase to XML  has finished.");
     }
-
 }

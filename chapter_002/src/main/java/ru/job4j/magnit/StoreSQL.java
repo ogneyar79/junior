@@ -95,6 +95,7 @@ public class StoreSQL implements AutoCloseable {
      */
     public void generate(int size) throws SQLException {
         System.out.println(String.format("Start inserting %s items into database", size));
+        connect.setAutoCommit(false);
         try (PreparedStatement statement = connect.prepareStatement("INSERT INTO entry(field) VALUES(?) ")) {
             for (int index = 1; index <= size; index++) {
                 statement.setInt(1, index);
@@ -105,9 +106,10 @@ public class StoreSQL implements AutoCloseable {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
             connect.rollback();
+            connect.setAutoCommit(true);
+            throw e;
         }
         System.out.println(String.format("%s elements inserted", size));
-
     }
 
     /**
@@ -128,7 +130,7 @@ public class StoreSQL implements AutoCloseable {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
-        return Collections.EMPTY_LIST;
+        return result;
     }
 
     @Override
