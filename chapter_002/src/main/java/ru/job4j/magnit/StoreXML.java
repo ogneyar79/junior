@@ -36,7 +36,8 @@ public class StoreXML {
 
     String atMyToString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
-        try (BufferedReader reader = new BufferedReader(new FileReader(getTarget().getPath()))) {
+        try  {
+            BufferedReader reader = new BufferedReader(new FileReader(getTarget().getPath()));
             reader.lines().forEach(out::add);
         } catch (Exception e) {
             e.printStackTrace();
