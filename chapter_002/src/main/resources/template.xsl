@@ -6,7 +6,7 @@
             <xsl:for-each select="entries/entry">
                 <entry>
                     <xsl:attribute name="field">
-                        <xsl:value-of select="value"/>
+                        <xsl:value-of select="field"/>
                     </xsl:attribute>
                 </entry>
             </xsl:for-each>
