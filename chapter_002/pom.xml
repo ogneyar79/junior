@@ -11,25 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter_002</artifactId>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>ru.job4j</groupId>
             <artifactId>chapter_001</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <!-- https://mvnrepository.com/artifact/postgresql/postgres
+ ql -->
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -55,7 +44,7 @@
                 <version>3.6.2</version>
                 <configuration>
                     <changeLogFile>${basedir}/db/master.xml</changeLogFile>
-                    <url>${db.url}</url>
+                    <url>${db.url}/trackersql</url>
                     <driver>${db.driver}</driver>
                     <username>${db.postgres}</username>
                     <password>${db.apsala}</password>
@@ -71,5 +60,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
