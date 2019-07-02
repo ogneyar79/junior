@@ -44,7 +44,7 @@
                 <version>3.6.2</version>
                 <configuration>
                     <changeLogFile>${basedir}/db/master.xml</changeLogFile>
-                    <url>${db.url}/trackersql</url>
+                    <url>${db.url}</url>
                     <driver>${db.driver}</driver>
                     <username>${db.postgres}</username>
                     <password>${db.apsala}</password>

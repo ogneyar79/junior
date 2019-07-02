@@ -15,7 +15,7 @@ public class StoreXMLTest {
     Config config = new Config();
 
     StoreSQL mySql = new StoreSQL(config);
-    StoreXML  storeXml = new StoreXML(target);
+    StoreXML storeXml = new StoreXML(target);
 
     /**
      * Check StoreXML
@@ -34,6 +34,12 @@ public class StoreXMLTest {
 
         storeXml.save(list);
 
+    }
+
+    @Test
+    public void whenOutconsole() {
+        System.out.println(target.getPath());
+        this.storeXml.atMyToString();
     }
 
 

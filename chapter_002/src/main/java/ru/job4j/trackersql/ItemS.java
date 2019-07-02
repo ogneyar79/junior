@@ -44,12 +44,14 @@ public class ItemS {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ItemS itemS = (ItemS) o;
-        return id == itemS.id &&
-                Objects.equals(name, itemS.name) &&
-                Objects.equals(description, itemS.description);
+        return id == itemS.id && Objects.equals(name, itemS.name) && Objects.equals(description, itemS.description);
     }
 
     @Override

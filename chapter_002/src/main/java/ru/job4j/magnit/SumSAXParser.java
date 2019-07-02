@@ -20,12 +20,11 @@ public class SumSAXParser {
 
     private long sum = 0;
 
-    public long parseSum (File file) throws ParserConfigurationException, SAXException {
+    public long parseSum(File file) throws ParserConfigurationException, SAXException {
 
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
         FieldCounter counter = new FieldCounter();
-
 
 
         return sum;

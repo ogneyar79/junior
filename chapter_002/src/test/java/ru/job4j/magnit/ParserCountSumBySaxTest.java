@@ -13,10 +13,10 @@ public class ParserCountSumBySaxTest {
     ParserCountSumBySax parserSum = new ParserCountSumBySax();
 
     @Test
-    public void CheckParseSumBySax() throws Exception {
+    public void checkParseSumBySax() throws Exception {
         parserSum.parseCountSumFromXmlBySax(file);
 
-        Long sum =parserSum.parseCountSumFromXmlBySax(file);
+        Long sum = parserSum.parseCountSumFromXmlBySax(file);
 
         assertThat(sum, is(3L));
 
