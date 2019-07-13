@@ -19,11 +19,19 @@ public class TrackerSQLTest {
     private ItemS item;
     Connection connection;
 
-    @Before
+
+@Test
+public void connect(){
+
+}
+
+    @Test
     public void testBefore() {
         item = new ItemS("TestName", "TestDescription");
 
         TrackerSQL trackerSQL = new TrackerSQL(connection);
+        trackerSQL.init();
+        trackerSQL.inicializationDateTable();
     }
 
 

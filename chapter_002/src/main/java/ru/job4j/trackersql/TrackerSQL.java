@@ -13,16 +13,17 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private static final Logger LOGER = LogManager.getLogger(TrackerSQL.class.getName());
 
-    Connection connection;
+    Connection connection = null;
 
 
     public TrackerSQL(Connection connection) {
         this.connection = connection;
         this.init();
         this.inicializationDateTable();
+
     }
 
-    private void inicializationDateTable() {
+    public void inicializationDateTable() {
         try (PreparedStatement ps = this.connection.prepareStatement(
                 "CREATE table if not exists Items (id serial primary key, name character varying(2000), description text)")) {
             ps.executeUpdate();
@@ -37,12 +38,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
             this.connection = DriverManager.getConnection(
-                    "jdbc:postgresql:/localhost:5432/itemss",
-                    "postgres",
-                    "apsala");
+                    config.getProperty("url"),
+                    config.getProperty("login"),
+                    config.getProperty("password")
+            );
             System.out.println("Connection");
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            LOGER.error(e.getMessage(), e);
         }
         return this.connection != null;
     }

@@ -2,6 +2,7 @@ package ru.job4j.trackersql;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+
 import java.sql.*;
 
 public class SQLStorage {
@@ -35,8 +36,6 @@ public class SQLStorage {
                 }
             }
         }
-
-
     }
 
 }
