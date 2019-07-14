@@ -15,22 +15,21 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     Connection connection = null;
 
+    public TrackerSQL() {
+    }
+
+    public static TrackerSQL getTrackerSQLwithConection(Connection connection) {
+        TrackerSQL trackerSQL = new TrackerSQL();
+        trackerSQL.connection = connection;
+        return trackerSQL;
+
+    }
 
     public TrackerSQL(Connection connection) {
         this.connection = connection;
         this.init();
-        this.inicializationDateTable();
-
     }
 
-    public void inicializationDateTable() {
-        try (PreparedStatement ps = this.connection.prepareStatement(
-                "CREATE table if not exists Items (id serial primary key, name character varying(2000), description text)")) {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            this.LOGER.error(e.getMessage(), e);
-        }
-    }
 
     public boolean init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
@@ -39,7 +38,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             Class.forName(config.getProperty("driver-class-name"));
             this.connection = DriverManager.getConnection(
                     config.getProperty("url"),
-                    config.getProperty("login"),
+                    config.getProperty("username"),
                     config.getProperty("password")
             );
             System.out.println("Connection");
@@ -132,7 +131,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM items returning id")) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                result.add(new ItemS(rs.getString("name"), rs.getString("description"), rs.getInt(1)));
+                result.add(new ItemS(rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt(1)));
             }
         } catch (SQLException e) {
             this.LOGER.error(e.getMessage(), e);
@@ -141,9 +142,42 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     }
 
+    String finderSqlByName = " select from items where name = ?";
+
+
+    /**
+     * Метод ищет заявку в БД по String key и добовляет в Array list.
+     *
+     * @param key item.
+     * @return List items.
+     */
     @Override
     public List<ItemS> findByName(String key) {
-        return null;
+
+        ItemS item = null;
+        List<ItemS> items = new ArrayList<>();
+        String name, description;
+        int id;
+        try (PreparedStatement st = this.connection.prepareStatement(finderSqlByName)) {
+            st.setString(1, key);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                item = new ItemS(
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("id"));
+
+                name = rs.getString("name");
+                description = rs.getString("description");
+                id = rs.getInt("id");
+                items.add(item);
+                System.out.println("Items has added");
+                System.out.printf("%s, %s, %d \n", name, description, id);
+            }
+        } catch (SQLException e) {
+            this.LOGER.error(e.getMessage(), e);
+        }
+        return items;
     }
 
     String finderSqlQById = "select from items where id = ?";
