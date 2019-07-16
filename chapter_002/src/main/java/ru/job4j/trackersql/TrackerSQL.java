@@ -142,7 +142,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     }
 
-    String finderSqlByName = " select from items where name = ?";
+    String finderSqlByName = " select * from items where name = ?";
 
 
     /**
@@ -162,17 +162,14 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             st.setString(1, key);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                item = new ItemS(
-                        rs.getString("name"),
+                items.add(new ItemS(rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("id")
+                ));
+                System.out.println("Items has added");
+                System.out.printf("%s, %s, %d \n", rs.getString("name"),
                         rs.getString("description"),
                         rs.getInt("id"));
-
-                name = rs.getString("name");
-                description = rs.getString("description");
-                id = rs.getInt("id");
-                items.add(item);
-                System.out.println("Items has added");
-                System.out.printf("%s, %s, %d \n", name, description, id);
             }
         } catch (SQLException e) {
             this.LOGER.error(e.getMessage(), e);
