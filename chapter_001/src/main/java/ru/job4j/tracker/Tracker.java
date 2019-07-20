@@ -151,6 +151,8 @@ public class Tracker implements ITracker {
 
     /**
      * metod for replace Item for another Item by id.
+     * * @param id id item.
+     * * @param item item.
      */
     @Override
     public void replace(String id, Item item) {
