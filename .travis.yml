@@ -8,9 +8,9 @@ services:
 before_install:
   - psql -c 'create database tracker;' -U postgres
 
-  cache:
-    directories:
-      - $HOME/.m2
+cache:
+  directories:
+    - $HOME/.m2
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
@@ -24,8 +24,3 @@ notifications:
       - maksimus.s@mail.ru
     on_success: never # default: change
     on_failure: always # default: always
-
-    env:
-      global:
-        CODECOV_TOKEN="09827600-c68e-483a-ab24-27f02f89f77b"
-
