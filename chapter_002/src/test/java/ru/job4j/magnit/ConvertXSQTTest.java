@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class ConvertXSQTTest {
 
-    File sourceXml = new File("C:\\projects\\sirotkinmaksim\\chapter_002\\src\\main\\resources\\storeXml.xml");
-    File destXml = new File("C:\\projects\\sirotkinmaksim\\chapter_002\\src\\main\\resources\\convertedFile.xml");
+    File sourceXml = new File("storeXml.xml");
+    File destXml = new File("convertedFile.xml");
     File shemeOfTransformation = new File(getClass().getClassLoader().getResource("template.xsl").getFile());
 
     ConvertXSQT conversion = new ConvertXSQT();
