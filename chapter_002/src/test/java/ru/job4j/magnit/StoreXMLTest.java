@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class StoreXMLTest {
 
-    File target = new File("C:\\projects\\sirotkinmaksim\\chapter_002\\src\\main\\resources\\storeXml.xml");
+    File target = new File("storeXml.xml");
     List<Entry> list = new ArrayList<>();
     Config config = new Config();
 
