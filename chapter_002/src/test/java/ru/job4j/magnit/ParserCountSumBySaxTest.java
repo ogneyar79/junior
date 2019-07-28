@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ParserCountSumBySaxTest {
 
-    File file = new File("C:\\projects\\sirotkinmaksim\\chapter_002\\src\\main\\resources\\convertedFile.xml");
+    File file = new File("convertedFile.xml");
     ParserCountSumBySax parserSum = new ParserCountSumBySax();
 
     @Test
