@@ -26,7 +26,6 @@ public class SumSAXParser {
         SAXParser parser = factory.newSAXParser();
         FieldCounter counter = new FieldCounter();
 
-
         return sum;
     }
 
