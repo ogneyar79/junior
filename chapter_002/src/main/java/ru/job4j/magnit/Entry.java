@@ -6,14 +6,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The database objects class for converting to XML.
- *  @author Maksim Sirotkin(maksimus.s@mail.ru)
- *  @version 0.1$
- *  @since 0.1
- *  18.12.2019
+ *
+ * @author Maksim Sirotkin(maksimus.s@mail.ru)
+ * @version 0.1$
+ * @since 0.1
+ * 18.12.2019
  */
 @XmlRootElement
 public class Entry {
 
+    public Entry() {
+    }
 
     private int field;
 
