@@ -2,10 +2,12 @@ package ru.job4j.parserjob;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
 
 public class ParserJobSqlRu {
 
@@ -31,8 +33,19 @@ public class ParserJobSqlRu {
     }
 
     public static void main(String... arg) throws IOException {
-        ParserJobSqlRu parserJobSqlRu = new ParserJobSqlRu("https://www.sql.ru/forum/job/");
-        Document document = parserJobSqlRu.connectToPageAndGetDocument(parserJobSqlRu.getUrl());
 
+        ParserJobSqlRu parserJobSqlRu = new ParserJobSqlRu("https://www.sql.ru/forum/job/");
+        Document document = parserJobSqlRu.connectToPageAndGetDocument(parserJobSqlRu.url);
+        System.out.println(document.title());
+        // получаем элементы которые содеражат атрибут class = " postslisttopic"
+        Elements elements = document.getElementsByClass("postslisttopic");
+
+        for (Element element : elements) {
+            String valueAtribute = element.attr("href");
+            System.out.println(valueAtribute);
+        }
     }
+
+
 }
+
