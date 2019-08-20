@@ -52,7 +52,6 @@ public class StoreSQL implements AutoCloseable {
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
             }
-
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
