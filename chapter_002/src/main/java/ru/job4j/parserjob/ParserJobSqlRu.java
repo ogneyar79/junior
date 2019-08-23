@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class ParserJobSqlRu {
 
     String url;
@@ -21,6 +20,10 @@ public class ParserJobSqlRu {
      */
     ArrayList<Vacancy> vacancies = new ArrayList<>();
 
+    /**
+     * Vacancy is being looked for.
+     */
+    String javaF;    //  In our case we going to look for vacancy with "Java"
 
     public ParserJobSqlRu(String url, File htmlFile) {
         this.url = url;
@@ -39,14 +42,18 @@ public class ParserJobSqlRu {
         return url;
     }
 
-
     /**
      * metod for parsing vacancies  from site.
      *
      * @param url String url.
      */
-    public void parseVacancies(String url) throws IOException {
+    public void parseVacancies(String url, String javaF) throws IOException {
         Vacancy vacancy;
+        String linkJob;
+        String id;
+        String EsqribishenJob;
+        String nameJob;
+
         Document document = this.connectToPageAndGetDocument(this.url);
         System.out.println(document.title());
 
@@ -54,15 +61,20 @@ public class ParserJobSqlRu {
         Elements elements = document.getElementsByClass("postslisttopic");
 
         for (Element element : elements) {
+
             String valueAtribute = element.select("a").attr("href");
-            System.out.println(" Work with text");
-            System.out.println(element.child(0).text());
-            System.out.println(valueAtribute);
-            String nameJob;
-            String linkJob;
-            String date;
-            String EsqribishenJob;
-            this.vacancies.add();
+            nameJob = element.child(0).text();
+
+            if (nameJob.indexOf(javaF) != -1 && nameJob.indexOf("JavaScript") == -1) {
+                vacancy = new Vacancy();
+                System.out.println(valueAtribute);
+                vacancy.setLinkJob(valueAtribute);
+                System.out.println(nameJob);
+                vacancy.setNameJob(nameJob);
+                System.out.println(Integer.valueOf(valueAtribute.substring(26, 32)));
+                vacancy.setId(Integer.valueOf(valueAtribute.substring(26, 32)));
+                vacancies.add(vacancy);
+            }
         }
     }
 
@@ -77,19 +89,32 @@ public class ParserJobSqlRu {
         System.out.println(document.title());
         // получаем элементы которые содеражат атрибут class = " postslisttopic"
         Elements elements = document.getElementsByClass("postslisttopic");
+        String nameJob;
+        String id;
+        String javaF = "Java";
+        String linkJob;
+        String date;
+        String EsqribishenJob;
 
         for (Element element : elements) {
 
             String valueAtribute = element.select("a").attr("href");
-            System.out.println(" Work with text");
-            System.out.println(element.child(0).text());
-            System.out.println(valueAtribute);
-            String nameJob;
-            String linkJob;
-            String date;
-            String EsqribishenJob;
+            // System.out.println(" Work with text");
+            // System.out.println(element.child(0).text());
+            // System.out.println(valueAtribute);
+            nameJob = element.child(0).text();
+            // System.out.println(nameJob.indexOf(javaF));
 
-
+            if (nameJob.indexOf(javaF) != -1 && nameJob.indexOf("JavaScript") == -1) {
+                Vacancy vacancy = new Vacancy();
+                System.out.println(valueAtribute);
+                vacancy.setLinkJob(valueAtribute);
+                System.out.println(nameJob);
+                vacancy.setNameJob(nameJob);
+                System.out.println(valueAtribute.substring(26, 32));
+                System.out.println(Integer.valueOf(valueAtribute.substring(26, 32)));
+                vacancy.setId(Integer.valueOf(valueAtribute.substring(26, 32)));
+            }
         }
     }
 }
