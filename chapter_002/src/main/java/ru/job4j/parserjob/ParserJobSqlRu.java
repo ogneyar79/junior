@@ -8,6 +8,9 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ParserJobSqlRu {
 
@@ -15,10 +18,14 @@ public class ParserJobSqlRu {
 
     File htmlFile;
 
+    public Set<Vacancy> getVacancySet() {
+        return vacancySet;
+    }
+
     /**
      * Array conteiner for vacansies.
      */
-    ArrayList<Vacancy> vacancies = new ArrayList<>();
+    Set<Vacancy> vacancySet;
 
     /**
      * Vacancy is being looked for.
@@ -30,8 +37,10 @@ public class ParserJobSqlRu {
         this.htmlFile = htmlFile;
     }
 
-    public ParserJobSqlRu(String url) {
+    public ParserJobSqlRu(String url, Set<Vacancy> vacancySet, String javaF) {
         this.url = url;
+        this.vacancySet = vacancySet;
+        this.javaF = javaF;
     }
 
     public Document connectToPageAndGetDocument(String url) throws IOException {
@@ -46,8 +55,9 @@ public class ParserJobSqlRu {
      * metod for parsing vacancies  from site.
      *
      * @param url String url.
+     * @param vacancySet
      */
-    public void parseVacancies(String url, String javaF) throws IOException {
+    public void parseVacancies(String url, Set<Vacancy> vacancySet, String javaF) throws IOException {
         Vacancy vacancy;
         String linkJob;
         String id;
@@ -59,13 +69,12 @@ public class ParserJobSqlRu {
 
         // получаем элементы которые содеражат атрибут class = " postslisttopic"
         Elements elements = document.getElementsByClass("postslisttopic");
-
         for (Element element : elements) {
 
             String valueAtribute = element.select("a").attr("href");
             nameJob = element.child(0).text();
 
-            if (nameJob.indexOf(javaF) != -1 && nameJob.indexOf("JavaScript") == -1) {
+            if (nameJob.indexOf(javaF) != -1 && nameJob.indexOf("JavaScript") == -1 && nameJob.indexOf("Java Script") == -1) {
                 vacancy = new Vacancy();
                 System.out.println(valueAtribute);
                 vacancy.setLinkJob(valueAtribute);
@@ -73,50 +82,12 @@ public class ParserJobSqlRu {
                 vacancy.setNameJob(nameJob);
                 System.out.println(Integer.valueOf(valueAtribute.substring(26, 32)));
                 vacancy.setId(Integer.valueOf(valueAtribute.substring(26, 32)));
-                vacancies.add(vacancy);
+                this.vacancySet.add(vacancy);
             }
         }
     }
 
-    public ArrayList<Vacancy> getVacancies() {
-        return vacancies;
-    }
 
-    public static void main(String... arg) throws IOException {
-
-        ParserJobSqlRu parserJobSqlRu = new ParserJobSqlRu("https://www.sql.ru/forum/job/");
-        Document document = parserJobSqlRu.connectToPageAndGetDocument(parserJobSqlRu.url);
-        System.out.println(document.title());
-        // получаем элементы которые содеражат атрибут class = " postslisttopic"
-        Elements elements = document.getElementsByClass("postslisttopic");
-        String nameJob;
-        String id;
-        String javaF = "Java";
-        String linkJob;
-        String date;
-        String EsqribishenJob;
-
-        for (Element element : elements) {
-
-            String valueAtribute = element.select("a").attr("href");
-            // System.out.println(" Work with text");
-            // System.out.println(element.child(0).text());
-            // System.out.println(valueAtribute);
-            nameJob = element.child(0).text();
-            // System.out.println(nameJob.indexOf(javaF));
-
-            if (nameJob.indexOf(javaF) != -1 && nameJob.indexOf("JavaScript") == -1) {
-                Vacancy vacancy = new Vacancy();
-                System.out.println(valueAtribute);
-                vacancy.setLinkJob(valueAtribute);
-                System.out.println(nameJob);
-                vacancy.setNameJob(nameJob);
-                System.out.println(valueAtribute.substring(26, 32));
-                System.out.println(Integer.valueOf(valueAtribute.substring(26, 32)));
-                vacancy.setId(Integer.valueOf(valueAtribute.substring(26, 32)));
-            }
-        }
-    }
 }
 
 

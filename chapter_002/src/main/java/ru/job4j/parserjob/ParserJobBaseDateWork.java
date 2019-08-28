@@ -73,5 +73,20 @@ public class ParserJobBaseDateWork {
             LOGGER.error(e.getMessage(), e);
         }
     }
+    String sqlInsertItems = "";
+
+    public void  addVacansy(Vacancy vacancy){
+        try (PreparedStatement st = this.connect.prepareStatement(sqlInsertItems)) {
+            st.setString(1, vacancy.getLinkJob());
+            st.setString(2, vacancy.getEsqribishenJob());
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                vacancy.setId(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            this.LOGGER.error(e.getMessage(), e);
+        }
+
+    }
 
 }
