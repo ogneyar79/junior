@@ -5,8 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.SchedulerException;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JobVacansyQ implements Job {
 
@@ -18,19 +21,25 @@ public class JobVacansyQ implements Job {
         this.managerSql = managerSql;
     }
 
+    // I wanna all another class Manager
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         final Logger LOG = LogManager.getLogger(JobVacansyQ.class.getName());
-
-        ParserJobSqlRu parserJobSqlRu = new ParserJobSqlRu(managerSql.url, managerSql.getParserJobSqlRu().vacancySet, managerSql.getParserJobSqlRu().javaF);
+        Set<Vacancy> vacancySet = new HashSet<>();
+        ParserJobBaseDateWork localDateWork = managerSql.getParserJobBaseDateWork();
+        managerSql.setMaxDate();
         try {
-            parserJobSqlRu.parseVacancies(parserJobSqlRu.url, parserJobSqlRu.vacancySet, parserJobSqlRu.javaF);
-            parserJobSqlRu.getVacancySet();
-
+            vacancySet = managerSql.parserJobSqlRu.parseThroughPagesToSet();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        if (managerSql.getInfoIsElementsAtSet() & managerSql.getParserJobSqlRu().isAddNewElement()) {
+            localDateWork.addVacansy(vacancySet);
+        }
 
     }
+
+
 }
+
