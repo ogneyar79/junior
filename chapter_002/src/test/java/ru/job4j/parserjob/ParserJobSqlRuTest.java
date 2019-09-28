@@ -4,12 +4,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.parserjob.workjsoup.ConectionJsoupGetingDocument;
 
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,13 +18,15 @@ import static org.junit.Assert.*;
 
 public class ParserJobSqlRuTest {
 
-    String url = "https://www.sql.ru/forum/job/1";
+    String url = "https://www.sql.ru/forum/job/";
     Set<Vacancy> vacancySet = new HashSet<>();
     String javaFinder = "Java";
     ParserJobSqlRu parserJobSqlRu;
+    ConectionJsoupGetingDocument jsoupGetingDocument;
 
     @Before
     public void init() {
+
         this.parserJobSqlRu = new ParserJobSqlRu(url, vacancySet, javaFinder);
     }
 
@@ -35,28 +37,51 @@ public class ParserJobSqlRuTest {
         assertThat(result, is(957));
     }
 
-    @Test
-    public void checkParsingOnePageFromSite() throws IOException {
-        System.out.println(vacancySet.isEmpty());
-        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
-        LocalDateTime localDateTime = LocalDateTime.now().minusDays(3);
-        System.out.println(localDateTime.toString());
-        parserJobSqlRu.setMaxDate(localDateTime);
-        parserJobSqlRu.parseVacancies(Jsoup.connect(url).get());
-        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
-  //      assertThat(parserJobSqlRu.isAddNewElement(), is(true));
-    }
-
+//    @Test
+//    public void checkParsingOnePageFromSite() throws IOException {
+//        System.out.println(vacancySet.isEmpty());
+//        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
+//        LocalDateTime localDateTime = LocalDateTime.now().minusDays(3);
+//        System.out.println(localDateTime.toString());
+//        parserJobSqlRu.setMaxDate(localDateTime);
+//        parserJobSqlRu.parseVacancies(Jsoup.connect(url).get(), );
+//        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
+    //     assertThat(parserJobSqlRu.isAddNewElement(), is(true));
+//    }
+//
 
     @Test
     public void parseAllPagesAndReturnSetWithVacancy() throws IOException {
         System.out.println(vacancySet.isEmpty());
         vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
-        parserJobSqlRu.setMaxDate(LocalDateTime.now().minusDays(3));
-        vacancySet = parserJobSqlRu.parseThroughPagesToSet();
+        parserJobSqlRu.setMaxDate(LocalDateTime.now().minusDays(9));
+
+        vacancySet = parserJobSqlRu.parseThroughPagesToSet(url -> {
+            url = parserJobSqlRu.url;
+            return Jsoup.connect(String.valueOf(url)).get();
+        });
         vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
         assertThat(parserJobSqlRu.isAddNewElement(), is(true));
     }
+
+    @Test
+    public void parseHtmlFromFileReturnSetWithVacancy() throws IOException {
+        System.out.println(vacancySet.isEmpty());
+        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
+        parserJobSqlRu.setMaxDate(LocalDateTime.of(2019, Month.JANUARY, 1, 0, 1));
+        vacancySet = parserJobSqlRu.parseThroughPagesToSet(new ConectionJsoupGetingDocument() {
+            @Override
+            public Document conectHtmlRepresentationAndGetDocument(Object object) throws IOException {
+
+                String path = getClass().getResource(fileNameHtml).getPath();
+                return Jsoup.parse(new File(path), "windows-1251");
+
+
+
+            }
+        });
+    }
+
 
 //    @Test
 //    public void checkParseFromDocument() throws IOException {

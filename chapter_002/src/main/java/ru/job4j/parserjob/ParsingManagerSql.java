@@ -1,10 +1,17 @@
 package ru.job4j.parserjob;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.quartz.SchedulerException;
+import ru.job4j.parserjob.workjsoup.ConectionJsoupGetingDocument;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class parsing site manager.
@@ -14,6 +21,11 @@ import java.time.Month;
  * @since 30.08.19
  */
 public class ParsingManagerSql {
+
+
+    ConectionJsoupGetingDocument<String> conectionJsoupGetingDocument;
+
+
 
     /**
      * field parsing object.
@@ -70,13 +82,34 @@ public class ParsingManagerSql {
 
 
     /**
-     * Procedure starting to Work, actually  start timeManager{@link ParserJobSqlRu#url}
+     * Procedure starting to Work, actually  start timeManager
      */
     public void beginWork() throws SchedulerException {
         try {
             this.timeManagerQ.task();
         } catch (SchedulerException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Procedure of Working, actually , use Two obgects ParserJobBaseDate, ParserJobSqlRu
+     */
+    public void work() {
+
+        final Logger LOG = LogManager.getLogger(JobVacansyQ.class.getName());
+
+        ParserJobBaseDateWork localDateWork = this.getParserJobBaseDateWork();
+        this.setMaxDate();
+        try {
+            parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(conectionJsoupGetingDocument);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (this.getInfoIsElementsAtSet() & this.getParserJobSqlRu().isAddNewElement()) {
+            localDateWork.addVacansy(parserJobSqlRu.getVacancySet());
         }
     }
 

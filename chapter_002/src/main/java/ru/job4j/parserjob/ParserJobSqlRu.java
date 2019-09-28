@@ -6,7 +6,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.job4j.parserjob.workjsoup.ConectionJsoupGetingDocument;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,10 +25,17 @@ import java.util.Set;
  */
 public class ParserJobSqlRu {
 
+    ConectionJsoupGetingDocument myJsoupObject;
+
     /**
      * field link for conection with site.
      */
     String url;
+
+    /**
+     * field copy of one page site at HTML format.
+     */
+    String fileName;
 
     /**
      * Logger for info output.
@@ -43,6 +52,8 @@ public class ParserJobSqlRu {
      * It's max(date) from Base or first January this year.
      */
     private LocalDateTime maxDate;
+
+    RegresJobParserSql regreObject = new RegresJobParserSql();
 
     /**
      * field informing even if one element was Added.
@@ -75,7 +86,7 @@ public class ParserJobSqlRu {
      */
     String javaFinder;    //  In our case we going to look for vacancy with "Java"
 
-    private Set<Vacancy> getVacancySet() {
+    Set<Vacancy> getVacancySet() {
         return vacancySet;
     }
 
@@ -97,14 +108,6 @@ public class ParserJobSqlRu {
         this.javaFinder = javaFinder;
     }
 
-    /**
-     * Function conection to our site.
-     *
-     * @return Document object for parsing.
-     */
-    private Document connectToPageAndGetDocument(String url) throws IOException {
-        return Jsoup.connect(url).get();
-    }
 
     /**
      * Function getting field value {@link ParserJobSqlRu#url}
@@ -126,19 +129,23 @@ public class ParserJobSqlRu {
      * @return SetVacancy<></>
      * @throws IOException If it is impossible to connect to the site.
      */
-    public Set<Vacancy> parseThroughPagesToSet() throws IOException {
-        System.out.println("Let's Start");
+    public Set<Vacancy> parseThroughPagesToSet(ConectionJsoupGetingDocument myJsoupObject) throws IOException {
+
         this.vacancySet.clear();
+        System.out.println("Let's continue");
         String url;
 
         int pages = getQuantityPages(this.url);
+        System.out.println("Let's Start" + " Pages int" + pages);
         LOGGER.info(String.format("Total pages to parse: %s", pages));
 
         for (int page = 1; page <= pages; page++) {
             url = String.format("%s/%s", this.url, page);
+            System.out.println("Let's continue");
+            System.out.println(url);
             LOGGER.info(String.format("Parsing page %s of %s pages.", page, pages));
-
-            Document document = this.connectToPageAndGetDocument(url);
+            System.out.println(page);
+            Document document = myJsoupObject.conectHtmlRepresentationAndGetDocument(url);
             this.parseVacancies(document);
         }
         return this.vacancySet;
@@ -154,6 +161,7 @@ public class ParserJobSqlRu {
      */
     public int getQuantityPages(String url) {
         Document doc = null;
+        System.out.println("Method Pages");
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
@@ -162,6 +170,7 @@ public class ParserJobSqlRu {
         Elements sortOptions = doc.getElementsContainingOwnText("Страницы:");          // container for all pages XML
         String pages = sortOptions.text().trim(); // All pages  at one, the Method text iterate and add(append) each element To String Builder
         String[] p = pages.split("\\s");
+        System.out.println(Integer.parseInt(p[p.length - 1]) + " Quantity of Pages");
         return Integer.parseInt(p[p.length - 1]);
     }
 
@@ -174,9 +183,7 @@ public class ParserJobSqlRu {
     public void parseVacancies(Document document) throws IOException {
         Vacancy vacancy;
         String nameJob;
-        System.out.println(document.title());
-
-//         получаем элементы которые содеражат атрибут class = " postslisttopic" and work with these items and his children
+        //         получаем элементы которые содеражат атрибут class = " postslisttopic" and work with these items and his children
         Elements elements = document.getElementsByClass("postslisttopic");
         for (Element element : elements) {
             nameJob = element.child(0).text();
@@ -184,7 +191,8 @@ public class ParserJobSqlRu {
             if (nameJob.indexOf(this.javaFinder) != -1 && nameJob.indexOf("JavaScript") == -1 && nameJob.indexOf("Java Script") == -1) {
 
                 String linkJob = element.select("a").attr("href"); // variable for  url about vacancy
-                int id = Integer.valueOf(linkJob.substring(26, 32));
+                System.out.println(linkJob);
+                int id = Integer.parseInt(regreObject.findThatByRegres(linkJob));
                 String date = element.parent().child(5).text(); // String Date of  publication of vacancy, getting from site
                 System.out.printf("String Date of  publication of vacancy, getting from site is %s%n ", date);
                 LocalDateTime vacDate = this.parsDate(date); // variable date and time together, setTing by parseDate with  String Date

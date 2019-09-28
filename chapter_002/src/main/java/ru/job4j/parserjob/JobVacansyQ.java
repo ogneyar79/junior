@@ -21,22 +21,9 @@ public class JobVacansyQ implements Job {
         this.managerSql = managerSql;
     }
 
-    // I wanna all another class Manager
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        final Logger LOG = LogManager.getLogger(JobVacansyQ.class.getName());
-        Set<Vacancy> vacancySet = new HashSet<>();
-        ParserJobBaseDateWork localDateWork = managerSql.getParserJobBaseDateWork();
-        managerSql.setMaxDate();
-        try {
-            vacancySet = managerSql.parserJobSqlRu.parseThroughPagesToSet();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (managerSql.getInfoIsElementsAtSet() & managerSql.getParserJobSqlRu().isAddNewElement()) {
-            localDateWork.addVacansy(vacancySet);
-        }
+        managerSql.work();
 
     }
 
