@@ -14,7 +14,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Class for direct parsing site.
@@ -25,7 +27,11 @@ import java.util.Set;
  */
 public class ParserJobSqlRu {
 
-    ConectionJsoupGetingDocument myJsoupObject;
+    Function<String, Document> convektorAtDocumentFrom;
+
+    public Function<String, Document> getConvektorAtDocumentFrom() {
+        return convektorAtDocumentFrom;
+    }
 
     /**
      * field link for conection with site.
@@ -123,16 +129,32 @@ public class ParserJobSqlRu {
     }
 
     /**
-     * Collects data from the pages of the site.
-     * In each cycle, adds the following number to the address, starting with one.
+     * Collects data from the pages of the Representation of Html.
      *
+     * @param file File.
      * @return SetVacancy<></>
      * @throws IOException If it is impossible to connect to the site.
      */
-    public Set<Vacancy> parseThroughPagesToSet(ConectionJsoupGetingDocument myJsoupObject) throws IOException {
+    public Set<Vacancy> parseThroughPagesToSet(File file) throws IOException {
+        this.vacancySet.clear();
+        System.out.println(file.toString());
+        System.out.println(file.canRead());
+        Document document = Jsoup.parse(file, "windows-1251");
+        this.parseVacancies(document);
+        return this.vacancySet;
+    }
+
+    /**
+     * Collects data from the pages of the site.
+     * In each cycle, adds the following number to the address, starting with one.
+     *
+     * @param myJsoupObject Function<String, Document>
+     * @return SetVacancy<></>
+     * @throws IOException If it is impossible to connect to the site.
+     */
+    public Set<Vacancy> parseThroughPagesToSet(Function<String, Document> myJsoupObject) throws IOException {
 
         this.vacancySet.clear();
-        System.out.println("Let's continue");
         String url;
 
         int pages = getQuantityPages(this.url);
@@ -141,11 +163,9 @@ public class ParserJobSqlRu {
 
         for (int page = 1; page <= pages; page++) {
             url = String.format("%s/%s", this.url, page);
-            System.out.println("Let's continue");
-            System.out.println(url);
+
             LOGGER.info(String.format("Parsing page %s of %s pages.", page, pages));
-            System.out.println(page);
-            Document document = myJsoupObject.conectHtmlRepresentationAndGetDocument(url);
+            Document document = myJsoupObject.apply(url);
             this.parseVacancies(document);
         }
         return this.vacancySet;
