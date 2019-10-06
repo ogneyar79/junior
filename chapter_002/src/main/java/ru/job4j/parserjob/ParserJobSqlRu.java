@@ -47,10 +47,10 @@ public class ParserJobSqlRu {
      */
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Loaded properties with connection options.
-     */
-    private Configjob configjob = new Configjob();
+//    /**
+//     * Loaded properties with connection options.
+//     */
+//    private Configjob configjob = new Configjob();
 
     /**
      * Beginning Date of the search.
@@ -71,8 +71,8 @@ public class ParserJobSqlRu {
      * @param addNewElement
      */
     private void changeAnewElIfOneementWasAdded(boolean addNewElement) {
-        if (addNewElement == true) {
-            this.addNewElement = true;
+        if (addNewElement) {
+            this.addNewElement = addNewElement;
             System.out.println("has  been added element at Set ");
         }
     }
@@ -216,7 +216,8 @@ public class ParserJobSqlRu {
                 System.out.printf("String Date of  publication of vacancy, getting from site is %s%n ", date);
                 LocalDateTime vacDate = this.parsDate(date); // variable date and time together, setTing by parseDate with  String Date
                 if (vacDate.isAfter(this.maxDate)) {
-                    System.out.printf("The Dates for add to Vacancy to BaseDate including are id, nameJob, linkJob and Date:" +
+                    System.out.printf("The Dates for add to Vacancy to BaseDate including are id, nameJob, linkJob and Date:"
+                            +
                             " %d%n,%s%n,%s%n,%s%n", id, nameJob, linkJob, vacDate.toString());
 
                     vacancy = new Vacancy(id, nameJob, linkJob, vacDate);

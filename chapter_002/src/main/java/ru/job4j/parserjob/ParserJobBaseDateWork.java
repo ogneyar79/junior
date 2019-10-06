@@ -92,9 +92,12 @@ public class ParserJobBaseDateWork implements Closeable {
 //    }
 
 
-    String creatorStructure = "\"CREATE TABLE IF NOT EXISTS  vacancy ( id integer unique,\\n\" +\n" +
-            " \"    name text,\\n\" +\n" +
-            "  \"    link text,\\n\" +\n" +
+    String creatorStructure = "\"CREATE TABLE IF NOT EXISTS  vacancy ( id integer unique,\\n\" +\n"
+            +
+            " \"    name text,\\n\" +\n"
+            +
+            "  \"    link text,\\n\" +\n"
+            +
             "   \"    elTiempo timestamp )\")";
 
     /**

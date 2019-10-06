@@ -25,9 +25,12 @@ public class ParserJobBaseDateWorkTest {
 
     @Test
     public void createStructure() throws Exception {
-        String create = "CREATE TABLE IF NOT EXISTS  vacancy ( id integer unique, " +
-                "    name text, " +
-                "    link text, " +
+        String create = "CREATE TABLE IF NOT EXISTS  vacancy ( id integer unique, "
+                +
+                "    name text, "
+                +
+                "    link text, "
+                +
                 "      elTiempo timestamp )";
         parserJobBaseDateWork.setConnection(configjob);
         parserJobBaseDateWork.createStructure(create);

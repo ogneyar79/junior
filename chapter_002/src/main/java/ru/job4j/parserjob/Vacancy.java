@@ -69,14 +69,24 @@ public class Vacancy {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Vacancy vacancy = (Vacancy) o;
 
-        if (id != vacancy.id) return false;
-        if (nameJob != null ? !nameJob.equals(vacancy.nameJob) : vacancy.nameJob != null) return false;
-        if (linkJob != null ? !linkJob.equals(vacancy.linkJob) : vacancy.linkJob != null) return false;
+        if (id != vacancy.id) {
+            return false;
+        }
+        if (nameJob != null ? !nameJob.equals(vacancy.nameJob) : vacancy.nameJob != null) {
+            return false;
+        }
+        if (linkJob != null ? !linkJob.equals(vacancy.linkJob) : vacancy.linkJob != null) {
+            return false;
+        }
         return dateTime != null ? dateTime.equals(vacancy.dateTime) : vacancy.dateTime == null;
     }
 
@@ -91,11 +101,21 @@ public class Vacancy {
 
     @Override
     public String toString() {
-        return "Vacancy{" +
-                "id=" + id +
-                ", nameJob='" + nameJob + '\'' +
-                ", linkJob='" + linkJob + '\'' +
-                ", dateTime=" + dateTime +
+        return "Vacancy{"
+                +
+                "id="
+                +
+                id
+                +
+                ", nameJob='"
+                + nameJob + '\''
+                +
+                ", linkJob='" + linkJob
+                + '\''
+                +
+                ", dateTime="
+                + dateTime
+                +
                 '}';
     }
 }

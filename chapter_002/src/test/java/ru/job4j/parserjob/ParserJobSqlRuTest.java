@@ -4,7 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.parserjob.workjsoup.ConectionJsoupGetingDocument;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,17 +11,23 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class ParserJobSqlRuTest {
 
-    String url = "https://www.sql.ru/forum/job/";
+    final String url = "https://www.sql.ru/forum/job/";
     Set<Vacancy> vacancySet = new HashSet<>();
     String javaFinder = "Java";
     ParserJobSqlRu parserJobSqlRu;
-    ConectionJsoupGetingDocument jsoupGetingDocument;
+
+    String htmlPath = "C: \\projects\\sirotkinmaksim\\chapter_002\\src\\test\\java\\resources\\SqlJob\\tableTwo.html";
+    String html = "tableTwo.html";
+    String htmlPathOne = "C:\\projects\\sirotkinmaksim\\chapter_002\\src\\test\\java\\resources\\SqlJob\\tableOne.html";
+
+    Function<String, Document> convektorAtDocumentFrom;
 
     @Before
     public void init() {
@@ -54,12 +59,22 @@ public class ParserJobSqlRuTest {
     public void parseAllPagesAndReturnSetWithVacancy() throws IOException {
         System.out.println(vacancySet.isEmpty());
         vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
-        parserJobSqlRu.setMaxDate(LocalDateTime.now().minusDays(9));
+        parserJobSqlRu.setMaxDate(LocalDateTime.now().minusDays(10));
 
-        vacancySet = parserJobSqlRu.parseThroughPagesToSet(url -> {
-            url = parserJobSqlRu.url;
-            return Jsoup.connect(String.valueOf(url)).get();
-        });
+        convektorAtDocumentFrom = new Function<String, Document>() {
+            @Override
+            public Document apply(String s) {
+                Document document = null;
+                try {
+                    document = Jsoup.connect(s).get();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return document;
+            }
+        };
+
+        vacancySet = parserJobSqlRu.parseThroughPagesToSet(convektorAtDocumentFrom);
         vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
         assertThat(parserJobSqlRu.isAddNewElement(), is(true));
     }
@@ -68,18 +83,11 @@ public class ParserJobSqlRuTest {
     public void parseHtmlFromFileReturnSetWithVacancy() throws IOException {
         System.out.println(vacancySet.isEmpty());
         vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
-        parserJobSqlRu.setMaxDate(LocalDateTime.of(2019, Month.JANUARY, 1, 0, 1));
-        vacancySet = parserJobSqlRu.parseThroughPagesToSet(new ConectionJsoupGetingDocument() {
-            @Override
-            public Document conectHtmlRepresentationAndGetDocument(Object object) throws IOException {
+        parserJobSqlRu.setMaxDate(LocalDateTime.of(2002, 01, 01, 00, 01, 01));
 
-                String path = getClass().getResource(fileNameHtml).getPath();
-                return Jsoup.parse(new File(path), "windows-1251");
-
-
-
-            }
-        });
+        vacancySet = parserJobSqlRu.parseThroughPagesToSet(new File(htmlPathOne));
+        vacancySet.forEach(vacancy -> System.out.println(vacancy.toString()));
+        assertThat(parserJobSqlRu.isAddNewElement(), is(true));
     }
 
 
@@ -132,5 +140,4 @@ public class ParserJobSqlRuTest {
 //        LocalDateTime.of(localDate, localTime);
 //        System.out.println(LocalDateTime.of(localDate, localTime));
 //   }
-
 }

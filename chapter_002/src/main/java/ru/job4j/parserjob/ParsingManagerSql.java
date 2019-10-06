@@ -5,13 +5,14 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.quartz.SchedulerException;
-import ru.job4j.parserjob.workjsoup.ConectionJsoupGetingDocument;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
+
 
 /**
  * Class parsing site manager.
@@ -22,15 +23,12 @@ import java.util.Set;
  */
 public class ParsingManagerSql {
 
-
-    ConectionJsoupGetingDocument<String> conectionJsoupGetingDocument;
-
-
-
     /**
      * field parsing object.
      */
     ParserJobSqlRu parserJobSqlRu;
+
+    File file;
 
     /**
      * field configuration connection.
@@ -80,7 +78,6 @@ public class ParsingManagerSql {
         this.timeManagerQ = timeManagerQ;
     }
 
-
     /**
      * Procedure starting to Work, actually  start timeManager
      */
@@ -102,7 +99,7 @@ public class ParsingManagerSql {
         ParserJobBaseDateWork localDateWork = this.getParserJobBaseDateWork();
         this.setMaxDate();
         try {
-            parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(conectionJsoupGetingDocument);
+            parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(file);
 
         } catch (IOException e) {
             e.printStackTrace();
