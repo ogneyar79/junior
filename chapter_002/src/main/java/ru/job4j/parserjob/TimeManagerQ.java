@@ -5,9 +5,13 @@ import org.apache.logging.log4j.Logger;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -43,10 +47,11 @@ public class TimeManagerQ {
         scheduler.start();
     }
 
-    public static void main(String[] args) {
-        TimeManagerQ parser = new TimeManagerQ();
+    public static void main(String[] args) throws SchedulerException {
+        TimeManagerQ timeManagerQ = new TimeManagerQ();
+
         try {
-            parser.task();
+            timeManagerQ.task();
         } catch (SchedulerException e) {
             LOGGER.error("ERROR", e);
         }

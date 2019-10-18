@@ -33,7 +33,7 @@ public class ParsingManagerSqlTest {
         parserJobSqlRu = new ParserJobSqlRu(url, vacancySet, javaFinder);
         parsingManagerSql = new ParsingManagerSql(parserJobSqlRu, parserJobBaseDateWork, url, timeManagerQ);
         parsingManagerSql.file = new File(htmlPathOne);
-        Job jobVacansyQ = new JobVacansyQ(parsingManagerSql);
+        Job jobVacansyQ = new JobVacansyQ();
         parsingManagerSql.beginWork();
     }
 

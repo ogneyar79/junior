@@ -78,6 +78,11 @@ public class ParsingManagerSql {
         this.timeManagerQ = timeManagerQ;
     }
 
+    public ParsingManagerSql(ParserJobSqlRu parserJobSqlRu, ParserJobBaseDateWork parserJobBaseDateWork) throws SchedulerException {
+        this.parserJobSqlRu = parserJobSqlRu;
+        this.parserJobBaseDateWork = parserJobBaseDateWork;
+    }
+
     /**
      * Procedure starting to Work, actually  start timeManager
      */
@@ -97,9 +102,8 @@ public class ParsingManagerSql {
         final Logger LOG = LogManager.getLogger(JobVacansyQ.class.getName());
 
         ParserJobBaseDateWork localDateWork = this.getParserJobBaseDateWork();
-        this.setMaxDate();
         try {
-            parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(file);
+            this.parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(file);
 
         } catch (IOException e) {
             e.printStackTrace();

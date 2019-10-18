@@ -7,24 +7,35 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.SchedulerException;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 public class JobVacansyQ implements Job {
 
-
-    ParsingManagerSql managerSql;
-
-
-    public JobVacansyQ(ParsingManagerSql managerSql) {
-        this.managerSql = managerSql;
+    public JobVacansyQ() throws SchedulerException {
     }
+
+    Set<Vacancy> vacancySet = new HashSet<>();
+    String javaFinder = "Java";
+    String htmlPathOne = "C:\\projects\\sirotkinmaksim\\chapter_002\\src\\test\\java\\resources\\SqlJob\\tableOne.html";
+
+    File file = new File(htmlPathOne);
+
+    ParserJobSqlRu parserJobSqlRu = new ParserJobSqlRu(vacancySet, javaFinder, file);
+
+
+    Configjob configjob = new Configjob();
+    ParserJobBaseDateWork parserJobBaseDateWork = new ParserJobBaseDateWork(configjob);
+
+    ParsingManagerSql managerSql = new ParsingManagerSql(parserJobSqlRu, parserJobBaseDateWork);
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        parserJobSqlRu.setMaxDate(LocalDateTime.of(2002, 01, 01, 00, 01, 01));
         managerSql.work();
-
     }
 
 

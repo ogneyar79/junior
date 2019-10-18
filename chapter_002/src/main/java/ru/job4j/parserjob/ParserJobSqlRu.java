@@ -112,6 +112,13 @@ public class ParserJobSqlRu {
         this.vacancySet = vacancySet;
         this.javaFinder = javaFinder;
     }
+    public ParserJobSqlRu(Set<Vacancy> vacancySet, String javaFinder, File file) {
+        this.url = url;
+        this.vacancySet = vacancySet;
+        this.javaFinder = javaFinder;
+    }
+
+
 
 
     /**
