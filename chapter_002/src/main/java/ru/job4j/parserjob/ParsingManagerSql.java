@@ -103,6 +103,7 @@ public class ParsingManagerSql {
 
         ParserJobBaseDateWork localDateWork = this.getParserJobBaseDateWork();
         try {
+            File file = parserJobSqlRu.file;
             this.parserJobSqlRu.vacancySet = this.parserJobSqlRu.parseThroughPagesToSet(file);
 
         } catch (IOException e) {

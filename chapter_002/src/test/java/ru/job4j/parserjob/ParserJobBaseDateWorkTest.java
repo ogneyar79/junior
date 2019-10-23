@@ -9,9 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ParserJobBaseDateWorkTest {
-    @Test
-    public void getConnect() throws Exception {
-    }
+
 
     Configjob configjob = new Configjob();
     ParserJobBaseDateWork parserJobBaseDateWork = new ParserJobBaseDateWork(configjob);

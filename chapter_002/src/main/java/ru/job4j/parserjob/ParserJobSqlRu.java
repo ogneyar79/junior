@@ -38,9 +38,14 @@ public class ParserJobSqlRu {
     String url;
 
     /**
-     * field copy of one page site at HTML format.
+     * field file's name copy of one page site at HTML format.
      */
     String fileName;
+
+    /**
+     * field object that contains file from hard disk there is of one page site at HTML format.
+     */
+    File file;
 
     /**
      * Logger for info output.
@@ -113,13 +118,10 @@ public class ParserJobSqlRu {
         this.javaFinder = javaFinder;
     }
     public ParserJobSqlRu(Set<Vacancy> vacancySet, String javaFinder, File file) {
-        this.url = url;
+        this.file = file;
         this.vacancySet = vacancySet;
         this.javaFinder = javaFinder;
     }
-
-
-
 
     /**
      * Function getting field value {@link ParserJobSqlRu#url}
