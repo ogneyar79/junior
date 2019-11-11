@@ -66,8 +66,13 @@ public class SearchTest {
 
     @Test
     public void checkReturnOurListWithFiles() {
-
         List<File> filesWithLookingForEX = search.files(path, lookingForExpansion);
+        assertThat(filesWithLookingForEX.containsAll(testFiles), is(true));
+    }
+
+    @Test
+    public void checkReturnOurListWithFilesNewMethod() {
+        List<File> filesWithLookingForEX = search.filesNewVersion(path, lookingForExpansion);
         assertThat(filesWithLookingForEX.containsAll(testFiles), is(true));
     }
 }
