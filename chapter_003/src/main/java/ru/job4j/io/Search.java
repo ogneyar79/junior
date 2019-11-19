@@ -33,6 +33,9 @@ public class Search {
         return result;
     }
 
+
+
+
     /**
      * Function of looking for a list of files with expansion inner  method we use private method filesAll() returning files from catalog without folder
      *
@@ -50,6 +53,27 @@ public class Search {
         }
         return result;
     }
+
+    /**
+     * Function of looking for a list of files withOut expansion inner  method we use private method filesAll() returning files from catalog without folder
+     *
+     * @param parent    String The way to catalog
+     * @param expansion String expansion file with this we need to except.
+     * @return result is List files is found as result.
+     */
+    public List<File> filesWithOutExpansion(String parent, String expansion) {
+        List<File> listFiles = filesAll(parent);
+        List<File> result = new ArrayList<>();
+        for (File file : listFiles) {
+            List<String> arrayExpansion = new ArrayList<>(1);
+            arrayExpansion.add(expansion);
+            if (file.isFile() && !(checkIdentityExts(file, arrayExpansion))) {
+                result.add(file);
+            }
+        }
+        return result;
+    }
+
 
     /**
      * Function of looking for a list of files with expansion

@@ -75,4 +75,12 @@ public class SearchTest {
         List<File> filesWithLookingForEX = search.filesNewVersion(path, lookingForExpansion);
         assertThat(filesWithLookingForEX.containsAll(testFiles), is(true));
     }
+
+    @Test
+    public void checkReturnOurListWithFilesWithOutExpansion() {
+        String exceptionExpansion = "bmp";
+        List<File> filesWithOutExpension = search.filesWithOutExpansion(path, exceptionExpansion);
+        assertThat(filesWithOutExpension.containsAll(testFiles), is(true));
+    }
+
 }
