@@ -1,9 +1,12 @@
 package ru.job4j.io.archive;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +38,29 @@ public class ZipTest {
 
     List<File> testFiles;
 
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
+
+
+    File createdFile;
+    File createdFolder;
+
+    public ZipTest() throws IOException {
+    }
+
+
     @Before
     public void setUp() throws Exception {
-        outDerictoryDestination = (System.getProperty("java.io.tmpdir") + File.separator + "/pr.zip");
+        createdFile = folder.newFile("pr.zip");
+        createdFolder = folder.newFolder("subfolder");
+        //         outDerictoryDestination = (System.getProperty("java.io.tmpdir") + File.separator + "/pr.zip");
+        outDerictoryDestination = createdFile.getAbsolutePath();
+        System.out.println(outDerictoryDestination);
         path = (System.getProperty("java.io.tmpdir") + File.separator + "/testcaseFirst");
         rootCatalog = new File(path);
         rootCatalog.mkdirs();
-        zipFile = new File(outDerictoryDestination);
-        zipFile.mkdirs();
+        //  zipFile = new File(outDerictoryDestination);
+        //zipFile.mkdirs();
 
 
         exceptionExpension = "zip";
@@ -86,7 +104,7 @@ public class ZipTest {
 
     @Test
     public void packZip() throws Exception {
-      zipClass.packZip(zipClass.argument.getDirectorySource(), zipClass.argument.getOutDerictoryDestination());
+        zipClass.packZip(zipClass.argument.getDirectorySource(), zipClass.argument.getOutDerictoryDestination());
 
     }
 
