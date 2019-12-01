@@ -33,9 +33,6 @@ public class Search {
         return result;
     }
 
-
-
-
     /**
      * Function of looking for a list of files with expansion inner  method we use private method filesAll() returning files from catalog without folder
      *
@@ -73,7 +70,6 @@ public class Search {
         }
         return result;
     }
-
 
     /**
      * Function of looking for a list of files with expansion

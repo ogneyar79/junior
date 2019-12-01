@@ -1,6 +1,7 @@
 package ru.job4j.io.chat;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -108,7 +109,7 @@ public class ChatBrain {
      * @param command String.
      * @return ArrayList<String></> result.
      */
-    public void worckChat(String command) {
+    public void worckChat(String command) throws IOException {
         this.logFile.writeLogToArrayAndFile(command + "Start");
         while (!(checkCommand(command) == finishWork)) {
 

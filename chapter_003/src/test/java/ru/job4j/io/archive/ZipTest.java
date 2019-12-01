@@ -41,19 +41,17 @@ public class ZipTest {
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
-
     File createdFile;
     File createdFolder;
-
-    public ZipTest() throws IOException {
-    }
-
 
     @Before
     public void setUp() throws Exception {
         createdFile = folder.newFile("pr.zip");
         createdFolder = folder.newFolder("subfolder");
         //         outDerictoryDestination = (System.getProperty("java.io.tmpdir") + File.separator + "/pr.zip");
+     //   outDerictoryDestination = "d:\\Temp\\MSI LIVE UPDATE";
+
+
         outDerictoryDestination = createdFile.getAbsolutePath();
         System.out.println(outDerictoryDestination);
         path = (System.getProperty("java.io.tmpdir") + File.separator + "/testcaseFirst");
@@ -100,10 +98,18 @@ public class ZipTest {
 
     @Test
     public void pack() throws Exception {
+
+        Zip.packDirectoryToZip(rootCatalog, createdFile);
+        System.out.println(createdFile.isFile());
+        System.out.println(createdFolder.isDirectory());
+        File[] arrayList = createdFolder.listFiles();
+        System.out.println(arrayList.length);
+        System.out.println(createdFolder.listFiles());
     }
 
     @Test
     public void packZip() throws Exception {
+        System.out.println(path);
         zipClass.packZip(zipClass.argument.getDirectorySource(), zipClass.argument.getOutDerictoryDestination());
 
     }

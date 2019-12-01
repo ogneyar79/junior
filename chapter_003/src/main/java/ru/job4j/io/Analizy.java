@@ -96,19 +96,15 @@ public class Analizy {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) {
-        int a = 9;
-        int b = 10;
-        if (a < 10) {
-            System.out.println("This A" + a);
-            if (b < 10) {
-                System.out.println(" A and B < 10" + a + b);
-            } else {
-                System.out.println(" !!!!!");
-            }
+        int a = 2;
+        System.out.println(a);
+        while (a<10){
+            a++;
+            System.out.println(a);
         }
-        System.out.println(" NoThing");
+        System.out.println(a);
+
         try (PrintWriter out = new PrintWriter(new FileOutputStream("unavailable.csv"))) {
             out.println("15:01:30;15:02:32");
             out.println("15:10:30;23:12:32");

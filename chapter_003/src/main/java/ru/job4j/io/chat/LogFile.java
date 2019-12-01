@@ -1,8 +1,9 @@
 package ru.job4j.io.chat;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,13 @@ public class LogFile {
     private final String path;
     private ArrayList<String> logList;
     private File fileOurLog;
+
+
+    public LogFile(String path, ArrayList<String> logList, File fileOurLog) {
+        this.path = path;
+        this.logList = logList;
+        this.fileOurLog = fileOurLog;
+    }
 
     /**
      * The konstructor create object and init in them
@@ -50,18 +58,16 @@ public class LogFile {
      *
      * @param info String that we want to write To log.
      */
-    public Boolean writeLogToArrayAndFile(String info) {
+    public Boolean writeLogToArrayAndFile(String info) throws IOException {
         Boolean result = false;
-        String logPlusTime = " info " + " current datetime : " + LocalDateTime.now();
-        this.logList.add(logPlusTime);
-        String logPlusNumerAtList = logPlusTime + "Number at Array : " + logList.indexOf(logPlusTime);
-        try {
-            new FileWriter(this.getFileOurLog()).write(logPlusNumerAtList);
-            System.out.println("Successfully wrote to the file.");
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StringBuilder stringBuilder = new StringBuilder(info);
+
+        String intern = String.valueOf(stringBuilder.append("  current datetime : " + LocalDateTime.now()));
+        this.logList.add(intern);
+        stringBuilder.append("Number at Array : " + logList.indexOf(intern) + "\n");
+        String logPlusNumerAtList = String.valueOf(stringBuilder);
+        Files.write(this.fileOurLog.toPath(), logPlusNumerAtList.getBytes(), StandardOpenOption.APPEND);
+
         return result;
     }
 
@@ -76,4 +82,9 @@ public class LogFile {
     public File getFileOurLog() {
         return fileOurLog;
     }
+
+    public void setFileOurLog(File fileOurLog) {
+        this.fileOurLog = fileOurLog;
+    }
+
 }

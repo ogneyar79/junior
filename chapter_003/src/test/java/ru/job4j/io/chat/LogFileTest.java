@@ -38,13 +38,20 @@ public class LogFileTest {
 
     @Test
     public void writeLogToFile() throws IOException {
-        logFile.writeLogToArrayAndFile(infoFirst);
-        logFile.writeLogToArrayAndFile(infoTwo);
-        assertThat(logFile.getFileOurLog().exists(), is(true));
-        System.out.println(logFile.getPath());
-        Files.lines(Paths.get(logFile.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(infoListTest::add);
-        Files.lines(Paths.get(logFile.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(System.out::println);
+        String pathTest = System.getProperty("java.io.tmpdir") + File.separator + "/testlogchat.txt";
+        ArrayList<String> testList = new ArrayList();
+        File testFile = new File(pathTest);
+        testFile.createNewFile();
+        LogFile testLog = new LogFile(pathTest, testList, testFile);
+        testLog.writeLogToArrayAndFile(infoFirst);
+        testLog.writeLogToArrayAndFile(infoTwo);
+        assertThat(testLog.getFileOurLog().exists(), is(true));
 
+        Files.lines(Paths.get(testLog.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(infoListTest::add);
+        Files.lines(Paths.get(testLog.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(System.out::println);
+
+        assertThat(testLog.getLogList().size(), is(infoListTest.size()));
+        testLog.getFileOurLog().delete();
     }
 
 }
