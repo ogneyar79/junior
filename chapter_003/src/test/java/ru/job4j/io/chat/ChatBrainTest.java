@@ -1,11 +1,9 @@
 package ru.job4j.io.chat;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -108,25 +106,25 @@ public class ChatBrainTest {
         String personWordSecond = "Stop";
         String conandContinue = "Continue";
 
-        while (!(chatBrain.checkCommand(command) == chatBrain.finishWork)) {
+        while (!(chatBrain.checkCommand(command) == chatBrain.FINISHWORK)) {
             System.out.println(" Your Question");
             command = personWord;                     // getMassageFromChatPerson();
-            if (chatBrain.checkCommand(command) == chatBrain.usualContinuer) {
+            if (chatBrain.checkCommand(command) == chatBrain.USUALCONTINUER) {
                 System.out.println(command);
                 String answer = chatBrain.sendMassage();
                 System.out.println(answer);
                 command = personWordSecond;
             }
-            if (chatBrain.checkCommand(command) == chatBrain.stop) {
+            if (chatBrain.checkCommand(command) == chatBrain.STOP) {
                 System.out.println(command);
                 // log;
-                while (!(chatBrain.checkCommand(command) == chatBrain.goOn)) {
+                while (!(chatBrain.checkCommand(command) == chatBrain.GOON)) {
                     command = " Are you Sure?";     // getMassageFromChatPerson()
                     System.out.println(command);
                     command = "Why?";  // getMassageFromChatPerson()
                     System.out.println(command);
                     command = "Continue";   // getMassageFromChatPerson()
-                    if (chatBrain.checkCommand(command) == chatBrain.finishWork) {
+                    if (chatBrain.checkCommand(command) == chatBrain.FINISHWORK) {
                         return;
                     }
                 }
@@ -144,10 +142,10 @@ public class ChatBrainTest {
         String command = firstCommand;
         String personWord = "My name Alex";
         String finishCommand = "Finish";
-        while (!(chatBrain.checkCommand(command) == chatBrain.finishWork)) {
+        while (!(chatBrain.checkCommand(command) == chatBrain.FINISHWORK)) {
             System.out.println(" Your Question");
             command = personWord;
-            if (chatBrain.checkCommand(command) == chatBrain.usualContinuer) {
+            if (chatBrain.checkCommand(command) == chatBrain.USUALCONTINUER) {
                 System.out.println(command);
                 String answer = chatBrain.sendMassage();
                 System.out.println(answer);

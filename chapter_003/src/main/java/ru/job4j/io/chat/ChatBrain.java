@@ -1,7 +1,6 @@
 package ru.job4j.io.chat;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,22 +20,22 @@ public class ChatBrain {
     /**
      * Field sins that need to cease answering.
      */
-    final int stop = 0;
+    final int STOP = 0;
 
     /**
      * Field sins that need to finish work of chat.
      */
-    final int finishWork = 1;
+    final int FINISHWORK = 1;
 
     /**
-     * Field sins that need go on chat after stop.
+     * Field sins that need go on chat after STOP.
      */
-    final int goOn = 2;
+    final int GOON = 2;
 
     /**
      * Field that shows need to continue in usual chat work.
      */
-    final int usualContinuer = 3;
+    final int USUALCONTINUER = 3;
 
     /**
      * Field where we keep Strings from file.
@@ -111,22 +110,22 @@ public class ChatBrain {
      */
     public void worckChat(String command) throws IOException {
         this.logFile.writeLogToArrayAndFile(command + "Start");
-        while (!(checkCommand(command) == finishWork)) {
+        while (!(checkCommand(command) == FINISHWORK)) {
 
             System.out.println(" Your Question");
             command = getMassageFromChatPerson();
 
-            if (checkCommand(command) == usualContinuer) {
+            if (checkCommand(command) == USUALCONTINUER) {
                 System.out.println(command);
                 System.out.println(sendMassage());
             }
-            if (checkCommand(command) == stop) {
+            if (checkCommand(command) == STOP) {
                 System.out.println(command);
                 logFile.writeLogToArrayAndFile(command);
-                while (!(checkCommand(command) == goOn)) {
+                while (!(checkCommand(command) == GOON)) {
                     command = getMassageFromChatPerson();
                     System.out.println(command);
-                    if (checkCommand(command) == finishWork) {
+                    if (checkCommand(command) == FINISHWORK) {
                         logFile.writeLogToArrayAndFile(command);
                         return;
                     }
