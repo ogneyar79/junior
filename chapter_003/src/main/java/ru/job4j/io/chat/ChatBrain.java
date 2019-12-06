@@ -15,27 +15,27 @@ public class ChatBrain {
     /**
      * Field logFile object for write events To log.
      */
-    LogFile logFile;
+    private LogFile logFile;
 
     /**
      * Field sins that need to cease answering.
      */
-    final int STOP = 0;
+    private final int STOP = 0;
 
     /**
      * Field sins that need to finish work of chat.
      */
-    final int FINISHWORK = 1;
+    private final int FINISHWORK = 1;
 
     /**
      * Field sins that need go on chat after STOP.
      */
-    final int GOON = 2;
+    private final int GOON = 2;
 
     /**
      * Field that shows need to continue in usual chat work.
      */
-    final int USUALCONTINUER = 3;
+    private final int USUALCONTINUER = 3;
 
     /**
      * Field where we keep Strings from file.
@@ -152,6 +152,26 @@ public class ChatBrain {
         this.basePhreases = basePhreases;
     }
 
+
+    public LogFile getLogFile() {
+        return logFile;
+    }
+
+    public int getSTOP() {
+        return STOP;
+    }
+
+    public int getFINISHWORK() {
+        return FINISHWORK;
+    }
+
+    public int getGOON() {
+        return GOON;
+    }
+
+    public int getUSUALCONTINUER() {
+        return USUALCONTINUER;
+    }
 
     public static void main(String[] args) {
         ChatBrain chatBrain = new ChatBrain();
