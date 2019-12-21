@@ -2,76 +2,90 @@ package ru.job4j.io.serverfirst;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
-public class KlientServer implements Runnable {
-    String nameConectionWith;
+public class KlientServer {
+
+    //  String nameConectionWith;
+
+    /**
+     * Field for sever's port .
+     */
     int port;
-    String name;
 
-    String mesegeBegin = name + " Connected  to  address" + nameConectionWith + " : " + port;
+    //   String mesegeBegin = name + " Connected  to  address" + nameConectionWith + " : " + port;
 
-    Dialog dialog;
+//    public KlientServer(String nameConectionWith, int port) {
+//        this.nameConectionWith = nameConectionWith;
+//        this.port = port;
+//    }
 
-    public KlientServer(String nameConectionWith, int port) {
-        this.nameConectionWith = nameConectionWith;
-        this.port = port;
+    /**
+     * Field for imitation work of Socket.
+     */
+    Socket sockerImitator;
+
+    /**
+     * Field for imitation console input.
+     */
+    BufferedReader console;
+
+    /**
+     * creator of object our class for imitation
+     *
+     * @param socket  Socket.
+     * @param console BufferedReader
+     */
+    public KlientServer(Socket socket, BufferedReader console) {
+        this.sockerImitator = socket;
+        this.console = console;
+
     }
 
-    @Override
-    public void run() {
+    public BufferedReader getConsole() {
+        return console;
+    }
 
-        try (Socket socket = new Socket(nameConectionWith, port);
-             BufferedReader consoleInputBuffReader = new BufferedReader(new InputStreamReader(System.in));
-             DataInputStream serverWordFromIn = new DataInputStream(socket.getInputStream());
-             DataOutputStream aswerToServerOut = new DataOutputStream(socket.getOutputStream())) {
+    /**
+     * Procedure for begin of work of client.
+     *
+     * @param console BufferedReader.
+     */
+    public void run(BufferedReader console) {
+        try (BufferedReader consoleInputBuffReader = this.console;
+             BufferedReader serverWordFromIn = new BufferedReader(new InputStreamReader(this.sockerImitator.getInputStream()));
+             PrintWriter aswerForServerOut = new PrintWriter(this.sockerImitator.getOutputStream())) {
 
-            System.out.println("Client connected to socket.");
-            aswerToServerOut.writeChars(mesegeBegin);
-            aswerToServerOut.writeBytes("Hello oracle");
-            System.out.println();
-
-            while ((!socket.isOutputShutdown()) | !(dialog.isClosed())) {
+            //      aswerForServerOut.write(mesegeBegin);
+            aswerForServerOut.write("Hello oracle" + System.lineSeparator());
+            while (!sockerImitator.isOutputShutdown()) {
                 if (consoleInputBuffReader.ready()) {
                     // The Dates is, are Working
                     System.out.println("Client start writing in channel...");
-                    Thread.sleep(1000);
                     String clientCommand = consoleInputBuffReader.readLine();  //
-                    aswerToServerOut.writeUTF(clientCommand); // are Writng dates from console  Server's Socet
-                    aswerToServerOut.flush();
+                    aswerForServerOut.write(clientCommand); // are Writng dates from console  Server's Socet
+
                     System.out.println("Clien sent message " + clientCommand + " to server.");
-                    Thread.sleep(1000);
+
+                    String writerOfSerfer;
                     if (clientCommand.equalsIgnoreCase("quit")) {
-                        if (serverWordFromIn.read() > -1) {
-                            System.out.println("reading...");
-                            String in = serverWordFromIn.readUTF();
-                            System.out.println(in);
-                        }
+                        if ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
+                            System.out.println("reading..." + writerOfSerfer);
+                                                    }
                         break;   // after get out from cycle
                     }
 // if condition of disconection is not reached We continue working
                     System.out.println("Client sent message & start waiting for data from server...");
-                    Thread.sleep(2000);
                     // проверяем, что нам ответит сервер на сообщение(за предоставленное ему время в паузе он должен был успеть ответить)
-                    if (serverWordFromIn.read() > -1) {
+                    if ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
                         // If in time, take answer from server'socet сервера and save it our variable in  and out our Console
-                        System.out.println("reading...");
-                        String in = serverWordFromIn.readUTF();
-                        System.out.println(in);
+                        System.out.println("reading..." + writerOfSerfer);
                     }
                 }
             }
             System.out.println("Closing connections & channels on clentSide - DONE."); // And At The End of comunication, close our resources
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
 

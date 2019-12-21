@@ -18,7 +18,8 @@ public class Dialog {
     // private ArrayList<String> dialogWords;
 
 
-    private Dialog(ArrayList<String> specialWords, Random random, WordBase base) {
+    Dialog(WordBase base) {
+        this.specialWords = new ArrayList<>();
         this.specialWords.add("Stop");
         this.specialWords.add(" Wait");
         this.random = new Random();

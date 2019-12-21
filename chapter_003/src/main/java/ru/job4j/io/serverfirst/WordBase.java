@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class WordBase {
 
-    private final String[] CommonPhrase = {
+    private final String[] commonPhrase = {
             "Нет ничего ценнее слов, сказанных к месту и ко времени.",
             "Порой молчание может сказать больше, нежели уйма слов.",
             "Перед тем как писать/говорить всегда лучше подумать.",
@@ -17,7 +17,7 @@ public class WordBase {
             "Кто ясно мыслит, тот ясно излагает.",
             "Боюсь Вы что-то не договариваете."};
 
-    private final String[] EksclusiveAnswer = {
+    private final String[] eksclusiveAnswer = {
             "Вопрос непростой, прошу тайм-аут на раздумья.",
             "Не уверен, что располагаю такой информацией.",
             "Может лучше поговорим о чём-то другом?",
@@ -29,7 +29,7 @@ public class WordBase {
             "Зачем Вам такая информация?",
             "Давайте сохраним интригу?"};
 
-    final Map<String, String> AnswersByPattern = new HashMap<String, String>() {{
+    final Map<String, String> answersByPattern = new HashMap<String, String>() {{
         put("hello", "Здравствуйте, рад Вас видеть.");
         put("who", "Я обычный чат-бот.");
         put("name", "Зовите меня Чаттер :)");
@@ -42,14 +42,14 @@ public class WordBase {
     }};
 
     public String[] getCommonPhrase() {
-        return CommonPhrase;
+        return commonPhrase;
     }
 
     public String[] getEksclusiveAnswer() {
-        return EksclusiveAnswer;
+        return eksclusiveAnswer;
     }
 
     public Map<String, String> getAnswersByPattern() {
-        return AnswersByPattern;
+        return answersByPattern;
     }
 }

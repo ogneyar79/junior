@@ -67,7 +67,6 @@ public class LogFile {
         stringBuilder.append("Number at Array : " + logList.indexOf(intern) + "\n");
         String logPlusNumerAtList = String.valueOf(stringBuilder);
         Files.write(this.fileOurLog.toPath(), logPlusNumerAtList.getBytes(), StandardOpenOption.APPEND);
-
         return result;
     }
 
