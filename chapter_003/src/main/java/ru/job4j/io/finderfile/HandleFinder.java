@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class HandleFinder {
 
-    /**
-     * Fields for constants that marker Tipe of file, that we want to find.
-     */
-    private final int FILES = 0;
-    private final int DIRECTORIES = 1;
-    private final int ALL = 2;
+//    /**
+//     * Fields for constants that marker Tipe of file, that we want to find.
+//     */
+//    private final int FILES = 0;
+//    private final int DIRECTORIES = 1;
+//    private final int ALL = 2;
 
     LogFile logFile;
 

@@ -97,8 +97,9 @@ public class ChatBrainTest {
         int nothing = chatBrain.checkCommand(commandNothing);
         assertThat(nothing, is(3));
     }
+
     @Test
-    public void CheckWorkChatWithDialogAtInfinity() throws IOException {
+    public void checkWorkChatWithDialogAtInfinity() throws IOException {
         chatBrain.fillInArray(textForAnswer);
         String firstCommand = "Begin Test";
         String command = firstCommand;
@@ -106,25 +107,25 @@ public class ChatBrainTest {
         String personWordSecond = "Stop";
         String conandContinue = "Continue";
 
-        while (!(chatBrain.checkCommand(command) == chatBrain.FINISHWORK)) {
+        while (!(chatBrain.checkCommand(command) == chatBrain.getFINISHWORK())) {
             System.out.println(" Your Question");
             command = personWord;                     // getMassageFromChatPerson();
-            if (chatBrain.checkCommand(command) == chatBrain.USUALCONTINUER) {
+            if (chatBrain.checkCommand(command) == chatBrain.getUSUALCONTINUER()) {
                 System.out.println(command);
                 String answer = chatBrain.sendMassage();
                 System.out.println(answer);
                 command = personWordSecond;
             }
-            if (chatBrain.checkCommand(command) == chatBrain.STOP) {
+            if (chatBrain.checkCommand(command) == chatBrain.getSTOP()) {
                 System.out.println(command);
                 // log;
-                while (!(chatBrain.checkCommand(command) == chatBrain.GOON)) {
+                while (!(chatBrain.checkCommand(command) == chatBrain.getGOON())) {
                     command = " Are you Sure?";     // getMassageFromChatPerson()
                     System.out.println(command);
                     command = "Why?";  // getMassageFromChatPerson()
                     System.out.println(command);
                     command = "Continue";   // getMassageFromChatPerson()
-                    if (chatBrain.checkCommand(command) == chatBrain.FINISHWORK) {
+                    if (chatBrain.checkCommand(command) == chatBrain.getFINISHWORK()) {
                         return;
                     }
                 }
@@ -136,16 +137,16 @@ public class ChatBrainTest {
     }
 
     @Test
-    public void CheckWorkChatWithCommandFinis() throws IOException {
+    public void checkWorkChatWithCommandFinis() throws IOException {
         chatBrain.fillInArray(textForAnswer);
         String firstCommand = "Begin Test";
         String command = firstCommand;
         String personWord = "My name Alex";
         String finishCommand = "Finish";
-        while (!(chatBrain.checkCommand(command) == chatBrain.FINISHWORK)) {
+        while (!(chatBrain.checkCommand(command) == chatBrain.getFINISHWORK())) {
             System.out.println(" Your Question");
             command = personWord;
-            if (chatBrain.checkCommand(command) == chatBrain.USUALCONTINUER) {
+            if (chatBrain.checkCommand(command) == chatBrain.getUSUALCONTINUER()) {
                 System.out.println(command);
                 String answer = chatBrain.sendMassage();
                 System.out.println(answer);

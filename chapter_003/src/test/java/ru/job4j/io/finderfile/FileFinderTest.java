@@ -77,8 +77,8 @@ public class FileFinderTest {
     public void findWithMaskIncorrectRegularExpression() throws Exception {
         List<File> fileList = fileFinder.find(path, "?.txt", fileFinder.getFILES());
         System.out.println(fileList.size());
-        int Sero = fileList.size();
-        assertThat(Sero == (fileList.size()), is(true));
+        int sero = fileList.size();
+        assertThat(sero == (fileList.size()), is(true));
 
     }
 

@@ -26,13 +26,20 @@ public class Dialog {
         this.wordBase = base;
     }
 
-    public boolean closeDialog() {
-        return this.opener = false;
+    /**
+     * procedure to close dialog.
+     */
+    public void closeDialog() {
+        this.opener = false;
     }
 
-
+    /**
+     * function returning boolean false if  opened or true in another way.
+     *
+     * @return this.opener()
+     */
     public boolean isClosed() {
-        return this.opener == false ? true : opener;
+        return !this.opener;
     }
 
     public String getRandomString() {

@@ -57,15 +57,13 @@ public class Zip {
     }
 
 
-    public void packZip(String source_dir, String zip_file) throws Exception {
+    public void packZip(String sourceDir, String zipFile) throws Exception {
         // Cоздание объекта ZipOutputStream из FileOutputStream
-        FileOutputStream fileOutputStream = new FileOutputStream(zip_file);
+        FileOutputStream fileOutputStream = new FileOutputStream(zipFile);
         ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-        // Определение кодировки
-        ;
 
         // Создание объекта File object архивируемой директории
-        File fileSource = new File(source_dir);
+        File fileSource = new File(sourceDir);
 
         addDirectory(zipOutputStream, fileSource);
 

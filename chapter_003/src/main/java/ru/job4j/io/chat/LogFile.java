@@ -2,7 +2,7 @@ package ru.job4j.io.chat;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,8 +30,12 @@ public class LogFile {
         fileOurLog = this.create(path);
     }
 
+
+
     public LogFile(String path) {
         this.path = path;
+        this.logList = new ArrayList<>();
+        fileOurLog = this.create(path);
     }
 
     /**

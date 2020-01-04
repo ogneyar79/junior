@@ -66,7 +66,7 @@ public class AnalizyTest {
 
         analizy.unavailable(empty, target);
 
-        assertThat(false, is (analizy.getDataForAnalisIs()));
+        assertThat(false, is(analizy.getDataForAnalisIs()));
 
     }
 

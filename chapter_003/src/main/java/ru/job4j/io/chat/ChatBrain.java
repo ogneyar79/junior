@@ -20,22 +20,22 @@ public class ChatBrain {
     /**
      * Field sins that need to cease answering.
      */
-    private final int STOP = 0;
+    private static final int STOP = 0;
 
     /**
      * Field sins that need to finish work of chat.
      */
-    private final int FINISHWORK = 1;
+    private static final int FINISHWORK = 1;
 
     /**
      * Field sins that need go on chat after STOP.
      */
-    private final int GOON = 2;
+    private static final int GOON = 2;
 
     /**
      * Field that shows need to continue in usual chat work.
      */
-    private final int USUALCONTINUER = 3;
+    private static final int USUALCONTINUER = 3;
 
     /**
      * Field where we keep Strings from file.

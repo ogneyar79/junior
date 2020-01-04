@@ -17,9 +17,9 @@ public class FileFinder {
     /**
      * Fields for constants that marker Tipe of file, that we want to find.
      */
-    private final int FILES = 0;
-    private final int DIRECTORIES = 1;
-    private final int ALL = 2;
+    private static final int FILES = 0;
+    private static final int DIRECTORIES = 1;
+    private static final int ALL = 2;
 
     /**
      * Creator that producing new example of our class.
@@ -99,10 +99,16 @@ public class FileFinder {
             return result; //...it means object according to
         } else {
             m = p.matcher(name); //create Matcher and check it's true if name is Equivalent.
-            return m.matches() == true ? true : false;
+            return m.matches();
         }
     }
 
+    /**
+     * Function that substitute mask like *or ?.txt on correct regular expression.
+     *
+     * @param mask String  that need be checked if at first part name file we have *or? in that we change it.
+     * @return result String corrected
+     */
     private String replaseIncorrectRegularExpression(String mask) {
         String result = mask;
         String delimeter = "\\.";
@@ -170,9 +176,7 @@ public class FileFinder {
                     res.add(fileF);  //add current objects at LIst of result a
                 }
                 search(fileF, res, objectType);    //выполняем поиск во вложенных директориях
-            }
-            //if It's file
-            else {
+            } else {  //if It's file
                 // check на equivalence of type object and regular expression
                 if (objectType != DIRECTORIES && accept(fileF.getName())) {
                     res.add(fileF);  //add current objects at LIst of result a

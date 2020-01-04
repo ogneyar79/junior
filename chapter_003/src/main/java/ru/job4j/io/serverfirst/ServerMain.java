@@ -78,7 +78,7 @@ public class ServerMain {
             while ((!this.sockerImitator.isClosed()) || (!dialog.isClosed())) {
 
                 System.out.println("Server reading from channel");
-                if ((clientWord = in.readLine()) != null) {
+                while ((clientWord = in.readLine()) != null) {
 
                     if (clientWord.equalsIgnoreCase(dialog.getSpecialWords().get(0))) {
                         System.out.println("Client initialize connections suicide ...");

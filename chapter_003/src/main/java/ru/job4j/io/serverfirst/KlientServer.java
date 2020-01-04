@@ -68,15 +68,15 @@ public class KlientServer {
 
                     String writerOfSerfer;
                     if (clientCommand.equalsIgnoreCase("quit")) {
-                        if ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
+                        while ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
                             System.out.println("reading..." + writerOfSerfer);
-                                                    }
+                        }
                         break;   // after get out from cycle
                     }
 // if condition of disconection is not reached We continue working
                     System.out.println("Client sent message & start waiting for data from server...");
                     // проверяем, что нам ответит сервер на сообщение(за предоставленное ему время в паузе он должен был успеть ответить)
-                    if ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
+                    while ((writerOfSerfer = serverWordFromIn.readLine()) != null) {
                         // If in time, take answer from server'socet сервера and save it our variable in  and out our Console
                         System.out.println("reading..." + writerOfSerfer);
                     }
