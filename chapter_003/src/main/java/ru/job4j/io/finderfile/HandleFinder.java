@@ -86,7 +86,7 @@ public class HandleFinder {
 //                result = true;
 //            }
 //        }
-//        return result;
+//        return result;a
 //    }
 
     public void writeFileResultToLog(String pathLog) throws IOException {

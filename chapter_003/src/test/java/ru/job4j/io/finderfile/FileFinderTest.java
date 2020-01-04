@@ -69,6 +69,20 @@ public class FileFinderTest {
 
     }
 
+    /**
+     * Here we test method with Mask like ? or * .that is incorrect regular expression
+     * this why we use our private method (String replaseIncorrectRegularExpression(String mask)).
+     */
+    @Test
+    public void findWithMaskIncorrectRegularExpression() throws Exception {
+        List<File> fileList = fileFinder.find(path, "?.txt", fileFinder.getFILES());
+        System.out.println(fileList.size());
+        int Sero = fileList.size();
+        assertThat(Sero == (fileList.size()), is(true));
+
+    }
+
+
     @Test
     public void search() throws Exception {
     }

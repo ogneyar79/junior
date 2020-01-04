@@ -103,6 +103,20 @@ public class FileFinder {
         }
     }
 
+    private String replaseIncorrectRegularExpression(String mask) {
+        String result = mask;
+        String delimeter = "\\.";
+        String[] substring = mask.split(delimeter);
+        System.out.println(substring.length);
+        System.out.println(substring[0]);
+        System.out.println(substring[1]);
+        if (substring[0].contains("*") || substring[0].contains("?")) {
+            result = ".*." + substring[1];
+            System.out.println(result);
+        }
+        return result;
+    }
+
     /**
      * Function make search at beginning, then set method search for ending search.
      *
@@ -122,6 +136,7 @@ public class FileFinder {
         }
         //если задано регулярное выражение, создаем Pattern
         if (!mask.equals("")) {
+            mask = this.replaseIncorrectRegularExpression(mask);
             p = Pattern.compile(mask,
                     Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         }
@@ -129,6 +144,10 @@ public class FileFinder {
         search(topDirectory, result, objectType);
 
         p = null;   //присваиваем null шаблону, т.к. при следующем вызове find... //регулярное выражение может быть не задано
+
+        if (result.size() < 1) {
+            System.out.println(" File has not found");
+        }
         return result;
     }
 
