@@ -96,10 +96,11 @@ public class Analizy {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         int a = 2;
         System.out.println(a);
-        while (a<10){
+        while (a < 10) {
             a++;
             System.out.println(a);
         }
