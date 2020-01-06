@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
 
-
 public class CalculatorHandlerTest {
     CalculatorHandler calculatorHandler;
     ICalculatorConsole calc;
