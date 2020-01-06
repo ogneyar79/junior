@@ -42,7 +42,7 @@ public class CalculatorHandlerTest {
     public void getLastResaltCalculation() throws Exception {
         calculatorHandler.workWithCalculator();
         double result = calculatorHandler.getLastResaltCalculation();
-        assertThat(calculatorHandler.workWithCalculator()==result, is(true));
+        assertThat(calculatorHandler.workWithCalculator() == result, is(true));
 
     }
 

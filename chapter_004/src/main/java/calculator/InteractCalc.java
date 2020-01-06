@@ -47,6 +47,8 @@ public class InteractCalc implements ICalculatorConsole {
                 this.calculatorElementary.div(num1, num2);
                 result = this.calculatorElementary.getResult();
                 break;
+            default:
+                break;
         }
         return result;
     }
