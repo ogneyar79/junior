@@ -31,7 +31,6 @@ public class LogFile {
     }
 
 
-
     public LogFile(String path) {
         this.path = path;
         this.logList = new ArrayList<>();
@@ -90,4 +89,7 @@ public class LogFile {
         this.fileOurLog = fileOurLog;
     }
 
+    public void makeFileBreak() {
+        this.fileOurLog.delete();
+    }
 }

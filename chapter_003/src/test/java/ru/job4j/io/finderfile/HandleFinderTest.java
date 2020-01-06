@@ -103,7 +103,7 @@ public class HandleFinderTest {
         Files.lines(Paths.get(testLog.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(System.out::println);
         assertThat(testLog.getLogList().size(), is(infoListTest.size()));
 
-        testLog.getFileOurLog().delete();
+        testLog.makeFileBreak();
 
     }
 

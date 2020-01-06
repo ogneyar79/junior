@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 /**
  * Class for manage other classes package With search file.
  */
@@ -39,12 +41,12 @@ public class HandleFinder {
     /**
      * Field for handover parameters of searching(parsing).
      */
-    ParametrTaskParsing parametrTaskParsing;
+    private ParametrTaskParsing parametrTaskParsing;
 
     /**
      * Field for parsing.
      */
-    ParserStringFinder parserStringFinder;
+    final private ParserStringFinder parserStringFinder;
 
     public HandleFinder(FileFinder fileFinder, ParserStringFinder parserStringFinder, LogFile logFile) {
         this.fileFinder = fileFinder;

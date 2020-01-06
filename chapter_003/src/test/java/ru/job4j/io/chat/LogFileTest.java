@@ -23,6 +23,7 @@ public class LogFileTest {
     @Before
     public void setUp() throws Exception {
         infoListTest = new ArrayList<>();
+        System.out.println("infoListTest.size() Before begin testMethod" + infoListTest.size());
         logFile = new LogFile();
         infoFirst = new String("Stop");
         infoTwo = new String("GO");
@@ -49,9 +50,9 @@ public class LogFileTest {
 
         Files.lines(Paths.get(testLog.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(infoListTest::add);
         Files.lines(Paths.get(testLog.getFileOurLog().getAbsolutePath()), StandardCharsets.UTF_8).forEach(System.out::println);
-
+        System.out.println("InfoListTest.size = " + " " + infoListTest.size());
         assertThat(testLog.getLogList().size(), is(infoListTest.size()));
-        testLog.getFileOurLog().delete();
+        testLog.makeFileBreak();
     }
 
 }
