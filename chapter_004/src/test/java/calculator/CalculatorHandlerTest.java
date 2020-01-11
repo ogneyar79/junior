@@ -39,21 +39,35 @@ public class CalculatorHandlerTest {
         calculatorHandler.workWithCalculator(calc);
         assertThat(calculatorHandler.workWithCalculator(calc) == 8, is(true));
     }
+
     @Test
-    public void work(){
+    public void work() {
         calculatorMMap.put(InteractCalc.getNAME(), calc);
-        String operator = InteractCalc.getNAME();
-       calculatorHandler.wannaCalculatingStart(operator);
-       calculatorHandler.getLastResaltCalculation();
+        String nameCalculator = InteractCalc.getNAME();
+        calculatorHandler.wannaCalculatingStart(nameCalculator);
+        calculatorHandler.getLastResaltCalculation();
         assertThat(calculatorHandler.getLastResaltCalculation() == 8, is(true));
     }
 
-//    @Test
-//    public void getLastResaltCalculation() throws Exception {
-//        calculatorHandler.workWithCalculator(calc);
-//        double result = calculatorHandler.getLastResaltCalculation();
-//        assertThat(calculatorHandler.workWithCalculator() == result, is(true));
-//
-//    }
+    @Test
+    public void workWithTrigCalc() {
+        TrigComands trigComands = new TrigComands();
+        trigComands.init();
+        ConsoleReadTrig consoleReadImitator = mock(ConsoleReadTrig.class);
+        when(consoleReadImitator.getDouble()).thenReturn((double) 2);  // angle in radian
+        when(consoleReadImitator.getOperation()).thenReturn(TrigComands.SIN);  // Insert comand calculation
+        ValidateOperator validation = new ValidateOperator();
+        TrigCalculator trigCalculator = new TrigCalculator(consoleReadImitator, validation);
+
+        calculatorMMap.put(TrigCalculator.getNAME(), trigCalculator);
+        System.out.println(TrigCalculator.getNAME());    //   Type CalculatorM that we use
+        String nameUsageCalculator = TrigCalculator.getNAME();
+        calculatorHandler.wannaCalculatingStart(nameUsageCalculator); // transfer  implementation specific TrigCalculator of CalculatorM
+        calculatorHandler.getResultsCalculation();
+        System.out.println(calculatorHandler.getResultsCalculation());
+
+        assertThat(calculatorHandler.getResultsCalculation(), is(0.9092974268256817));
+
+    }
 
 }

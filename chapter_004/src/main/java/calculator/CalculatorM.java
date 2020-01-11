@@ -1,19 +1,31 @@
 package calculator;
 
-
+/**
+ * Abstract Class for creating different realisation 0f calculator.
+ */
 public abstract class CalculatorM {
-    char operation;
-    int numFirst;
 
+    char operation;
+    double numFirst;
+    double result;
 
     static String name;
 
-    int result;
 
+    /**
+     * every object  our class must have method return result calculation.
+     */
     abstract double calc();
-     abstract public void startConsoleCalc();
 
-     abstract Double getResult();
+    /**
+     * every object  our class must have method aggregate stages calculating.
+     */
+    abstract public void startConsoleCalc();
+
+    /**
+     * every object  our class must have method return result Calculation.
+     */
+    abstract Double getResult();
 
 
     public void setOperation(char operation) {
