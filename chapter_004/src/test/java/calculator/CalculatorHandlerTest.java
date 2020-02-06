@@ -53,8 +53,9 @@ public class CalculatorHandlerTest {
     public void workWithTrigCalc() {
         TrigComands trigComands = new TrigComands();
         trigComands.init();
+        double v = 2.00;
         ConsoleReadTrig consoleReadImitator = mock(ConsoleReadTrig.class);
-        when(consoleReadImitator.getDouble()).thenReturn((double) 2);  // angle in radian
+        when(consoleReadImitator.getDouble()).thenReturn(v);  // angle in radian
         when(consoleReadImitator.getOperation()).thenReturn(TrigComands.SIN);  // Insert comand calculation
         ValidateOperator validation = new ValidateOperator();
         TrigCalculator trigCalculator = new TrigCalculator(consoleReadImitator, validation);
@@ -63,10 +64,10 @@ public class CalculatorHandlerTest {
         System.out.println(TrigCalculator.getNAME());    //   Type CalculatorM that we use
         String nameUsageCalculator = TrigCalculator.getNAME();
         calculatorHandler.wannaCalculatingStart(nameUsageCalculator); // transfer  implementation specific TrigCalculator of CalculatorM
-        calculatorHandler.getResultsCalculation();
+        double result = calculatorHandler.getLastResaltCalculation();
         System.out.println(calculatorHandler.getResultsCalculation());
 
-        assertThat(calculatorHandler.getResultsCalculation(), is(0.9092974268256817));
+        assertEquals(0.9092974268256817, result, 0.001);
 
     }
 
