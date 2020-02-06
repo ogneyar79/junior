@@ -7,22 +7,22 @@ abstract public class Food {
     /**
      * name specific food.
      */
-    String name;
+    private String name;
 
     /**
      * field of date end expiration  period.
      */
-    final LocalDate expirationDate;
+    private final LocalDate expirationDate;
 
     /**
      * price of item.
      */
-    int price;
+    private int price;
 
     /**
      * field date when item was made.
      */
-    final LocalDate createDate;
+    private final LocalDate createDate;
 
     /**
      * field that show where item located now.
@@ -44,15 +44,25 @@ abstract public class Food {
     }
 
 
-    abstract public void setPrice(int price);
+     public void setPrice(int price){
+        this.price = price;
+     }
 
-    abstract public String getName();
+     public String getName(){
+         return this.name;
+     };
 
-    abstract public LocalDate getExpirationDate();
+    public LocalDate getExpirationDate(){
+        return this.expirationDate;
+    }
 
-    abstract public LocalDate getCreateDate();
+    public LocalDate getCreateDate(){
+        return this.createDate;
+    }
 
-    abstract public int getPrice();
+     public int getPrice(){
+        return this.price;
+     }
 
 
     public void setNameStock(String nameStock) {
