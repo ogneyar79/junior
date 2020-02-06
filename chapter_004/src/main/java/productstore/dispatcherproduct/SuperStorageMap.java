@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class SuperStorageMap {
 
-    Map<String, SuperStorage> superStorage;
-    ArrayList<String> commands;
+   private Map<String, SuperStorage> superStorage;
+    private ArrayList<String> commands;
 
-    ArrayList<IControllQuality> controllQualities = new ArrayList<>(6);
+    private ArrayList<IControllQuality> controllQualities = new ArrayList<>(6);
 
 
     public void initControlChekerDefault() {

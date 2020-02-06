@@ -5,7 +5,7 @@ import productstore.superstorage.SuperStorage;
 
 public class PostmanAnyStock implements IPostmanSending {
 
-    SuperStorage superStorage;
+    private SuperStorage superStorage;
 
 
     @Override
@@ -20,7 +20,10 @@ public class PostmanAnyStock implements IPostmanSending {
 
     @Override
     public IPostmanSending getThisNewObject() {
-       return new PostmanAnyStock();
+        return new PostmanAnyStock();
     }
 
+    public SuperStorage getSuperStorage() {
+        return superStorage;
+    }
 }

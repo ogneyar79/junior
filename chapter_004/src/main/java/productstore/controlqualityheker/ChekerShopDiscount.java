@@ -29,7 +29,7 @@ public class ChekerShopDiscount implements IControllQuality {
      * @param concreteFood Food abstract class.
      * @param discount     int at currency that we use.
      */
-    void turnOnDiscount(Food concreteFood, int discount) {
+    public void turnOnDiscount(Food concreteFood, int discount) {
         concreteFood.setPrice(concreteFood.getPrice() - discount);
     }
 
