@@ -13,19 +13,19 @@ public class MyParking implements IParking {
     /**
      * field list where keep cell for keeping car.
      */
-    List<PlaceAbstractCar> carPPlist;
+    List<PlaceCar> carPPlist;
     /**
      * field list where keep cell for keeping track car.
      */
 
     List<PlaceTruck> trucksList;
 
-    public MyParking(List<PlaceAbstractCar> carPPlist, List<PlaceTruck> trucksList) {
+    public MyParking(List<PlaceCar> carPPlist, List<PlaceTruck> trucksList) {
         this.carPPlist = carPPlist;
         this.trucksList = trucksList;
     }
 
-    public List<PlaceAbstractCar> getCarPPlist() {
+    public List<PlaceCar> getCarPPlist() {
         return carPPlist;
     }
 
