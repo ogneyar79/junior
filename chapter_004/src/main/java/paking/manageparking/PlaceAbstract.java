@@ -6,17 +6,22 @@ import paking.car.IVehicle;
 /**
  * Class for mapping concrete cell for parking(parking place) for different type Vehicle.
  */
-abstract class PlaceAbstract implements IPlaceParking{
+abstract public class PlaceAbstract implements IPlaceParking {
+
 
     /**
      * field show us free parking place or not.
      */
-    private boolean freeOrNo = false;
+    private boolean free = true;
 
     /**
      * field always array with one length for keeping parking vehicle
      */
     private final IVehicle[] vehicle = new IVehicle[1];
+
+    public PlaceAbstract(byte size) {
+        this.size = size;
+    }
 
     /**
      * field show size of our parking cell
@@ -27,12 +32,12 @@ abstract class PlaceAbstract implements IPlaceParking{
         this.size = size;
     }
 
-    public void setFreeOrNo(boolean freeOrNo) {
-        this.freeOrNo = freeOrNo;
+    public void setFree(boolean freeOrNo) {
+        this.free = freeOrNo;
     }
 
-    public boolean isFreeOrNo() {
-        return freeOrNo;
+    public boolean isFree() {
+        return free;
     }
 
     public IVehicle[] getVehicle() {
@@ -50,6 +55,13 @@ abstract class PlaceAbstract implements IPlaceParking{
      */
     public void occupyPlace(IVehicle vehicle) {
         this.vehicle[0] = vehicle;
+        this.setFree(false);
+    }
+
+    public void setPlaceFree() {
+        this.vehicle[0] = null;
+        this.setFree(true);
+
     }
 
     /**
@@ -58,6 +70,18 @@ abstract class PlaceAbstract implements IPlaceParking{
     public IVehicle getPlace() {
         return this.getVehicle()[0];
     }
+
+
     // abstract void CarOnPlace(Vehicle vehicle);
 
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

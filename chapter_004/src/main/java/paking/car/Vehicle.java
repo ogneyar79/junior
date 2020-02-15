@@ -27,8 +27,5 @@ abstract class Vehicle implements IVehicle {
         return size;
     }
 
-   // public void setIMovingCar(IMovingVehicle movingCar) {
-     //   this.movingCar = movingCar;
-  //  }
 
 }

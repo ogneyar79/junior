@@ -10,5 +10,5 @@ public interface IPlaceParking {
 
     void occupyPlace(IVehicle car);
 
-    void setFrePlace();
+    void setPlaceFree();
 }
