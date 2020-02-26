@@ -6,9 +6,15 @@ import paking.car.IVehicle;
 /**
  * Interface for creating and functioning parking place.
  */
-public interface IPlaceParking {
+public interface IPlaceParking<T extends IVehicle> {
 
-    void occupyPlace(IVehicle car);
+    void occupyPlace(T car);
 
-    void setPlaceFree();
+    T makePlaceFree();
+
+    String getTypeName();
+
+    boolean isFree();
+
+
 }

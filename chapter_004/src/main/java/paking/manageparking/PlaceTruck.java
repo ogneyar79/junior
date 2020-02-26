@@ -5,12 +5,12 @@ package paking.manageparking;
  */
 public class PlaceTruck extends PlaceAbstract {
 
-    final int number;
+
     final String typeName = "Track";
 
     public PlaceTruck(int number) {
-        super((byte) 6);
-        this.number = number;
+        super(number, (byte) 6);
+
     }
 
     public int getNumber() {
@@ -21,8 +21,9 @@ public class PlaceTruck extends PlaceAbstract {
         return typeName;
     }
 
-    @Override
-    public void setPlaceFree() {
 
+    @Override
+    public  PlaceAbstract createNewInstance(int number) {
+        return new PlaceTruck(number);
     }
 }

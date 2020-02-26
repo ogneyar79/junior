@@ -28,6 +28,7 @@ public class ParkingMove implements IMovingVehicle {
     }
     @Override
     public void move(IVehicle car) {
+
         this.place.occupyPlace(car);
     }
 

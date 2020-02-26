@@ -1,13 +1,14 @@
 package paking.manageparking;
 
 import paking.car.IVehicle;
+import paking.car.Vehicle;
 
 interface IParking {
 
-    void park(IVehicle car);
+    void park(Vehicle car);
 
-PlaceAbstract parkWith(IVehicle car);
+PlaceAbstract getFreePlace();
 
-boolean returnFlag(IVehicle car);
+boolean returnFlag(Vehicle car);
 
 }

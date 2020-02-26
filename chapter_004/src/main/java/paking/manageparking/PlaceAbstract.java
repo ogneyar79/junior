@@ -3,10 +3,13 @@ package paking.manageparking;
 import paking.car.IVehicle;
 
 
+import java.util.ArrayList;
+
+
 /**
  * Class for mapping concrete cell for parking(parking place) for different type Vehicle.
  */
-abstract public class PlaceAbstract implements IPlaceParking {
+abstract public class PlaceAbstract<T extends IVehicle> implements IPlaceParking {
 
 
     /**
@@ -15,13 +18,24 @@ abstract public class PlaceAbstract implements IPlaceParking {
     private boolean free = true;
 
     /**
-     * field always array with one length for keeping parking vehicle
+     * field always array with one length for keeping parking vehicleList
      */
-    private final IVehicle[] vehicle = new IVehicle[1];
+    private final ArrayList<T> vehicleList;
 
-    public PlaceAbstract(byte size) {
-        this.size = size;
+    final int number;
+
+    public int getNumber() {
+        return number;
     }
+
+    public PlaceAbstract(int number, byte size) {
+        this.number = number;
+        this.size = size;
+        this.vehicleList = new ArrayList<>(1);
+        System.out.println(vehicleList.size() + " SIZE");
+    }
+
+    abstract public PlaceAbstract createNewInstance(int number);
 
     /**
      * field show size of our parking cell
@@ -40,40 +54,30 @@ abstract public class PlaceAbstract implements IPlaceParking {
         return free;
     }
 
-    public IVehicle[] getVehicle() {
-        return vehicle;
-    }
 
     public byte getSize() {
         return size;
     }
 
-    /**
-     * Procedure placing vehicle on parking place
-     *
-     * @param vehicle
-     */
-    public void occupyPlace(IVehicle vehicle) {
-        this.vehicle[0] = vehicle;
+    public void occupyPlace(IVehicle car) {
+        this.vehicleList.add ((T) car);
         this.setFree(false);
     }
 
-    public void setPlaceFree() {
-        this.vehicle[0] = null;
+    public IVehicle makePlaceFree() {
+        IVehicle vehicle = vehicleList.remove(0);
         this.setFree(true);
+        return vehicle;
 
     }
 
-    /**
-     * @return cell our array with vehicle if it has it.
-     */
-    public IVehicle getPlace() {
-        return this.getVehicle()[0];
+    public ArrayList<T> getVehicleList() {
+        return vehicleList;
     }
 
-
-    // abstract void CarOnPlace(Vehicle vehicle);
-
+    public T getPlace() {
+        return this.getVehicleList().get(0);
+    }
 
     @Override
     public int hashCode() {

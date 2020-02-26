@@ -11,8 +11,8 @@ public class Car extends Vehicle {
         return super.equals(obj);
     }
 
-    public Car(String tipe, byte size, int id) {
-        super(tipe, size, id);
+    public Car(String type, byte size, int id) {
+        super(type, size, id);
     }
 
 

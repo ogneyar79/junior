@@ -1,12 +1,12 @@
 package paking.manageparking;
 
 public class PlaceCar extends PlaceAbstract {
-    final int number;
+
     final String typeName = "LightCar";
 
     public PlaceCar(int number) {
-        super((byte) 4);
-        this.number = number;
+        super(number, (byte) 4);
+
     }
 
     public int getNumber() {
@@ -18,6 +18,10 @@ public class PlaceCar extends PlaceAbstract {
     }
 
 
+    @Override
+    public PlaceAbstract createNewInstance(int number) {
+        return new PlaceCar(number);
+    }
 
     @Override
     public int hashCode() {

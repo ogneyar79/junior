@@ -2,8 +2,8 @@ package paking.car;
 
 public class Track extends Vehicle {
 
-    public Track(String tipe, byte size, int id) {
-        super(tipe, size, id);
+    public Track(final String type, byte size, int id) {
+        super(type, size, id);
     }
 
 
