@@ -6,7 +6,7 @@ package paking.car;
  */
 public interface IMovingVehicle {
 
-    void move();
+  //  void move();
     void move(IVehicle car);
 
 }

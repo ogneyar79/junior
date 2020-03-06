@@ -9,8 +9,8 @@ public class Track extends Vehicle {
 
     // need use constructor with one parameters at IMovingVehicle car
     @Override
-    public void move(IMovingVehicle car) {
-        car.move(this);
+    public void move(IMovingVehicle typeMovement) {
+        typeMovement.move(this);
     }
 
     @Override

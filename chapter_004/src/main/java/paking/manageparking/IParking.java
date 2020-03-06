@@ -5,9 +5,9 @@ import paking.car.Vehicle;
 
 interface IParking {
 
-    void park(Vehicle car);
+    void park(Vehicle car) throws MyParking.MyException;
 
-PlaceAbstract getFreePlace();
+PlaceAbstract getFreePlace() throws MyParking.MyException;
 
 boolean returnFlag(Vehicle car);
 

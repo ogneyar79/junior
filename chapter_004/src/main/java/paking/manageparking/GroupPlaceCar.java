@@ -30,6 +30,7 @@ public class GroupPlaceCar extends AGroupPlaceVehicle {
     }
 
     public boolean isTwoPlaceIs() {
+        this.findNearFreePlace();
         return twoPlaceIs;
     }
 }

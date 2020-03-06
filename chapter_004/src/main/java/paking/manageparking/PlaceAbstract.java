@@ -32,7 +32,7 @@ abstract public class PlaceAbstract<T extends IVehicle> implements IPlaceParking
         this.number = number;
         this.size = size;
         this.vehicleList = new ArrayList<>(1);
-        System.out.println(vehicleList.size() + " SIZE");
+      //  System.out.println(vehicleList.size() + " SIZE");
     }
 
     abstract public PlaceAbstract createNewInstance(int number);

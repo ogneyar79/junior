@@ -4,7 +4,7 @@ package paking.car;
  * Class  created for imitation different vehicle.
  */
 abstract public class Vehicle implements IVehicle {
-    private static String type;
+    private final String type;
     private final byte size;
     private final int id;
 
@@ -18,7 +18,7 @@ abstract public class Vehicle implements IVehicle {
         this.id = id;
     }
 
-    public static String getType() {
+    public String getType() {
         return type;
     }
 
@@ -26,10 +26,5 @@ abstract public class Vehicle implements IVehicle {
         return size;
     }
 
-
-public static void main(String args[]){
-    final String type = Vehicle.type;
-
-}
 
 }

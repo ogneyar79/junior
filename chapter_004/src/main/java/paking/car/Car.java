@@ -16,10 +16,10 @@ public class Car extends Vehicle {
     }
 
 
-    // need use consructor with two parameters at IMovingVehicle type one of them parking and yourself Car
+    //  before need use consructor with two parameters at IMovingVehicle type one of them parking and yourself Car Now Like at track
     @Override
     public void move(IMovingVehicle type) {
-        type.move();
+        type.move(this);
 
     }
 }

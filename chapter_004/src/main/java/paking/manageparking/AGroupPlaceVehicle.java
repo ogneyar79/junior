@@ -18,13 +18,15 @@ abstract public class AGroupPlaceVehicle {
     private final int numberPlace;
 
 
-    protected AGroupPlaceVehicle(int numberPlace, PlaceAbstract placeAbstract) {
+     AGroupPlaceVehicle(int numberPlace, PlaceAbstract placeAbstract) {
         this.numberPlace = numberPlace;
         this.placeParcingsArray = new PlaceAbstract[numberPlace];
         this.placeAbstract = placeAbstract;
         this.sumFreePlace = numberPlace;
         this.type = placeAbstract.getTypeName();
+        this.createGroupPlace(numberPlace);
     }
+
 
     final private PlaceAbstract<Vehicle> placeAbstract;
 
@@ -33,7 +35,7 @@ abstract public class AGroupPlaceVehicle {
      *
      * @param numberPlace
      */
-    public void createGroupPlace(int numberPlace) {
+    protected void createGroupPlace(int numberPlace) {
         for (int i = 0; i < numberPlace; i++)
             this.setAtPlaceGroup(i, this.placeAbstract.createNewInstance(i + 1));
 
@@ -43,11 +45,11 @@ abstract public class AGroupPlaceVehicle {
         this.placeParcingsArray[index] = object;
     }
 
-    public IPlaceParking[] getPlaceParcingsArray() {
+    public PlaceAbstract[] getPlaceParcingsArray() {
         return placeParcingsArray;
     }
 
-    private int countFreePlace() {
+    int countFreePlace() {
 
         return (int) Arrays.stream(this.placeParcingsArray).filter(s -> s.isFree()).count();
     }
