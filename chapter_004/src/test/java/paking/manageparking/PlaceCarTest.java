@@ -20,21 +20,21 @@ public class PlaceCarTest {
         vehiclesC[0] = car;
         placeAbstract = new PlaceCar(01);
 
+
     }
 
     @Test
     public void setPlaceFree() throws Exception {
-        placeAbstract.setPlaceFree();
-        Car carTest = (Car) placeAbstract.getPlace();
-
-        assertThat(carTest == null, is(true));
-
+        placeAbstract.occupyPlace(car);
+        placeAbstract.makePlaceFree();
+        assertThat(placeAbstract.getVehicleList().size(), is(0));
+        assertThat(placeAbstract.isFree(), is(true));
     }
 
     @Test
     public void getVehicle() throws Exception {
-        assertThat(placeAbstract.getVehicle().length, is(1));
-
+        placeAbstract.occupyPlace(car);
+        assertThat(placeAbstract.getVehicleList().size(), is(1));
     }
 
     @Test
@@ -42,5 +42,4 @@ public class PlaceCarTest {
         placeAbstract.occupyPlace(car);
         assertThat(placeAbstract.getPlace(), is(car));
     }
-
 }
