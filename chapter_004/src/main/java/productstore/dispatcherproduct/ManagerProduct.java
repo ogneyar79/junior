@@ -14,13 +14,13 @@ public class ManagerProduct {
     /**
      * Field  object for keeping different implementation SuperStorage where keeping products.
      */
-    SuperStorageMap superStorageMap = new SuperStorageMap();
+    private SuperStorageMap superStorageMap = new SuperStorageMap();
 
 
     /**
      * Field interface objects for sending goods to different storage.
      */
-    IPostmanSending postman;
+    private IPostmanSending postman;
 
 
     /**
@@ -42,6 +42,13 @@ public class ManagerProduct {
         return result;
     }
 
+    public void distributeConcreteStock(Food concreteFood, IPostmanSending postman, SuperStorage stock) {
+
+        this.postman = postman.getThisNewObject();
+        this.postman.setSuperStorage(stock);
+        postman.send(concreteFood);
+    }
+
     /**
      * Procedure that move on our Stock(Shop itc), control quality and send  goods to appropriate Stock
      * and remove good from stock where it was before
@@ -60,6 +67,23 @@ public class ManagerProduct {
             }
         }
     }
+
+    public void resort(IPostmanSending postman, SuperStorage stockTime) {
+        for (Map.Entry<String, SuperStorage> entry : this.superStorageMap.getSuperStorage().entrySet()) {
+            SuperStorage storage = entry.getValue();
+            if (storage.getNameNumber().equals("0")) {
+                continue;
+            }
+            ListIterator<Food> stockFoodIterator = storage.getListProducts().listIterator();
+            while (stockFoodIterator.hasNext()) {
+                Food concreteFood = stockFoodIterator.next();
+                this.distributeConcreteStock(concreteFood, postman, stockTime);
+                stockFoodIterator.remove();
+            }
+        }
+        this.movingControl(postman);// for our class we can change logic distribution by use another  SuperStorageMap superStorageMap and other Cheker
+    }
+
 
 }
 
