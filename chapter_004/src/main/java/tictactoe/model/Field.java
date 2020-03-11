@@ -25,13 +25,9 @@ public class Field {
         return field[point.x][point.y];
     }
 
-    public void setFigure(final Point point, final Figure figure) throws InvalidPointException, OccupiedException {
+    public void setFigure(final Point point, final Figure figure) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
-        }
-
-        if(field[point.x][point.y] !=null) {
-            throw new OccupiedException();
         }
         field[point.x][point.y] = figure;
     }
