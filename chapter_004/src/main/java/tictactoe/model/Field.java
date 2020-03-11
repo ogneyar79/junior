@@ -1,7 +1,7 @@
-package tictactoe;
+package tictactoe.model;
 
-import tictactoe.exeption.InvalidPoinException;
-import tictactoe.exeption.OccupiedException;
+import tictactoe.model.exeption.InvalidPointException;
+import tictactoe.model.exeption.OccupiedException;
 
 import java.awt.*;
 
@@ -17,17 +17,17 @@ public class Field {
         return FIELD_SIZE;
     }
 
-    public Figure getFigure(Point point) throws InvalidPoinException{
+    public Figure getFigure(Point point) throws InvalidPointException {
         if (!checkPoint(point)) {
-            throw new InvalidPoinException();
+            throw new InvalidPointException();
         }
 
         return field[point.x][point.y];
     }
 
-    public void setFigure(final Point point, final Figure figure) throws InvalidPoinException, OccupiedException {
+    public void setFigure(final Point point, final Figure figure) throws InvalidPointException, OccupiedException {
         if (!checkPoint(point)) {
-            throw new InvalidPoinException();
+            throw new InvalidPointException();
         }
 
         if(field[point.x][point.y] !=null) {
