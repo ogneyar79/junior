@@ -1,7 +1,10 @@
 package tictactoe;
 
 import org.junit.Test;
-import tictactoe.exeption.InvalidPoinException;
+import tictactoe.model.exeption.InvalidPointException;
+import tictactoe.model.exeption.OccupiedException;
+import tictactoe.model.Field;
+import tictactoe.model.Figure;
 
 import java.awt.*;
 
@@ -15,7 +18,7 @@ public class FieldTest {
     }
 
     @Test
-    public void getFigureWhenFigureNoSet() throws InvalidPoinException {
+    public void getFigureWhenFigureNoSet() throws InvalidPointException {
         final Field field = new Field();
         final Point inputPoint = new Point(0, 0);
         final Figure actualFigure = field.getFigure(inputPoint);
@@ -29,7 +32,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPoinException e) {
+        } catch (InvalidPointException e) {
             e.printStackTrace();
         }
     }
@@ -41,7 +44,7 @@ public class FieldTest {
         try {
             field.getFigure(inputPoint);
             fail();
-        } catch (InvalidPoinException e) {
+        } catch (InvalidPointException e) {
             e.printStackTrace();
         }
     }
@@ -54,7 +57,7 @@ public class FieldTest {
         field.setFigure(inputPoint, inputFigure);
         final Figure actualFigure = field.getFigure(inputPoint);
         assertEquals(inputFigure, actualFigure);
-
     }
+
 
 }
