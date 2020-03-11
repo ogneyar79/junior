@@ -1,4 +1,4 @@
-package tictactoe.exeption;
+package tictactoe.model.exeption;
 
 public class OccupiedException extends XOException{
 
