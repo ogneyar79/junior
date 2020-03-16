@@ -10,6 +10,13 @@ import java.util.Optional;
  */
 public class WinnerController {
 
+
+    /**
+     * method return Winner Figure Optional if have Or Optional with Null.
+     *
+     * @param field Field
+     * @return result Optional can be with Null.
+     */
     public Optional<Figure> getWinner(Field field) {
         Optional<Figure> result = Optional.ofNullable(null);
         Figure figure = Figure.X;
@@ -21,6 +28,12 @@ public class WinnerController {
         return result;
     }
 
+    /**
+     * method change Figure Tic Tac Toe.
+     *
+     * @param figure Figure.
+     * @return result Figure
+     */
     Figure changeFigure(Figure figure) {
         Figure frsult = null;
         Figure figureX = Figure.X;
@@ -31,7 +44,6 @@ public class WinnerController {
         if (figureO.equals(figure)) {
             frsult = figureX;
         }
-
         return frsult;
     }
 
