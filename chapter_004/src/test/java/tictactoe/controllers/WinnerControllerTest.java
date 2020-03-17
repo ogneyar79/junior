@@ -24,7 +24,8 @@ public class WinnerControllerTest {
 
     @Test
     public void checkDiagonal() throws Exception {
-        Field field = new Field();
+        int field_size = 3;
+        Field field = new Field(field_size);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);
@@ -48,7 +49,8 @@ public class WinnerControllerTest {
 
     @Test
     public void checkLanes() throws Exception {
-        Field field = new Field();
+        int field_size = 3;
+        Field field = new Field(field_size);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);
@@ -63,7 +65,8 @@ public class WinnerControllerTest {
     }
     @Test
     public void checkWinnerFigure() throws InvalidPointException {
-        Field field = new Field();
+        int field_size = 3;
+        Field field = new Field(field_size);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);
