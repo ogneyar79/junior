@@ -34,7 +34,7 @@ public class WinnerController {
      * @param figure Figure.
      * @return result Figure
      */
-    Figure changeFigure(Figure figure) {
+    static Figure changeFigure(Figure figure) {
         Figure frsult = null;
         Figure figureX = Figure.X;
         Figure figureO = Figure.O;
@@ -81,8 +81,8 @@ public class WinnerController {
     /**
      * Function check  if all Figures  are The same on  all lines(colons and rows) of field  are The same.
      *
-     * @param field
-     * @param figure
+     * @param field  Field
+     * @param figure Figure.
      * @return
      */
     boolean checkLanes(Field field, Figure figure) {
