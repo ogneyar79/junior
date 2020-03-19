@@ -62,4 +62,6 @@ public class FieldTest {
         final Figure actualFigure = field.getFigure(inputPoint);
         assertEquals(inputFigure, actualFigure);
     }
+
+
 }
