@@ -1,4 +1,5 @@
 package tictactoe.model.exeption;
 
-public class InvalidPointException extends XOException{
+public class InvalidPointException extends XOException {
+
 }

@@ -44,25 +44,25 @@ abstract public class Food {
     }
 
 
-     public void setPrice(int price){
+    public void setPrice(int price) {
         this.price = price;
-     }
+    }
 
-     public String getName(){
-         return this.name;
-     };
+    public String getName() {
+        return this.name;
+    }
 
-    public LocalDate getExpirationDate(){
+    public LocalDate getExpirationDate() {
         return this.expirationDate;
     }
 
-    public LocalDate getCreateDate(){
+    public LocalDate getCreateDate() {
         return this.createDate;
     }
 
-     public int getPrice(){
+    public int getPrice() {
         return this.price;
-     }
+    }
 
 
     public void setNameStock(String nameStock) {

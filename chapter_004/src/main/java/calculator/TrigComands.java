@@ -14,7 +14,8 @@ public class TrigComands {
     /**
      * field where we have our trig operators for users and checking at our List.
      */
-    static final List<String> listTrigComandsAndKeys = new ArrayList();
+    static final List<String> LIST_TRIG_COMANDS = new ArrayList();
+
     /**
      * field where we have map with keys trig commands  String like sin, cos i.t.c.
      * and function realisation these  commands.
@@ -25,19 +26,19 @@ public class TrigComands {
      * заполенение Map ключами-операциями.
      */
     public void init() {
-        listTrigComandsAndKeys.add(SIN);
+        LIST_TRIG_COMANDS.add(SIN);
         actions.put(SIN, this::sin);
-        listTrigComandsAndKeys.add(COS);
+        LIST_TRIG_COMANDS.add(COS);
         actions.put(COS, this::cos);
-        listTrigComandsAndKeys.add(TAN);
+        LIST_TRIG_COMANDS.add(TAN);
         actions.put(TAN, this::tan);
-        listTrigComandsAndKeys.add(ASIN);
+        LIST_TRIG_COMANDS.add(ASIN);
         actions.put(ASIN, this::asin);
-        listTrigComandsAndKeys.add(ACOS);
+        LIST_TRIG_COMANDS.add(ACOS);
         actions.put(ACOS, this::acos);
-        listTrigComandsAndKeys.add(ATAN);
+        LIST_TRIG_COMANDS.add(ATAN);
         actions.put(ATAN, this::atan);
-        listTrigComandsAndKeys.add(ATAN2);
+        LIST_TRIG_COMANDS.add(ATAN2);
         actions.put(ATAN2, this::atan2);
     }
 
@@ -73,7 +74,7 @@ public class TrigComands {
         return Math.atan(radian);
     }
 
-    public double sin(String sinKey, Double radian) {
+    public double sin(String sinKey, double radian) {
         return Math.sin(radian);
     }
 
@@ -94,8 +95,8 @@ public class TrigComands {
         return Math.acos(radian);
     }
 
-    public static List<String> getListTrigComandsAndKeys() {
-        return listTrigComandsAndKeys;
+    public static List<String> getListTrigComands() {
+        return LIST_TRIG_COMANDS;
     }
 
     public static Map<String, BiFunction<String, Double, Double>> getActions() {

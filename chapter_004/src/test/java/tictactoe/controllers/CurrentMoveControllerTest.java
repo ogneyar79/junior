@@ -11,16 +11,23 @@ import static org.junit.Assert.*;
 
 public class CurrentMoveControllerTest {
 
+    Field field;
 
-    CurrentMoveController controller = new CurrentMoveController();
-    Field field = new Field(3);
+    // figure that make first step
+    Figure firstFigure;
+
+    CurrentMoveController controller;
+
     Figure figure;
     Figure figureO;
 
     @Before
     public void setUp() throws Exception {
+        field = new Field(3);
         figure = Figure.X;
         figureO = Figure.O;
+        firstFigure = figure;
+        controller = new CurrentMoveController(field, firstFigure);
     }
 
     @Test
@@ -31,7 +38,7 @@ public class CurrentMoveControllerTest {
         field.setFigure(new Point(0, 1), figureO);
         field.setFigure(new Point(0, 2), figureO);
         int expected = 2;
-        int count = controller.countFigureAtColumns(field, 0);
+        int count = controller.countFigureAtColumns(0);
         assertEquals(expected, count);
     }
 
@@ -40,15 +47,15 @@ public class CurrentMoveControllerTest {
         field.setFigure(new Point(0, 0), figure);
         field.setFigure(new Point(2, 2), figure);
         field.setFigure(new Point(0, 1), figureO);
-        Figure actalFigure = controller.getCurrentFigure(field, figure).get();
+        Figure actalFigure = controller.getCurrentFigure().get();
         Figure expected = Figure.O;
         assertEquals(expected, actalFigure);
     }
 
     @Test
-    public void getFigureIfNoFigure(){
-        Figure actalFigure = controller.getCurrentFigure(field, figureO).get();
-        Figure expected = Figure.O;
+    public void getFigureIfNoFigure() {
+        Figure actalFigure = controller.getCurrentFigure().get();
+        Figure expected = Figure.X;
         assertEquals(expected, actalFigure);
     }
 

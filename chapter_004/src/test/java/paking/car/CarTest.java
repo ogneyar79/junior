@@ -19,7 +19,7 @@ public class CarTest {
     public void setUp() throws Exception {
         placeParking = new PlaceCar(01);
         // may be to delete parametr Car from comstructor?
-        parkOfCar = new ParkingMove(placeParking, car);
+        parkOfCar = new ParkingMove(placeParking);
 
 
     }

@@ -22,11 +22,13 @@ public class WinnerController {
         Figure figure = Figure.X;
         if ((this.checkDiagonal(field, figure)) || (this.checkLanes(field, figure))) {
             result = Optional.of(figure);
+            return result;
         } else if (this.checkDiagonal(field, this.changeFigure(figure)) || this.checkLanes(field, this.changeFigure(figure))) {
             result = Optional.of(this.changeFigure(figure));
         }
         return result;
     }
+
 
     /**
      * method change Figure Tic Tac Toe.
@@ -63,7 +65,7 @@ public class WinnerController {
             if (figureR == null & figureL == null) {
                 return false;
             }
-            if (figureR == null) {
+            if (figureR == null) {                     // if here Figure is Null at our we change Figure for opposite as result no NullPointer
                 figureR = this.changeFigure(figure);
             }
             if (figureL == null) {
@@ -98,13 +100,15 @@ public class WinnerController {
                 }
                 if (figureRows == null) {
                     figureRows = this.changeFigure(figure);
+                }
 
-                    cols &= (figureCols.equals(figure));
-                    rows &= (figureRows.equals(figure));
-                }
-                if (cols || rows) {
-                    return true;
-                }
+                cols &= (figureCols.equals(figure));
+                rows &= (figureRows.equals(figure));
+
+
+            }
+            if (cols || rows) {
+                return true;
             }
         }
         return false;

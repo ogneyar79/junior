@@ -2,18 +2,87 @@ package tictactoe.controllers;
 
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
+import tictactoe.model.Game;
+import tictactoe.model.exeption.InvalidFigure;
 import tictactoe.model.exeption.InvalidPointException;
 import tictactoe.model.exeption.OccupiedException;
 
 import java.awt.*;
 
+/**
+ * Class control setting (moving) figures on field.
+ */
 public class MoveController {
+    private final CurrentMoveController currentMoveController;
+    private final WinnerController winnerController;
 
-    public void applyFigure(final Field field, Point point, Figure figure) throws OccupiedException, InvalidPointException {
+    public MoveController(CurrentMoveController currentMoveController, WinnerController winnerController) {
+        this.currentMoveController = currentMoveController;
+        this.winnerController = winnerController;
+    }
+
+    /**
+     * Procedure that setting figure on field.
+     *
+     * @param field  Field where setting figures.
+     * @param point  Point coordinate according with we setting figures.
+     * @param figure Figure that we setting.
+     * @throws OccupiedException
+     * @throws InvalidPointException
+     */
+    void applyFigure(final Field field, Point point, Figure figure) throws OccupiedException, InvalidPointException {
         if (field.getFigure(point) != null) {
             throw new OccupiedException();
         }
-
         field.setFigure(point, figure);
+    }
+
+    /**
+     * Function that check opportunity setting figure, aggregation two controllers.
+     *
+     * @return result boolean.
+     */
+    public boolean controlMove(final Field field) {
+        boolean result = false;
+        boolean moveResult = this.currentMoveController.getCurrentFigure().isPresent();
+        boolean winnerResultNO = !this.winnerController.getWinner(field).isPresent();
+        if (moveResult & winnerResultNO) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * Function that move figure, but before need use controlMove method, that check validation.
+     *
+     * @param field    Field.
+     * @param point    Point
+     * @param currentF Figure
+     * @return result boolean if was successed in.
+     */
+    public boolean moveFigure(final Field field, final Point point, Figure currentF) throws InvalidFigure {
+        boolean result = true;
+        if (currentF != this.currentMoveController.getCurrentFigure().get()) {
+            throw new InvalidFigure("NO according to current Figure");
+        }
+        try {
+            this.applyFigure(field, point, currentF);
+        } catch (OccupiedException e) {
+            e.printStackTrace();
+            result = false;
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
+    }
+
+
+    public CurrentMoveController getCurrentMoveController() {
+        return currentMoveController;
+    }
+
+    public WinnerController getWinnerController() {
+        return winnerController;
     }
 }

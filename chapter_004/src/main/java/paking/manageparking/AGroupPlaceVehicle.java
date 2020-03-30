@@ -18,7 +18,7 @@ abstract public class AGroupPlaceVehicle {
     private final int numberPlace;
 
 
-     AGroupPlaceVehicle(int numberPlace, PlaceAbstract placeAbstract) {
+    AGroupPlaceVehicle(int numberPlace, PlaceAbstract placeAbstract) {
         this.numberPlace = numberPlace;
         this.placeParcingsArray = new PlaceAbstract[numberPlace];
         this.placeAbstract = placeAbstract;
@@ -36,8 +36,9 @@ abstract public class AGroupPlaceVehicle {
      * @param numberPlace
      */
     protected void createGroupPlace(int numberPlace) {
-        for (int i = 0; i < numberPlace; i++)
+        for (int i = 0; i < numberPlace; i++) {
             this.setAtPlaceGroup(i, this.placeAbstract.createNewInstance(i + 1));
+        }
 
     }
 

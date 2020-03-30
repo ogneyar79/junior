@@ -24,13 +24,11 @@ public class WinnerControllerTest {
 
     @Test
     public void checkDiagonal() throws Exception {
-        int field_size = 3;
-        Field field = new Field(field_size);
+        int fieldSize = 3;
+        Field field = new Field(fieldSize);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);
-
-
         field.setFigure(new Point(1, 1), figure);
         field.setFigure(new Point(2, 2), figure);
         field.setFigure(new Point(0, 1), figureO);
@@ -49,8 +47,8 @@ public class WinnerControllerTest {
 
     @Test
     public void checkLanes() throws Exception {
-        int field_size = 3;
-        Field field = new Field(field_size);
+        int fieldSize = 3;
+        Field field = new Field(fieldSize);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);
@@ -58,15 +56,36 @@ public class WinnerControllerTest {
         field.setFigure(new Point(2, 2), figure);
         field.setFigure(new Point(0, 1), figureO);
         field.setFigure(new Point(0, 2), figureO);
+
+        WinnerController winnerControl = new WinnerController();
+        Boolean fact = winnerControl.checkLanes(field, figure);
+        boolean expect = false;
+        assertEquals(expect, (fact));
+    }
+
+    @Test
+    public void checkLanesLinesFullFigureX() throws InvalidPointException {
+        int fieldSize = 3;
+        Field field = new Field(fieldSize);
+        Figure figure = Figure.X;
+        Figure figureO = Figure.O;
+        field.setFigure(new Point(0, 0), figure);
+        field.setFigure(new Point(0, 1), figureO);
+        field.setFigure(new Point(0, 2), figureO);
+        field.setFigure(new Point(1, 2), figure);
+        field.setFigure(new Point(1, 1), figure);
+        field.setFigure(new Point(1, 0), figure);
+
         WinnerController winnerControl = new WinnerController();
         Boolean fact = winnerControl.checkLanes(field, figure);
         boolean expect = true;
         assertEquals(expect, (fact));
     }
+
     @Test
     public void checkWinnerFigure() throws InvalidPointException {
-        int field_size = 3;
-        Field field = new Field(field_size);
+        int fieldSize = 3;
+        Field field = new Field(fieldSize);
         Figure figure = Figure.X;
         Figure figureO = Figure.O;
         field.setFigure(new Point(0, 0), figure);

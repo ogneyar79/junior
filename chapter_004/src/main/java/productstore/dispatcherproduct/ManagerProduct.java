@@ -81,7 +81,7 @@ public class ManagerProduct {
                 stockFoodIterator.remove();
             }
         }
-        this.movingControl(postman);// for our class we can change logic distribution by use another  SuperStorageMap superStorageMap and other Cheker
+        this.movingControl(postman);   // for our class we can change logic distribution by use another  SuperStorageMap superStorageMap and other Cheker
     }
 
 

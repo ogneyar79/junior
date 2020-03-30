@@ -25,7 +25,7 @@ public class AGroupPlaceVehicleTest {
 
     @Test
     public void createGroupPlace() throws Exception {
-    //    groupPlaceVehicle.createGroupPlace(numberPlace);
+        //    groupPlaceVehicle.createGroupPlace(numberPlace);
         System.out.println(groupPlaceVehicle.getPlaceParcingsArray().length);
         System.out.println(groupPlaceVehicle.getType());
         PlaceAbstract placeCarOne = (PlaceAbstract) groupPlaceVehicle.getPlace(0);
@@ -36,16 +36,15 @@ public class AGroupPlaceVehicleTest {
     }
 
 
-
     @Test
     public void getPlaceParcingsArray() throws Exception {
     }
 
     @Test
     public void countFreePlace() throws Exception {
-        Car car = new Car("Light", (byte) 3,01);
-        Car carOne = new Car("Light", (byte) 3,02);
-      //  groupPlaceVehicle.createGroupPlace(numberPlace);
+        Car car = new Car("Light", (byte) 3, 01);
+        Car carOne = new Car("Light", (byte) 3, 02);
+        //  groupPlaceVehicle.createGroupPlace(numberPlace);
         System.out.println(groupPlaceVehicle.getPlaceParcingsArray().length);
         System.out.println(groupPlaceVehicle.countFreePlace());
         assertThat(numberPlace == groupPlaceVehicle.countFreePlace(), is(true));
@@ -54,7 +53,7 @@ public class AGroupPlaceVehicleTest {
         groupPlaceVehicle.getPlace(4).occupyPlace(carOne);
         System.out.println(groupPlaceVehicle.countFreePlace());
         assertThat(groupPlaceVehicle.countFreePlace(), is(6));
-        Track track = new Track("Track", (byte) 5,11);
+        Track track = new Track("Track", (byte) 5, 11);
         trackGroup.getPlace(3).occupyPlace(track);
         assertThat(trackGroup.countFreePlace(), is(7));
     }

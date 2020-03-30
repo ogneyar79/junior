@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class SuperStorageMap {
 
-   private Map<String, SuperStorage> superStorage;
+    private Map<String, SuperStorage> superStorage;
     private ArrayList<String> commands;
 
     private ArrayList<IControllQuality> controllQualities = new ArrayList<>(6);
@@ -40,10 +40,10 @@ public class SuperStorageMap {
         return this.superStorage.get(command);
     }
 
-    static final String firstStorage = "0";
-    static final String wareHouse = "1";
-    static final String shop = "2";
-    static final String trash = "3";
+    static final String FIRST_STORAGE = "0";
+    static final String WARE_HOUSE = "1";
+    static final String SHOP = "2";
+    static final String TRASH = "3";
 
     public void init(String key, SuperStorage storageObject) {
         this.commands.add(key);
@@ -51,10 +51,10 @@ public class SuperStorageMap {
     }
 
     public void initDefault() {
-        this.init(firstStorage, new FirstStorage(firstStorage));
-        this.init(wareHouse, new Warehouse(wareHouse));
-        this.init(shop, new Shop(shop));
-        this.init(trash, new Trash(trash));
+        this.init(FIRST_STORAGE, new FirstStorage(FIRST_STORAGE));
+        this.init(WARE_HOUSE, new Warehouse(WARE_HOUSE));
+        this.init(SHOP, new Shop(SHOP));
+        this.init(TRASH, new Trash(TRASH));
     }
 
     public ArrayList<String> getCommands() {

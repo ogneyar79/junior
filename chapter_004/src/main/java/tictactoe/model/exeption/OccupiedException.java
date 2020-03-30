@@ -1,5 +1,5 @@
 package tictactoe.model.exeption;
 
-public class OccupiedException extends XOException{
+public class OccupiedException extends XOException {
 
 }

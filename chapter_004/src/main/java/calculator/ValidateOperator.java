@@ -1,8 +1,5 @@
 package calculator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Class for checking operation.
  */
@@ -28,7 +25,7 @@ public class ValidateOperator {
      */
     public boolean checkOperationTrig(String operation) {
         boolean result = false;
-        if (TrigComands.listTrigComandsAndKeys.contains(operation)) {
+        if (TrigComands.LIST_TRIG_COMANDS.contains(operation)) {
             result = true;
         }
         return result;

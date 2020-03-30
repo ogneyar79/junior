@@ -81,9 +81,7 @@ public class MyParking implements IParking {
     public void park(Vehicle car) throws MyException {
         if (this.returnFlag(car)) {
             car.move(new ParkingMove(this.getFreePlace()));
-        }
-        // this.placesCar.findNearFreePlace();
-        else if ((car.getType().equalsIgnoreCase(this.placesTrack.getType())) && !(this.returnFlag(car)) & (this.placesCar.isTwoPlaceIs())) {
+        } else if ((car.getType().equalsIgnoreCase(this.placesTrack.getType())) && !(this.returnFlag(car)) & (this.placesCar.isTwoPlaceIs())) {
             ArrayList<PlaceCar> localPlace;
             localPlace = this.placesCar.findNearFreePlace();
             this.setPlaceFree(localPlace.get(0));

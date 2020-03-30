@@ -105,17 +105,30 @@ public class InteractCalc extends CalculatorM {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         InteractCalc that = (InteractCalc) o;
 
-        if (Double.compare(that.result, result) != 0) return false;
-        if (Double.compare(that.num2, num2) != 0) return false;
-        if (Double.compare(that.numFirst, numFirst) != 0) return false;
-        if (calculatorElementary != null ? !calculatorElementary.equals(that.calculatorElementary) : that.calculatorElementary != null)
+        if (Double.compare(that.result, result) != 0) {
             return false;
-        if (consolReader != null ? !consolReader.equals(that.consolReader) : that.consolReader != null) return false;
+        }
+        if (Double.compare(that.num2, num2) != 0) {
+            return false;
+        }
+        if (Double.compare(that.numFirst, numFirst) != 0) {
+            return false;
+        }
+        if (calculatorElementary != null ? !calculatorElementary.equals(that.calculatorElementary) : that.calculatorElementary != null) {
+            return false;
+        }
+        if (consolReader != null ? !consolReader.equals(that.consolReader) : that.consolReader != null) {
+            return false;
+        }
         return validation != null ? validation.equals(that.validation) : that.validation == null;
     }
 
