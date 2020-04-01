@@ -1,49 +1,80 @@
 package tictactoe.view;
 
-import tictactoe.controllers.CurrentMoveController;
+import tictactoe.common.IXOProperty;
+
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
 import tictactoe.model.Game;
+import tictactoe.model.Player;
 import tictactoe.model.exeption.InvalidPointException;
+import tictactoe.view.reader.IXOConsoleReader;
+import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class ConsoleView {
+    private static final Character SEPARATOR = IXOProperty.getDefaultProperties().getSeparatorCharacter();
 
+    private final int separatorLength = 11;
+    private final int indentLength = 50;
+    private final int halfIndentL = indentLength / 2;
+    private final String hypnenView = " -- ";
+
+    IXOConsoleReader reader = new XOReader();
 
     public void show(final Game game) {
-        System.err.format(" Game name %s\n", game.getName());
-        Field field = game.getField();
-        for (int x = 0; x < field.getFieldSize(); x++) {
-            if (x != 0) {
-                printSeparator();
-            }
-            printLine(field, x);
-        }
-    }
+        final Player plOne = game.getPlayers()[0];
+        final Player plTwo = game.getPlayers()[1];
 
+        System.err.format("%" + indentLength + "s\n", " Game name:" + game.getName());
 
-    private void printLine(final Field field, final int x) {
+        System.err.format("%" + (halfIndentL
+                        - separatorLength
+                        + plTwo.getName().length()
+                        + hypnenView.length() + plOne.getFigure().toString().length()) + "s %"
+                        + (halfIndentL
+                        + separatorLength
+                        + halfIndentL
+                        - plTwo.getName().length() - hypnenView.length() - plTwo.getFigure().toString().length()) + "s",
+                plOne.getName() + hypnenView + plOne.getFigure(),
+                plTwo.getName() + hypnenView + plTwo.getFigure() + "\n");
 
+        final Field field = game.getField();
         for (int y = 0; y < field.getFieldSize(); y++) {
             if (y != 0) {
-                System.err.print("|");
+                System.err.format("%" + indentLength + "s\n", generateSeparator(SEPARATOR, separatorLength));
             }
-            System.err.print(" ");
-
-            final Figure figure;
-            try {
-                figure = field.getFigure(new Point(x, y));
-            } catch (InvalidPointException e) {
-                throw new RuntimeException(e);
-            }
-            System.err.print(figure != null ? figure : "  ");
-            System.err.print(" ");
+            System.err.format("%" + indentLength + "s\n", generateLine(field, y));
         }
-        System.err.println();
     }
+
+
+    protected String generateLine(final Field field, final int y) {
+        String result = "";
+        try {
+            for (int x = 0; x < field.getFieldSize(); x++) {
+                Figure figure = null;
+                try {
+                    figure = field.getFigure(new Point(x, y));
+                } catch (InvalidPointException e) {
+                    e.printStackTrace();
+                }
+                String leftWall = (x != 0 ? "|" : "");
+                String figureSymbol = String.format("%s", figure != null ? figure : " ");
+                String figureCell = String.format("%s%2s ", leftWall, figureSymbol);
+                result = result.concat(figureCell);
+
+            }
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 
     private int askCoordinate(final String coordinateName) {
         System.err.format("Please input %s", coordinateName);
@@ -55,7 +86,7 @@ public class ConsoleView {
         String message;
         if (figure.isPresent()) {
             message = "Winner is " + figure;
-            System.out.print(message);
+            System.out.println(message);
 
         } else {
             message = " No winner here is draw";
@@ -65,11 +96,29 @@ public class ConsoleView {
 
     public Point askPoint() {
 
-        return new Point(askCoordinate("X") - 1, askCoordinate("Y") - 1);
+        return new Point(this.reader.askCoordinate("X") - 1, reader.askCoordinate("Y") - 1);
     }
 
-    private void printSeparator() {
-        System.err.println("~~~~~~~~~~~~~~");
+    public String generateSeparator(final Character piece, final int count) {
+        String result = "";
+        for (int i = 0; i < count; i++) {
+            result = result + piece;
+        }
+        return result;
     }
+
+    public static void main(String... args) {
+        //   ConsoleView reader = new ConsoleView();
+//        reader.askCoordinate("0");
+        Field field = new Field(3);
+        ConsoleView consoleView = new ConsoleView();
+        String empty = consoleView.generateLine(field, 2);
+        System.out.print(empty);
+
+        String line = consoleView.generateSeparator('~', 10);
+        System.out.print(line);
+        System.err.format("%" + consoleView.indentLength + "s\n", consoleView.generateSeparator(ConsoleView.SEPARATOR, 11));
+    }
+
 
 }
