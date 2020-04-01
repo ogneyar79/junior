@@ -3,6 +3,7 @@ package tictactoe.controllers;
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
 import tictactoe.model.Game;
+import tictactoe.model.Player;
 import tictactoe.model.exeption.InvalidFigure;
 import tictactoe.view.ConsoleView;
 
@@ -14,13 +15,28 @@ import java.util.Optional;
  */
 public class GameController {
 
+    /**
+     * object that define show our game.
+     */
     private final ConsoleView consoleView;
+
+    /**
+     * object that control movement our figure.
+     */
     private final MoveController moveController;
 
     public GameController(ConsoleView consoleView, MoveController moveController) {
         this.consoleView = consoleView;
         this.moveController = moveController;
     }
+
+
+    /**
+     * Procedure that make game to play.
+     *
+     * @param game Game.
+     * @throws InvalidFigure
+     */
 
     public void aggregatePlay(Game game) throws InvalidFigure {
         this.consoleView.show(game);
@@ -35,6 +51,22 @@ public class GameController {
         moveController.getCurrentMoveController();
         Optional<Figure> figure = moveController.getWinnerController().getWinner(game.getField());
         consoleView.showWinner(figure);
+    }
+
+    public static void main(String... args) throws InvalidFigure {
+        Player[] players = new Player[2];
+        Field field = new Field(3);
+        players[0] = new Player("ONE", Figure.X);
+        players[1] = new Player("TWO", Figure.O);
+        Game game = new Game(players, field, "FIRSTGame");
+
+        ConsoleView consoleView = new ConsoleView();
+        CurrentMoveController currentController = new CurrentMoveController(game.getField(), game.getFirstFigure());
+        WinnerController winnerController = new WinnerController();
+        MoveController moveController = new MoveController(currentController, winnerController);
+
+        GameController gameController = new GameController(consoleView, moveController);
+        gameController.aggregatePlay(game);
     }
 
 }
