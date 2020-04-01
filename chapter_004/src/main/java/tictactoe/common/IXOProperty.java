@@ -1,15 +1,21 @@
 package tictactoe.common;
 
+import tictactoe.model.exeption.XOCriticalException;
+
 import java.io.IOException;
 
 public interface IXOProperty {
 
     public Character getSeparatorCharacter();
 
-    static IXOProperty getDefaultProperties() throws IOException {
+    static IXOProperty getDefaultProperties() {
 
-        return XOPropertyBase.generateInstance();
-
+        try {
+            return XOPropertyBase.generateInstance();
+        } catch (final IOException e) {
+            e.printStackTrace();
+            throw new XOCriticalException(e);
+        }
     }
 
 }
