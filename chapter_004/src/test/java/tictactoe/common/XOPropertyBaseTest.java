@@ -13,6 +13,10 @@ public class XOPropertyBaseTest {
 
     @Test
     public void getSeparatorCharacter() throws Exception {
+        final Character expected = '~';
+        final IXOProperty test = XOPropertyBase.generateInstance();
+        final Character result = test.getSeparatorCharacter();
+        assertEquals(expected, result);
     }
 
 }
