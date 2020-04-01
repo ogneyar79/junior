@@ -32,8 +32,17 @@ class XOPropertyBase implements IXOProperty {
     }
 
     public static void main(String... args) throws IOException {
-
+        XOPropertyBase.generateInstance().getSeparatorCharacter();
         System.out.println(XOPropertyBase.generateInstance());
+
+
+        if (true)
+            System.err.print("Fuck");
+        System.err.print(" NoFuck");
+
     }
 
+
 }
+
+
