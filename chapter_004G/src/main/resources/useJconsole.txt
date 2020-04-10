@@ -1,0 +1,13 @@
+I work with utility Jconsole on my class userUsage.
+by use this program I can see that program   used GC1,
+and Java HotSpot(TM) 64-Bit Server VM version 14+36-1461.
+We see Total compile time: 1,738 seconds and VM time work itc
+Treds  quantity all and current demons and treads
+Quantity of classes - 2.
+current heap size 6.2 m
+all memory for using by heap 147 m and max heap size 2 GB.
+during working our program we use only Name = 'G1 Young Generation', Collections = 67, Total time spent = 0,168 seconds
+This means that our program a little and doesn't demand a lot resources(No using old generation).
+0,168 seconds on G1 Young Generation (67 collections ) time all collections and how much we call collections.
+we can use non heap memory using and size
+we can see size of all  generations and set it If it need.
