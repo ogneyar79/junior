@@ -61,7 +61,6 @@ public class MySoftReferenseKash {
         for (String line : lines) {
             System.out.println(line);
         }
-
         return lines.toString();
     }
 
@@ -88,5 +87,4 @@ public class MySoftReferenseKash {
         }
         return result;
     }
-
 }
