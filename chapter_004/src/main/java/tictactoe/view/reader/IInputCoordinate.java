@@ -1,4 +1,4 @@
-package tictactoe.controllers;
+package tictactoe.view.reader;
 
 import java.awt.*;
 

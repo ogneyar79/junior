@@ -46,7 +46,7 @@ public class GameController {
         while (moveController.controlMove(field)) {
             final Figure currentF = moveController.getCurrentMoveController().getCurrentFigure().get();
             System.err.format("Please  enter move Point for: %s\n", currentF);
-            Point point = this.consoleView.inputPoint();
+            Point point = this.consoleView.askPoint();
             moveController.moveFigure(field, point, currentF);
             this.consoleView.show(game);
         }
