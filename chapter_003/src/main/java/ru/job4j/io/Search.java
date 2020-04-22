@@ -14,7 +14,7 @@ public class Search {
      * @param parent String The way to catalog
      * @return result is List files is found as result.
      */
-    private List<File> filesAll(String parent) {
+    public List<File> filesAll(String parent) {
         List<File> result = new ArrayList<>();
         Queue<File> queue = new LinkedList<>();
         queue.offer(new File(parent));

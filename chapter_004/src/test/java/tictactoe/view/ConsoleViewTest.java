@@ -3,6 +3,8 @@ package tictactoe.view;
 import org.junit.jupiter.api.Test;
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
+import tictactoe.view.reader.IXOConsoleReader;
+import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
 
@@ -11,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class ConsoleViewTest {
-    ConsoleView consoleView = new ConsoleView();
+    IXOConsoleReader reader = new XOReader();
+    ConsoleView consoleView = new ConsoleView(reader);
 
     @Test
     public void testLineFormatWithElement() throws Exception {
@@ -44,7 +47,7 @@ class ConsoleViewTest {
         field.setFigure(new Point(1, 1), Figure.X);
         field.setFigure(new Point(2, 1), Figure.X);
 
-        assertEquals( line, consoleView.generateLine(field, 1));
+        assertEquals(line, consoleView.generateLine(field, 1));
     }
 
     @Test

@@ -59,7 +59,7 @@ public class Config {
     public String toString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().forEach(out::add);
+            read.lines().forEach(System.out::print);
         } catch (Exception e) {
             e.printStackTrace();
         }

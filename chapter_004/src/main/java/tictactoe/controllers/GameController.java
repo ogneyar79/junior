@@ -6,6 +6,8 @@ import tictactoe.model.Game;
 import tictactoe.model.Player;
 import tictactoe.model.exeption.InvalidFigure;
 import tictactoe.view.ConsoleView;
+import tictactoe.view.reader.IXOConsoleReader;
+import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
 import java.util.Optional;
@@ -59,8 +61,8 @@ public class GameController {
         players[0] = new Player("ONE", Figure.X);
         players[1] = new Player("TWO", Figure.O);
         Game game = new Game(players, field, "FIRSTGame");
-
-        ConsoleView consoleView = new ConsoleView();
+        IXOConsoleReader reader = new XOReader();
+        ConsoleView consoleView = new ConsoleView(reader);
         CurrentMoveController currentController = new CurrentMoveController(game.getField(), game.getFirstFigure());
         WinnerController winnerController = new WinnerController();
         MoveController moveController = new MoveController(currentController, winnerController);
