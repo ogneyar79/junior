@@ -12,6 +12,7 @@ public class Field {
     private final int fieldSize;
     private static final int MIN_COORDINATE = 0;
 
+
     /**
      * array for setting figure.
      */
@@ -25,6 +26,7 @@ public class Field {
     public Field(final int fieldSize) {
         this.fieldSize = fieldSize;
         this.field = new Figure[this.fieldSize][this.fieldSize];
+
     }
 
 
@@ -85,4 +87,17 @@ public class Field {
     public Figure[][] getField() {
         return field;
     }
+
+
+    
+        public int getElementCounter() {
+            int count = 0;
+            for (int i = 0; i < this.field.length; i++) {
+                for (int j = 0; j < this.field[i].length; j++) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
 }
