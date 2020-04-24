@@ -7,17 +7,21 @@ import java.awt.*;
 
 public class InputerImitator implements IInputCoordinate {
 
-    private final IXOConsoleReader reader;
+    private final XOaskImitation reader;
+    Field field;
 
-
-    public InputerImitator(IXOConsoleReader reader) {
-
-        this.reader = reader;
+    public InputerImitator(Field field) {
+        this.field = field;
+        this.reader = new XOaskImitation(field);
     }
 
 
     @Override
-    public Point inputPoint() throws InvalidFigureWriting {
-        return new Point(reader.askCoordinate("X"), reader.askCoordinate("Y") - 1);
+    public Point inputPoint() {
+        try {
+            return new Point(reader.askCoordinate("X"), reader.getArrayY());
+        } catch (InvalidFigureWriting invalidFigureWriting) {
+            invalidFigureWriting.printStackTrace();
+        }
     }
 }

@@ -10,6 +10,8 @@ public class XOaskImitation implements IXOConsoleReader {
     // final private int arrayIndex;
     //  private final int rangeOneArray;  // size array quantity fields
     private final Field field;
+    private int arrayX;
+    private int arrayY;
 
     public XOaskImitation(Field field) {
         this.field = field;
@@ -20,9 +22,9 @@ public class XOaskImitation implements IXOConsoleReader {
     @Override
     public int askCoordinate(String coordinateName) throws InvalidFigureWriting {
         System.out.format("Please input %s:", coordinateName);
-        int arrayIndex = (int) (Math.random() * (field.getElementCounter() + 1));
-        int arrayX = arrayIndex / this.size;
-        int arrayY = arrayIndex - (arrayX * this.size);
+        int arrayIndex = (int) (Math.random() * (field.getElementCounter()));
+        arrayX = arrayIndex / this.size;
+        arrayY = arrayIndex - (arrayX * this.size);
 
         if (coordinateName.equalsIgnoreCase("X")) {
             return arrayX;
@@ -35,4 +37,11 @@ public class XOaskImitation implements IXOConsoleReader {
     }
 
 
+    private int getArrayX() {
+        return arrayX;
+    }
+
+     int getArrayY() {
+        return arrayY;
+    }
 }
