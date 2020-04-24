@@ -2,12 +2,13 @@ package tictactoe.view.reader;
 
 import org.junit.Before;
 import org.junit.Test;
+import tictactoe.model.Field;
 
 import static org.junit.Assert.*;
 
 public class XOaskImitationTest {
 
-
+ Field field;
     int arrayDouble[][] = new int[][]{
             {0, 1, 2},
             {3, 4, 5},
@@ -23,8 +24,9 @@ public class XOaskImitationTest {
 
     @Before
     public void setUp() throws Exception {
-        arrayindex = 4;
-        readerImitator = new XOaskImitation(size, rangeOneArray, arrayindex);
+        field = new Field(3);
+
+        readerImitator = new XOaskImitation(field);
     }
 
     @Test
@@ -32,7 +34,7 @@ public class XOaskImitationTest {
         int resultX = readerImitator.askCoordinate("x");
         int resultY = readerImitator.askCoordinate("y");
         int expected = arrayDouble[resultX][resultY];
-        assertEquals(expected, array[arrayindex]);
+        assertEquals(expected, array[array);
 
     }
 
