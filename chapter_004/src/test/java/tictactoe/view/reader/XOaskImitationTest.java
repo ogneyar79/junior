@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class XOaskImitationTest {
 
- Field field;
+    Field field;
     int arrayDouble[][] = new int[][]{
             {0, 1, 2},
             {3, 4, 5},
@@ -20,7 +20,7 @@ public class XOaskImitationTest {
     int rangeOneArray = array.length;
 
     int arrayindex;
-    IXOConsoleReader readerImitator;
+    XOaskImitation readerImitator;
 
     @Before
     public void setUp() throws Exception {
@@ -31,11 +31,20 @@ public class XOaskImitationTest {
 
     @Test
     public void askCoordinate() throws Exception {
-        int resultX = readerImitator.askCoordinate("x");
-        int resultY = readerImitator.askCoordinate("y");
+        int resultX = readerImitator.askCoorImitator("x", 4);
+        int resultY = readerImitator.getArrayY();
+        readerImitator.getArrayIndex();
         int expected = arrayDouble[resultX][resultY];
-        assertEquals(expected, array[array);
+        assertEquals(expected, array[4]);
+    }
 
+    @Test
+    public void askCoordinateTwo() throws Exception {
+        int resultX = readerImitator.askCoorImitator("x", 8);
+        int resultY = readerImitator.getArrayY();
+        readerImitator.getArrayIndex();
+        int expected = arrayDouble[resultX][resultY];
+        assertEquals(expected, array[8]);
     }
 
 }

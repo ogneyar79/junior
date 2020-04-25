@@ -5,6 +5,7 @@ import tictactoe.model.Figure;
 import tictactoe.model.Game;
 import tictactoe.model.Player;
 import tictactoe.model.exeption.InvalidFigure;
+import tictactoe.model.exeption.InvalidFigureWriting;
 import tictactoe.view.ConsoleView;
 import tictactoe.view.reader.IXOConsoleReader;
 import tictactoe.view.reader.XOReader;
@@ -40,7 +41,7 @@ public class GameController {
      * @throws InvalidFigure
      */
 
-    public void aggregatePlay(Game game) throws InvalidFigure {
+    public void aggregatePlay(Game game) throws InvalidFigure, InvalidFigureWriting {
         this.consoleView.show(game);
         Field field = game.getField();
         while (moveController.controlMove(field)) {
@@ -55,7 +56,7 @@ public class GameController {
         consoleView.showWinner(figure);
     }
 
-    public static void main(String... args) throws InvalidFigure {
+    public static void main(String... args) throws InvalidFigure, InvalidFigureWriting {
         Player[] players = new Player[2];
         Field field = new Field(3);
         players[0] = new Player("ONE", Figure.X);

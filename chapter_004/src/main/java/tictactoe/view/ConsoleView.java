@@ -1,11 +1,11 @@
 package tictactoe.view;
 
 import tictactoe.common.IXOProperty;
-
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
 import tictactoe.model.Game;
 import tictactoe.model.Player;
+import tictactoe.model.exeption.InvalidFigureWriting;
 import tictactoe.model.exeption.InvalidPointException;
 import tictactoe.view.reader.IXOConsoleReader;
 import tictactoe.view.reader.XOReader;
@@ -22,7 +22,11 @@ public class ConsoleView {
     private final int halfIndentL = indentLength / 2;
     private final String hypnenView = " -- ";
 
-    IXOConsoleReader reader = new XOReader();
+ private final    IXOConsoleReader reader;
+
+    public ConsoleView(IXOConsoleReader reader) {
+        this.reader = reader;
+    }
 
     public void show(final Game game) {
         final Player plOne = game.getPlayers()[0];
@@ -94,7 +98,7 @@ public class ConsoleView {
         return message;
     }
 
-    public Point askPoint() {
+    public Point askPoint() throws InvalidFigureWriting {
 
         return new Point(this.reader.askCoordinate("X") - 1, reader.askCoordinate("Y") - 1);
     }
@@ -108,10 +112,11 @@ public class ConsoleView {
     }
 
     public static void main(String... args) {
-        //   ConsoleView reader = new ConsoleView();
-//        reader.askCoordinate("0");
+
+
         Field field = new Field(3);
-        ConsoleView consoleView = new ConsoleView();
+        IXOConsoleReader reader2 = new XOReader();
+        ConsoleView consoleView = new ConsoleView(reader2);
         String empty = consoleView.generateLine(field, 2);
         System.out.print(empty);
 
