@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleViewTest {
     IXOConsoleReader reader = new XOReader();
-    ConsoleView consoleView = new ConsoleView(reader);
+    ConsoleView consoleView = new ConsoleView(reader, imputer);
 
     @Test
     public void testLineFormatWithElement() throws Exception {

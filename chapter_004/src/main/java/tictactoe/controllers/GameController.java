@@ -63,7 +63,7 @@ public class GameController {
         players[1] = new Player("TWO", Figure.O);
         Game game = new Game(players, field, "FIRSTGame");
         IXOConsoleReader reader = new XOReader();
-        ConsoleView consoleView = new ConsoleView(reader);
+        ConsoleView consoleView = new ConsoleView(reader, imputer);
         CurrentMoveController currentController = new CurrentMoveController(game.getField(), game.getFirstFigure());
         WinnerController winnerController = new WinnerController();
         MoveController moveController = new MoveController(currentController, winnerController);

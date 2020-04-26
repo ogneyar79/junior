@@ -7,7 +7,9 @@ import tictactoe.model.Game;
 import tictactoe.model.Player;
 import tictactoe.model.exeption.InvalidFigureWriting;
 import tictactoe.model.exeption.InvalidPointException;
+import tictactoe.view.reader.IInputCoordinate;
 import tictactoe.view.reader.IXOConsoleReader;
+import tictactoe.view.reader.PointIputer;
 import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
@@ -22,10 +24,12 @@ public class ConsoleView {
     private final int halfIndentL = indentLength / 2;
     private final String hypnenView = " -- ";
 
- private final    IXOConsoleReader reader;
+    private final IXOConsoleReader reader;
+    private final IInputCoordinate imputer;
 
-    public ConsoleView(IXOConsoleReader reader) {
+    public ConsoleView(IXOConsoleReader reader, IInputCoordinate imputer) {
         this.reader = reader;
+        this.imputer = imputer;
     }
 
     public void show(final Game game) {
@@ -98,10 +102,10 @@ public class ConsoleView {
         return message;
     }
 
-    public Point askPoint() throws InvalidFigureWriting {
+    public Point askPoint() throws  InvalidFigureWriting {
 
-        return new Point(this.reader.askCoordinate("X") - 1, reader.askCoordinate("Y") - 1);
-    }
+      return   this.imputer.inputPoint();
+   }
 
     public String generateSeparator(final Character piece, final int count) {
         String result = "";
@@ -116,7 +120,8 @@ public class ConsoleView {
 
         Field field = new Field(3);
         IXOConsoleReader reader2 = new XOReader();
-        ConsoleView consoleView = new ConsoleView(reader2);
+        IInputCoordinate imputer = new PointIputer((XOReader) reader2);
+        ConsoleView consoleView = new ConsoleView(reader2, imputer);
         String empty = consoleView.generateLine(field, 2);
         System.out.print(empty);
 
