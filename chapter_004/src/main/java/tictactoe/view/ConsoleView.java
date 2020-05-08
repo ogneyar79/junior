@@ -14,7 +14,6 @@ import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class ConsoleView {
     private static final Character SEPARATOR = IXOProperty.getDefaultProperties().getSeparatorCharacter();
@@ -24,12 +23,19 @@ public class ConsoleView {
     private final int halfIndentL = indentLength / 2;
     private final String hypnenView = " -- ";
 
-    private final IXOConsoleReader reader;
-    private final IInputCoordinate imputer;
+    private IXOConsoleReader reader;
+    private IInputCoordinate imputer;
 
     public ConsoleView(IXOConsoleReader reader, IInputCoordinate imputer) {
         this.reader = reader;
         this.imputer = imputer;
+    }
+
+    public ConsoleView(IInputCoordinate imputer) {
+        this.imputer = imputer;
+    }
+
+    public ConsoleView() {
     }
 
     public void show(final Game game) {
@@ -84,11 +90,11 @@ public class ConsoleView {
     }
 
 
-    private int askCoordinate(final String coordinateName) {
-        System.err.format("Please input %s", coordinateName);
-        final Scanner in = new Scanner(System.in);
-        return in.nextInt();
-    }
+//    private int askCoordinate(final String coordinateName) {
+//        System.err.format("Please input %s", coordinateName);
+//        final Scanner in = new Scanner(System.in);
+//        return in.nextInt();
+//    }
 
     public String showWinner(Optional<Figure> figure) {
         String message;
@@ -102,10 +108,10 @@ public class ConsoleView {
         return message;
     }
 
-    public Point askPoint() throws  InvalidFigureWriting {
+    public Point askPoint() throws InvalidFigureWriting, InvalidPointException {
 
-      return   this.imputer.inputPoint();
-   }
+        return this.imputer.inputPoint();
+    }
 
     public String generateSeparator(final Character piece, final int count) {
         String result = "";
