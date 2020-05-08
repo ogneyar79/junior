@@ -3,7 +3,9 @@ package tictactoe.view;
 import org.junit.jupiter.api.Test;
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
+import tictactoe.view.reader.IInputCoordinate;
 import tictactoe.view.reader.IXOConsoleReader;
+import tictactoe.view.reader.PointIputer;
 import tictactoe.view.reader.XOReader;
 
 import java.awt.*;
@@ -13,7 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class ConsoleViewTest {
+
+
     IXOConsoleReader reader = new XOReader();
+    IInputCoordinate imputer = new PointIputer(reader);
     ConsoleView consoleView = new ConsoleView(reader, imputer);
 
     @Test
