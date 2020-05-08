@@ -56,6 +56,7 @@ public class GameBotController implements IGameController {
                 point = inputerImitator.inputPoint();
             }
             moveController.moveFigure(field, point, currentF);
+            this.consoleView.show(game);
         }
         Optional<Figure> figure = moveController.getWinnerController().getWinner(game.getField());
         consoleView.showWinner(figure);
