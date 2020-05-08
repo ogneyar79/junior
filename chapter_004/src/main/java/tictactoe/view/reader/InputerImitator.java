@@ -2,6 +2,7 @@ package tictactoe.view.reader;
 
 import tictactoe.model.Field;
 import tictactoe.model.exeption.InvalidFigureWriting;
+import tictactoe.model.exeption.InvalidPointException;
 
 import java.awt.*;
 
@@ -17,7 +18,7 @@ public class InputerImitator implements IInputCoordinate {
 
 
     @Override
-    public Point inputPoint() throws InvalidFigureWriting {
+    public Point inputPoint() throws InvalidFigureWriting, InvalidPointException {
 
             return new Point(reader.askCoordinate("X"), reader.getArrayY());
 
