@@ -8,6 +8,8 @@ public class XOReader implements IXOConsoleReader {
 
     @Override
     public int askCoordinate(String coordinateName) {
+
+
         System.out.format("Please input %s:", coordinateName);
         final Scanner in = new Scanner(System.in);
         try {
