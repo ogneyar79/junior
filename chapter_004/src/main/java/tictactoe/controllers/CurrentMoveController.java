@@ -61,7 +61,7 @@ public class CurrentMoveController {
                 if (field.getFigure(new Point(row, colmns)) != null) {
 
                     ++countFigure;
-                    System.err.println(countFigure);
+   //                 System.err.println(countFigure);
                 }
             } catch (InvalidPointException e) {
                 e.printStackTrace();
