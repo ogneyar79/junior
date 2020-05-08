@@ -1,16 +1,34 @@
 package tictactoe.model;
 
-public class XOSimpleBot {
+import tictactoe.model.exeption.InvalidFigureWriting;
+import tictactoe.model.exeption.InvalidPointException;
+import tictactoe.view.reader.IInputCoordinate;
 
-  private final   String botName;
+import java.awt.*;
 
-  private final Figure figure;
+public class XOSimpleBot implements IInputCoordinate {
 
-  private final LogicalBiohaver logic;
+    private final String botName;
 
-    public XOSimpleBot(String botName, Figure figure, LogicalBiohaver logic) {
+    private final Figure figure;
+
+    private final LogicalBiohaver logic;
+    private final Game game;
+
+    public XOSimpleBot(String botName, Figure figure, Game game) {
         this.botName = botName;
         this.figure = figure;
-        this.logic = logic;
+        this.game = game;
+        this.logic = new LogicalBiohaver(figure, game);
+    }
+
+
+
+
+    @Override
+    public Point inputPoint() throws InvalidFigureWriting, InvalidPointException {
+        return logic.getInfoFirstOrNOt(game, figure) ? logic.stepPointIfMyFirst() : logic.stepPointIfMySecond();
+
+
     }
 }
