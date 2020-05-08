@@ -63,13 +63,26 @@ public class Field {
         field[point.x][point.y] = figure;
     }
 
+
+    public boolean checkFreeOccupied(Point point)  {
+        boolean result = false;
+        try {
+            if (this.getFigure(point) == null) {
+                result = true;
+            }
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     /**
      * function that check correctness coordinate on field.
      *
      * @param point Point checked coordinate.
      * @return boolean result.
      */
-    private boolean checkPoint(Point point) {
+    public boolean checkPoint(Point point) {
         return checkCoordinate(point.x, field.length) && checkCoordinate(point.y, field[point.x].length);
     }
 
@@ -89,15 +102,18 @@ public class Field {
     }
 
 
-
-        public int getElementCounter() {
-            int count = 0;
-            for (int i = 0; i < this.field.length; i++) {
-                for (int j = 0; j < this.field[i].length; j++) {
-                    count++;
-                }
+    /**
+     * function that counts how many can be elements on our field.
+     *
+     * @return count int.
+     */
+    public int getElementCounter() {
+        int count = 0;
+        for (int i = 0; i < this.field.length; i++) {
+            for (int j = 0; j < this.field[i].length; j++) {
+                count++;
             }
-            return count;
         }
-
+        return count;
+    }
 }
