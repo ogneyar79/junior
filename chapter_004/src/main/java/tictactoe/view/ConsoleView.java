@@ -123,7 +123,6 @@ public class ConsoleView {
 
     public static void main(String... args) {
 
-
         Field field = new Field(3);
         IXOConsoleReader reader2 = new XOReader();
         IInputCoordinate imputer = new PointIputer((XOReader) reader2);
@@ -135,6 +134,4 @@ public class ConsoleView {
         System.out.print(line);
         System.err.format("%" + consoleView.indentLength + "s\n", consoleView.generateSeparator(ConsoleView.SEPARATOR, 11));
     }
-
-
 }
