@@ -36,14 +36,13 @@ public class WinnerController {
      * @param figure Figure.
      * @return result Figure
      */
-    static Figure changeFigure(Figure figure) {
+    public static Figure changeFigure(Figure figure) {
         Figure frsult = null;
         Figure figureX = Figure.X;
         Figure figureO = Figure.O;
         if (figureX.equals(figure)) {
             frsult = figureO;
-        }
-        if (figureO.equals(figure)) {
+        } else if (figureO.equals(figure)) {
             frsult = figureX;
         }
         return frsult;
@@ -101,11 +100,8 @@ public class WinnerController {
                 if (figureRows == null) {
                     figureRows = this.changeFigure(figure);
                 }
-
                 cols &= (figureCols.equals(figure));
                 rows &= (figureRows.equals(figure));
-
-
             }
             if (cols || rows) {
                 return true;

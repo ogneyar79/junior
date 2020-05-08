@@ -2,7 +2,6 @@ package tictactoe.controllers;
 
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
-import tictactoe.model.Game;
 import tictactoe.model.exeption.InvalidFigure;
 import tictactoe.model.exeption.InvalidPointException;
 import tictactoe.model.exeption.OccupiedException;
@@ -60,19 +59,14 @@ public class MoveController {
      * @param currentF Figure
      * @return result boolean if was successed in.
      */
-    public boolean moveFigure(final Field field, final Point point, Figure currentF) throws InvalidFigure {
-        boolean result = true;
+    public boolean moveFigure(final Field field, final Point point, Figure currentF) throws InvalidFigure, OccupiedException, InvalidPointException {
+        boolean result = false;
         if (currentF != this.currentMoveController.getCurrentFigure().get()) {
             throw new InvalidFigure("NO according to current Figure");
         }
-        try {
+        if (field.checkFreeOccupied(point) & field.checkPoint(point)) {
             this.applyFigure(field, point, currentF);
-        } catch (OccupiedException e) {
-            e.printStackTrace();
-            result = false;
-        } catch (InvalidPointException e) {
-            e.printStackTrace();
-            result = false;
+            result = true;
         }
         return result;
     }
