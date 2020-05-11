@@ -33,7 +33,7 @@ public class GameBotController implements IGameController {
         this.consoleView.show(game);
         Field field = game.getField();
         while (moveController.controlMove(field)) {
-            Figure currentF = moveController.getCurrentMoveController().getCurrentFigure().get();
+            Figure currentF = moveController.getCurrentFigure().get();
             System.err.format("Please  enter move Point for: %s\n", currentF);
             XOSimpleBot brain = new XOSimpleBot("BRAIN", currentF, game);
             Point point = brain.inputPoint();
@@ -47,7 +47,7 @@ public class GameBotController implements IGameController {
                 System.err.println(" We have winner");
                 break;
             }
-            currentF = moveController.getCurrentMoveController().getCurrentFigure().get();
+            currentF = moveController.getCurrentFigure().get();
             System.err.format("Please  enter move Point for: %s\n", currentF);
             InputerImitator inputerImitator = new InputerImitator(field);
             point = inputerImitator.inputPoint();
