@@ -134,4 +134,5 @@ public class ConsoleView {
         System.out.print(line);
         System.err.format("%" + consoleView.indentLength + "s\n", consoleView.generateSeparator(ConsoleView.SEPARATOR, 11));
     }
+
 }
