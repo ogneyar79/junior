@@ -17,6 +17,7 @@
         <module>chapter_003</module>
         <module>chapter_004</module>
         <module>chapter_004G</module>
+        <module>chapter_007</module>
     </modules>
     <dependencies>
         <dependency>
