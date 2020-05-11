@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class MoveController {
     private final CurrentMoveController currentMoveController;
-    private final WinnerController winnerController;
+    final WinnerController winnerController;
 
     public MoveController(CurrentMoveController currentMoveController, WinnerController winnerController) {
         this.currentMoveController = currentMoveController;
