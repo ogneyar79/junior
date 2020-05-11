@@ -36,8 +36,9 @@ class XOPropertyBase implements IXOProperty {
         System.out.println(XOPropertyBase.generateInstance());
 
 
-        if (true)
+        if (true) {
             System.err.print("Fuck");
+        }
         System.err.print(" NoFuck");
 
     }
