@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Class that aggregate our Controllers that we can play.
  */
-public class GameController implements IGameController{
+public class GameController implements IGameController {
 
     /**
      * object that define show our game.
@@ -57,7 +57,7 @@ public class GameController implements IGameController{
 
             this.consoleView.show(game);
         }
-       // moveController.getCurrentMoveController();
+        // moveController.getCurrentMoveController();
         Optional<Figure> figure = moveController.getWinnerController().getWinner(game.getField());
         consoleView.showWinner(figure);
     }
