@@ -82,13 +82,13 @@ class LogicalBiohaverTest {
         field.setFigure(new Point(0, 0), myFigure);
         actualResult = logicalBiohaver.checkDiagonalFinish(field, myFigure);
         actual = actualResult.isPresent();
-        int X = (int) actualResult.get().getX();
-        int Y = (int) actualResult.get().getY();
+        int x = (int) actualResult.get().getX();
+        int y = (int) actualResult.get().getY();
         int expectedX = 2;
         int expectedY = 2;
         assertEquals(true, actual);
-        assertEquals(expectedX, X);
-        assertEquals(expectedY, Y);
+        assertEquals(expectedX, x);
+        assertEquals(expectedY, y);
     }
 
     @Test
@@ -102,12 +102,12 @@ class LogicalBiohaverTest {
         field.setFigure(new Point(1, 1), Figure.O);
         field.setFigure(new Point(2, 0), Figure.O);
         actualResult = logicalBiohaver.checkDiagonalFinish(field, Figure.O);
-        int X = (int) actualResult.get().getX();
-        int Y = (int) actualResult.get().getY();
+        int x = (int) actualResult.get().getX();
+        int y = (int) actualResult.get().getY();
         int expectedX = 0;
         int expectedY = 2;
-        assertEquals(expectedX, X);
-        assertEquals(expectedY, Y);
+        assertEquals(expectedX, x);
+        assertEquals(expectedY, y);
     }
 
     @Test
@@ -118,12 +118,12 @@ class LogicalBiohaverTest {
         field.setFigure(new Point(0, 2), Figure.O);
         field.setFigure(new Point(1, 1), myFigure);
         Optional<Point> actualResult = logicalBiohaver.checkLineFinish(field, myFigure);
-        int X = (int) actualResult.get().getX();
-        int Y = (int) actualResult.get().getY();
+        int x = (int) actualResult.get().getX();
+        int y = (int) actualResult.get().getY();
         int expectedX = 1;
         int expectedY = 2;
-        assertEquals(expectedX, X);
-        assertEquals(expectedY, Y);
+        assertEquals(expectedX, x);
+        assertEquals(expectedY, y);
     }
 
     @Test
@@ -135,22 +135,22 @@ class LogicalBiohaverTest {
         field.setFigure(new Point(1, 1), myFigure);
         field.setFigure(new Point(2, 0), Figure.O);
         Optional<Point> actualResult = logicalBiohaver.checkLineFinish(field, myFigure);
-        int X = (int) actualResult.get().getX();
-        int Y = (int) actualResult.get().getY();
+        int x = (int) actualResult.get().getX();
+        int y = (int) actualResult.get().getY();
         int expectedX = 2;
         int expectedY = 1;
-        assertEquals(expectedX, X);
-        assertEquals(expectedY, Y);
+        assertEquals(expectedX, x);
+        assertEquals(expectedY, y);
 
     }
 
     @Test
     void getRandomExeption() throws InvalidPointException {
         Point result = logicalBiohaver.getRandomCordinate();
-        int X = (int) result.getX();
-        int Y = (int) result.getY();
-        System.err.println(X);
-        System.err.println(Y);
+        int x = (int) result.getX();
+        int y = (int) result.getY();
+        System.err.println(x);
+        System.err.println(y);
         Point compareException = new Point(0, 0);
         Point compareExceptionTwo = new Point(2, 0);
         Point threeException = new Point(1, 1);
