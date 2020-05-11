@@ -1,6 +1,5 @@
 package tictactoe.view;
 
-import tictactoe.common.IXOProperty;
 import tictactoe.model.Field;
 import tictactoe.model.Figure;
 import tictactoe.model.Game;
@@ -16,7 +15,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public class ConsoleView {
-    private static final Character SEPARATOR = IXOProperty.getDefaultProperties().getSeparatorCharacter();
+    private static final Character SEPARATOR = '~';
 
     private final int separatorLength = 11;
     private final int indentLength = 50;
