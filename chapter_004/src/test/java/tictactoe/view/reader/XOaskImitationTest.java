@@ -9,14 +9,14 @@ import static org.junit.Assert.*;
 public class XOaskImitationTest {
 
     Field field;
-    int arrayDouble[][] = new int[][]{
+    int[][] arrayDouble = new int[][]{
             {0, 1, 2},
             {3, 4, 5},
             {6, 7, 8}};
 
     int size = arrayDouble.length;
 
-    int array[] = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+    int[] array = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     int rangeOneArray = array.length;
 
     int arrayindex;
