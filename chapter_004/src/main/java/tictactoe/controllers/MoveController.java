@@ -7,6 +7,7 @@ import tictactoe.model.exeption.InvalidPointException;
 import tictactoe.model.exeption.OccupiedException;
 
 import java.awt.*;
+import java.util.Optional;
 
 /**
  * Class control setting (moving) figures on field.
@@ -74,6 +75,11 @@ public class MoveController {
 
     public CurrentMoveController getCurrentMoveController() {
         return currentMoveController;
+    }
+
+    public Optional<Figure> getCurrentFigure() {
+        return this.currentMoveController.getCurrentFigure();
+
     }
 
     public WinnerController getWinnerController() {
