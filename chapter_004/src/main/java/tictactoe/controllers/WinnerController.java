@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * Class Show Who win or The game go on.
  */
-public class WinnerController {
+public  class WinnerController {
 
 
     /**
@@ -17,7 +17,7 @@ public class WinnerController {
      * @param field Field
      * @return result Optional can be with Null.
      */
-    public Optional<Figure> getWinner(Field field) {
+     public Optional<Figure> getWinner(Field field) {
         Optional<Figure> result = Optional.ofNullable(null);
         Figure figure = Figure.X;
         if ((this.checkDiagonal(field, figure)) || (this.checkLanes(field, figure))) {
