@@ -6,6 +6,7 @@ import ru.job4j.collection.list.DinamicArrayConteiner;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
 @ThreadSafe
 public class SingleLockList<T> implements Iterable<T> {
@@ -24,14 +25,12 @@ public class SingleLockList<T> implements Iterable<T> {
 
     public synchronized DinamicArrayConteiner<T> copy(DinamicArrayConteiner<T> list) {
         DinamicArrayConteiner copyList = new DinamicArrayConteiner();
-        Arrays.stream(list.getContainer()).filter(x -> x != null).forEach(copyList::add);
+        Arrays.stream(list.getContainer()).filter(Objects::nonNull).forEach(copyList::add);
         return copyList;
     }
 
     @Override
     public synchronized Iterator<T> iterator() {
-        list.iterator();
-
         return this.copy(this.list).iterator();
     }
 
