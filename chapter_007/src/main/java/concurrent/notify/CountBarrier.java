@@ -1,4 +1,4 @@
-package concurrent.userstorage;
+package concurrent.notify;
 
 public class CountBarrier {
 

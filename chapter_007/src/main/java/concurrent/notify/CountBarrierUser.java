@@ -1,4 +1,4 @@
-package concurrent.userstorage;
+package concurrent.notify;
 
 public class CountBarrierUser {
     public static void main(String[] args) throws InterruptedException {
