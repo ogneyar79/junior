@@ -26,8 +26,9 @@ public class CountBarrier {
 
         while (count != this.total) {
             try {
-                wait();
                 monitor.notifyAll();
+                wait();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
