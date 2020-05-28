@@ -14,10 +14,11 @@ public class CountBarrier {
 
     public void count() {
         synchronized (monitor) {
+            monitor.notify();
             this.count++;
         }
         total = this.count;
-        notify();
+
 
     }
 
