@@ -11,30 +11,24 @@ import java.util.stream.Collectors;
 @ThreadSafe
 public class UserStorage implements IUserStorage {
 
-
     @GuardedBy("this")
-    private final Set<UserC> userList;
+    private final Set<UserC> users;
 
-    public UserStorage(Set<UserC> userList) {
-        this.userList = userList;
+    public UserStorage(Set<UserC> users) {
+        this.users = users;
     }
-
-
-//    public Set<UserC> getUserList() {
-//        return userList;
-//    }
 
     @Override
     public synchronized boolean add(UserC user) {
-        return userList.add(user);
+        return users.add(user);
     }
 
     @Override
     public synchronized boolean update(UserC user) {
         boolean result = false;
-        if (this.userList.contains(user)) {
-            userList.remove(user);
-            result = userList.add(user);
+        if (this.users.contains(user)) {
+            users.remove(user);
+            result = users.add(user);
         }
         return result;
     }
@@ -42,13 +36,13 @@ public class UserStorage implements IUserStorage {
     @Override
     public synchronized boolean delete(UserC user) {
 
-        return userList.remove(user);
+        return users.remove(user);
     }
 
     @Override
     public synchronized boolean transfer(int fromId, int toId, int amount) {
         boolean result = true;
-        List<UserC> list = this.userList.stream().filter(userC -> userC.getId() == fromId || userC.getId() == toId).collect(Collectors.toList());
+        List<UserC> list = this.users.stream().filter(userC -> userC.getId() == fromId || userC.getId() == toId).collect(Collectors.toList());
         if (list.size() != 2) {
             return false;
         }
@@ -67,9 +61,8 @@ public class UserStorage implements IUserStorage {
         return result;
     }
 
-    public UserC getUserId(int id) {
-        Optional<UserC> optionalUser = userList.stream().filter(userC -> userC.getId() == id).findAny();
+    public synchronized UserC getUserId(int id) {
+        Optional<UserC> optionalUser = users.stream().filter(userC -> userC.getId() == id).findAny();
         return optionalUser.isPresent() ? optionalUser.get() : new UserC(0, 0);
-
     }
 }
