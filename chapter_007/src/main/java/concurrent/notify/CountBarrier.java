@@ -4,9 +4,9 @@ public class CountBarrier {
 
     private final Object monitor = this;
 
-    private int total;
+    private volatile int total;
 
-    private int count = 0;
+    private volatile int count = 0;
 
     public CountBarrier(final int total) {
         this.total = total;
@@ -14,19 +14,21 @@ public class CountBarrier {
 
     public void count() {
         synchronized (monitor) {
-            monitor.notify();
+
             this.count++;
+            System.out.println("Count" + "" + this.count);
+            total = this.count;
+            monitor.notify();
         }
-        total = this.count;
 
 
     }
 
-    public void await() {
+    public synchronized void await() {
 
-        while (count != this.total) {
+        while (count >= this.total) {
             try {
-                monitor.notifyAll();
+                notifyAll();
                 wait();
 
             } catch (InterruptedException e) {
