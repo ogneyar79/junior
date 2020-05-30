@@ -15,7 +15,6 @@ public class SingleLockList<T> implements Iterable<T> {
     private DinamicArrayConteiner<T> list = new DinamicArrayConteiner();
 
     public synchronized void add(T value) {
-
         this.list.add(value);
     }
 
@@ -32,9 +31,5 @@ public class SingleLockList<T> implements Iterable<T> {
     @Override
     public synchronized Iterator<T> iterator() {
         return this.copy(this.list).iterator();
-    }
-
-    public DinamicArrayConteiner<T> getList() {
-        return list;
     }
 }
