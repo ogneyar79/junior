@@ -1,9 +1,11 @@
 package ru.job4j.multithereading.threads.produserconsumer;
 
-public class Consumer implements Runnable {
+import java.util.ArrayList;
+
+public class Consumer<T> implements Runnable {
 
     private SimpleBlockingQueue<Integer> myQueue;
-    private volatile boolean stop;
+    private ArrayList<T> list = new ArrayList<>();
 
     public Consumer(SimpleBlockingQueue<Integer> myQueue) {
         this.myQueue = myQueue;
@@ -11,15 +13,12 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            int i = 0;
+        while (!myQueue.isEmpty()) {
             try {
-                System.out.println(myQueue.poll());
-                System.out.println(i);
+                list.add((T) myQueue.poll());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println();
         }
     }
 }
