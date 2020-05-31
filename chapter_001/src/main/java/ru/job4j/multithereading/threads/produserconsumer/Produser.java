@@ -1,30 +1,23 @@
-//package ru.job4j.multithereading.threads.produserconsumer//package ru.job4j.multithereading.threads.produserconsumer;
-//
-//import java.util.Random;
-//
-//public class Produser implements Runnable {
-//
-//    private SimpleBlockingQueue<Integer> myQueue;
-//
-//    public Produser(SimpleBlockingQueue<Integer> myQueue) {
-//        this.myQueue = myQueue;
-//    }
-//
-//    @Override
-//    public void run() {
-//        Random random = new Random();
-//        while (true) {
-//            int i = 0;
-//            i++;
-//            try {
-//
-//                myQueue.offer(random.nextInt());
-//                System.out.println(i);
-//
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//}
-//
+package ru.job4j.multithereading.threads.produserconsumer;
+
+
+public class Produser implements Runnable {
+
+    private final SimpleBlockingQueue<Integer> myQueue;
+    private final int quantity;
+
+    public Produser(SimpleBlockingQueue<Integer> myQueue, int quantity) {
+        this.myQueue = myQueue;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public void run() {
+        int index = 0;
+        while (index < quantity) {
+            myQueue.offer(index++);
+            System.out.println(index);
+        }
+    }
+}
+
