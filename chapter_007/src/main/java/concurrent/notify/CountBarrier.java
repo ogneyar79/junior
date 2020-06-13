@@ -26,7 +26,7 @@ public class CountBarrier {
 
     public synchronized void await() {
 
-        while (count >= this.total) {
+        while (count != this.total) {
             try {
                 notifyAll();
                 wait();
@@ -37,11 +37,11 @@ public class CountBarrier {
         }
     }
 
-    public int getTotal() {
+    public synchronized int getTotal() {
         return total;
     }
 
-    public int getCount() {
+    public synchronized int getCount() {
         return count;
     }
 }
