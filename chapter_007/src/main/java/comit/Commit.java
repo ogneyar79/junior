@@ -2,7 +2,8 @@ package comit;
 
 public class Commit {
 
-    public static void main(String... args){
-        System.out.println("FIX ERROR 3 Commit");
+    public static void main(String... args) {
+        System.out.println("FIX ERRoR5");
+        System.err.println("Add new Change");
     }
 }
