@@ -9,7 +9,6 @@ public class Hash {
      */
     ConcurrentHashMap<Integer, Base> mapBase = new ConcurrentHashMap<>();
 
-
     /**
      * Добавление элемнтов в Hash контейнер.
      *
@@ -32,18 +31,16 @@ public class Hash {
     /**
      * изменение объекта в нашем контейнере.
      *
-     * @param model изменяемый объект
+     * @param modelA объект that we want to change if it is at map.
      */
-    public void update(Base model) {
+    public void update(Base modelA) {
 
-        this.mapBase.computeIfPresent(model.getId(), (key, value) -> {
-            if (mapBase.get(key).getVersion() != model.getVersion()) {
+        this.mapBase.computeIfPresent(modelA.getId(), (key, value) -> {
+            if (mapBase.get(key).getVersion() != modelA.version) {
                 throw new OptimisticException(" It has already been changed");
             }
-            model.ecriment();
-
-            return model;
+            value.ecriment();
+            return value;
         });
-
     }
 }

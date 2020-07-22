@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.*;
+
+
 public class HashTest {
     @Test
     public void whenHashIncrementTrowExceptions() throws InterruptedException {
@@ -17,6 +21,7 @@ public class HashTest {
             for (int i = 0; i < 300; i++) {
                 try {
                     hash.update(new Base(100, 0));
+                    System.out.println(Thread.currentThread().getName() + " " + i);
                 } catch (OptimisticException e) {
                     atomic.set(e);
                 }
@@ -30,6 +35,7 @@ public class HashTest {
             for (int i = 0; i < 300; i++) {
                 try {
                     hash.update(new Base(100, 0));
+                    System.out.println(Thread.currentThread().getName() + " " + i);
                 } catch (OptimisticException e) {
                     atomic.set(e);
                 }
@@ -39,5 +45,6 @@ public class HashTest {
         threadSecond.start();
         threadFirst.join();
         threadSecond.join();
+        assertThat(atomic.get().getMessage(), is(" It has already been changed"));
     }
 }
