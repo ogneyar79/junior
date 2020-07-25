@@ -2,4 +2,4 @@
 
 [![codecov](https://codecov.io/gh/ogneyar79/junior/branch/master/graph/badge.svg)](https://codecov.io/gh/ogneyar79/junior)
 
-Объединение зафиксированных изменений
+CONFLICT
