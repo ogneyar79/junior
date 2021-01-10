@@ -15,7 +15,6 @@ public class Item {
     /**
      * @ param field id.
      */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
