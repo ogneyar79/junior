@@ -5,9 +5,9 @@ import java.util.List;
 public interface ITracker {
     Item add(Item item);
 
-    void replace(String id, Item item);
+    void replace(int id, Item item);
 
-    void delete(String id);
+    void delete(int id);
 
     Item[] findAll();
 

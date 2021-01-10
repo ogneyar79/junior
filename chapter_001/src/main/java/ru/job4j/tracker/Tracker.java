@@ -89,7 +89,7 @@ public class Tracker implements ITracker {
      * method for deleted by Finding String id.
      */
     @Override
-    public void delete(String id) {
+    public void delete(int id) {
         for (Item item : items) {
             if (item != null && item.getId().equals(id)) {
                 items.remove(item);
@@ -155,7 +155,7 @@ public class Tracker implements ITracker {
      * * @param item item.
      */
     @Override
-    public void replace(String id, Item item) {
+    public void replace(int id, Item item) {
 
         for (Item itemChanged : items) {
             if (itemChanged.getId().equals(id)) {
