@@ -84,7 +84,6 @@ public class Tracker implements ITracker {
         position--;
     }
 
-
     /**
      * method for deleted by Finding String id.
      */

@@ -15,35 +15,37 @@ public class HibernateRun {
                 .configure().build();
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            Item item = create(new Item("Learn Hibernate"), sf);
-            System.out.println(item);
+
+            ItemS item = create(new ItemS("Learn Hibernate"), sf);
+
             item.setName("Learn Hibernate 5.");
             update(item, sf);
             System.out.println(item);
-            Item rsl = findById(item.getId(), sf);
+            ItemS rsl = findById(item.getId(), sf);
             System.out.println(rsl);
             delete(rsl.getId(), sf);
-            List<Item> list = findAll(sf);
-            for (Item it : list) {
+            List<ItemS> list = findAll(sf);
+            for (ItemS it : list) {
                 System.out.println(it);
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
     }
 
-    public static Item create(Item item, SessionFactory sf) {
+    public static ItemS create(ItemS item, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
+
         session.save(item);
         session.getTransaction().commit();
         session.close();
         return item;
     }
 
-    public static void update(Item item, SessionFactory sf) {
+    public static void update(ItemS item, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
         session.update(item);
@@ -51,33 +53,31 @@ public class HibernateRun {
         session.close();
     }
 
-    public static void delete(String id, SessionFactory sf) {
+    public static void delete(int id, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Item item = new Item(null);
+        ItemS item = new ItemS(null);
         item.setId(id);
         session.delete(item);
         session.getTransaction().commit();
         session.close();
     }
 
-    public static List<Item> findAll(SessionFactory sf) {
+    public static List<ItemS> findAll(SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        List result = session.createQuery("from ru.job4j.tracker.Item").list();
+        List result = session.createQuery("from ru.job4j.tracker.ItemS").list();
         session.getTransaction().commit();
         session.close();
         return result;
     }
 
-    public static Item findById(String id, SessionFactory sf) {
+    public static ItemS findById(int id, SessionFactory sf) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Item result = session.get(Item.class, id);
+        ItemS result = session.get(ItemS.class, id);
         session.getTransaction().commit();
         session.close();
         return result;
     }
-
-
 }

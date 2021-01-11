@@ -1,22 +1,12 @@
 package ru.job4j.tracker;
 
-import javax.persistence.*;
-
 /**
  * класс Item for kreating orders.
  *
  * @author Sirotkin.
  */
-
-@Entity
-@Table(name = "items")
 public class Item {
 
-    /**
-     * @ param field id.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     /**
@@ -32,7 +22,7 @@ public class Item {
     /**
      * @ param field create.
      */
-    private long create;
+    private long creator;
 
     /**
      * method for creaction Item object.
@@ -49,12 +39,12 @@ public class Item {
      *
      * @param name        String
      * @param description String
-     * @param create      long
+     * @param creator     long
      */
-    public Item(String name, String description, long create) {
+    public Item(String name, String description, long creator) {
         this.name = name;
         this.description = description;
-        this.create = create;
+        this.creator = creator;
     }
 
     /**
@@ -80,8 +70,8 @@ public class Item {
      *
      * @return create
      */
-    public long getCreate() {
-        return this.create;
+    public long getCreator() {
+        return this.creator;
     }
 
     /**
@@ -131,7 +121,7 @@ public class Item {
      * @return this
      */
     public Item inputCreate(long create) {
-        this.create = create;
+        this.creator = create;
         return this;
     }
 

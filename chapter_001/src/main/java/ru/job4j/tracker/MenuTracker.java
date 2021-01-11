@@ -133,7 +133,7 @@ public class MenuTracker {
         public void execute(IInput input, Tracker tracker) {
             String id = input.ask("Please enter the item id.");
             tracker.findById(id);
-            System.out.println(String.format("%s. %s. %s", tracker.findById(id).getName(), tracker.findById(id).getDescription(), tracker.findById(id).getCreate()));
+            System.out.println(String.format("%s. %s. %s", tracker.findById(id).getName(), tracker.findById(id).getDescription(), tracker.findById(id).getCreator()));
 
         }
 
@@ -153,7 +153,7 @@ public class MenuTracker {
             tracker.findByName(name);
             List<Item> result = tracker.findByName(name);
             for (Item resalt : result) {
-                System.out.println(String.format("%s. %s. %s. %s", resalt.getId(), resalt.getName(), resalt.getDescription(), resalt.getCreate()));
+                System.out.println(String.format("%s. %s. %s. %s", resalt.getId(), resalt.getName(), resalt.getDescription(), resalt.getCreator()));
 
             }
         }
