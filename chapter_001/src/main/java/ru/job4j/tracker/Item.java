@@ -5,7 +5,7 @@ package ru.job4j.tracker;
  *
  * @author Sirotkin.
  */
-public class Item {
+public class Item implements IItem {
 
     private String id;
 
