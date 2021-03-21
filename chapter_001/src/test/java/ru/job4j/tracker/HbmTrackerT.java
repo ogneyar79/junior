@@ -6,10 +6,11 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class HbmTracker implements IStore, AutoCloseable {
+public class HbmTrackerT implements IStore, AutoCloseable {
 
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
@@ -25,9 +26,9 @@ public class HbmTracker implements IStore, AutoCloseable {
     public ItemS add(ItemS item) {
         Session session = sf.openSession();
         session.beginTransaction();
-        session.save(item);
+        Serializable id = session.save(item);
         session.getTransaction().commit();
-        ItemS it = item;
+        ItemS it = session.get(ItemS.class, id);
         session.close();
         return it;
     }
@@ -85,4 +86,6 @@ public class HbmTracker implements IStore, AutoCloseable {
 
         return item == null ? new ItemS("Ziro") : item;
     }
+
+
 }

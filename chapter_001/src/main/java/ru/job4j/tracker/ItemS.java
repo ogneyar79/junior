@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "items")
@@ -80,4 +81,16 @@ public class ItemS implements IItem{
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemS itemS = (ItemS) o;
+        return id == itemS.id && Objects.equals(name, itemS.name) && Objects.equals(description, itemS.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description);
+    }
 }
