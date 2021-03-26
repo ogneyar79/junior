@@ -19,7 +19,7 @@ public class BeanConfig {
 
     @Bean
     public StartUI startUI() {
-        return new StartUI(store(),consoleInput());
+        return new StartUI();
     }
 
 }
