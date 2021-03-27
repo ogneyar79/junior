@@ -10,15 +10,16 @@ public class SpringDI {
         context.register(Store.class);
         context.register(StartUI.class);
         context.refresh();
-      //  BeanConfig.class
+        //  BeanConfig.class
         context.scan("ru.job4j.di");
         StartUI ui = context.getBean(StartUI.class);
         ui.add("Petr Arsentev");
         ui.add("Ivan ivanov");
         ui.print();
-        ui.addToConsole("!!!!!");
+        ui.addToConsole();
 
         StartUI another = context.getBean(StartUI.class);
+        another.addToConsole();
         another.print();
 
     }

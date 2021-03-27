@@ -2,8 +2,10 @@ package ru.job4j.di;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@Scope("prototype")
 @Component
 public class StartUI {
 
@@ -23,9 +25,8 @@ public class StartUI {
         store.add(value);
     }
 
-    public void addToConsole(String value) {
-        input.addToList(value);
-        input.askStr(value);
+    public void addToConsole() {
+        input.addToList(input.askStr());
     }
 
 
@@ -34,6 +35,8 @@ public class StartUI {
             System.out.println(value);
         }
         for (String value : input.getList()) {
+            int i = 0;
+            System.out.println(" We are reading the text :" + i++);
             System.out.println(value);
         }
     }
