@@ -25,6 +25,7 @@ public class StartUI {
 
     public void addToConsole(String value) {
         input.addToList(value);
+        input.askStr(value);
     }
 
 

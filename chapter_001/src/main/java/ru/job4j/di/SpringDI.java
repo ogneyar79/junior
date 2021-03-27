@@ -20,6 +20,7 @@ public class SpringDI {
 
         StartUI another = context.getBean(StartUI.class);
         another.print();
+
     }
 
 }
